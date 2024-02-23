@@ -3,7 +3,7 @@ import { PlaceCardPropsType } from '../../utils/mocks';
 import FavoriteLocation from '../favorite-location/FavoriteLocation';
 import PlaceCard from '../place-card/PlaceCard';
 
-export default function FavoritesList({favoritePlaces}: Array<PlaceCardPropsType>): JSX.Element {
+export default function FavoritesList(props: {favoritePlaces: Array<PlaceCardPropsType>}): JSX.Element {
   return (
     <ul className="favorites__list">
       <li className="favorites__locations-items">
@@ -11,7 +11,7 @@ export default function FavoritesList({favoritePlaces}: Array<PlaceCardPropsType
           <FavoriteLocation title='Paris' />
         </div>
         <div className="favorites__places">
-          {favoritePlaces.map((el) => (
+          {props.favoritePlaces.map((el) => (
             <PlaceCard
               className={el.className}
               key={el.id}
@@ -33,7 +33,7 @@ export default function FavoritesList({favoritePlaces}: Array<PlaceCardPropsType
           <FavoriteLocation title='Cologne' />
         </div>
         <div className="favorites__places">
-          {favoritePlaces.map((el) => (
+          {props.favoritePlaces.map((el) => (
             <PlaceCard
               className={el.className}
               key={el.id}

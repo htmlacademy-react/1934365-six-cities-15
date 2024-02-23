@@ -1,22 +1,22 @@
 import Location from '../../components/blocks/locations/Locations';
 import Header from '../../components/layout/header/Header';
-import { places } from '../../components/utils/mocks';
+import { places, cities } from '../../components/utils/mocks';
 import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList';
 
-export default function Main({placesAmount}): JSX.Element {
+export default function Main(props: {placesAmount: number}): JSX.Element {
   return (
     < div className="page page--gray page--main" >
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Location />
+          <Location cities= {cities} />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesAmount} places to stay in Amsterdam</b>
+              <b className="places__found">{props.placesAmount} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>

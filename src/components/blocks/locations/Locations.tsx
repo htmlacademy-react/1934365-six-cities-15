@@ -1,17 +1,10 @@
-export const cities = [
-  { id: 1, title: 'Paris' },
-  { id: 2, title: 'Cologne' },
-  { id: 3, title: 'Brussels' },
-  { id: 4, title: 'Amsterdam' },
-  { id: 5, title: 'Hamburg' },
-  { id: 6, title: 'Dusseldorf' },
-];
+import { CityPropsType } from '../../utils/mocks';
 
-export default function Location(): JSX.Element {
+export default function Location(props: {cities: Array<CityPropsType>}): JSX.Element {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {cities.map((el) => (
+        {props.cities.map((el) => (
           <li
             key = {el.id}
             className="locations__item"

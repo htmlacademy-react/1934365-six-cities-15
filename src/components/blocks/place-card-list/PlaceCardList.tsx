@@ -2,9 +2,9 @@ import { PlaceCardPropsType } from '../../utils/mocks';
 
 import PlaceCard from '../place-card/PlaceCard';
 
-export default function PlaceCardList({ places }: Array<PlaceCardPropsType>): JSX.Element {
+export default function PlaceCardList(props: { places: Array<PlaceCardPropsType>}): JSX.Element {
   return (
-    places.map((el: PlaceCardPropsType) => (
+    props.places.map((el: PlaceCardPropsType) => (
       <PlaceCard
         className = {el.className}
         key={el.id}
