@@ -1,10 +1,9 @@
-import { IMAGE_HEIGHT, IMAGE_WIDTH } from "../../utils/constants";
-import { PlaceCardPropsType } from "../../utils/mocks";
-import FavoriteLocation from "../favorite-location/FavoriteLocation";
-import PlaceCard from "../place-card/PlaceCard";
+import { IMAGE_HEIGHT, IMAGE_WIDTH } from '../../utils/constants';
+import { PlaceCardPropsType } from '../../utils/mocks';
+import FavoriteLocation from '../favorite-location/FavoriteLocation';
+import PlaceCard from '../place-card/PlaceCard';
 
-export default function FavoritesList( {favoritePlaces}: Array<PlaceCardPropsType>): JSX.Element {
-  console.log(favoritePlaces[0].className)
+export default function FavoritesList({favoritePlaces}: Array<PlaceCardPropsType>): JSX.Element {
   return (
     <ul className="favorites__list">
       <li className="favorites__locations-items">
@@ -12,9 +11,8 @@ export default function FavoritesList( {favoritePlaces}: Array<PlaceCardPropsTyp
           <FavoriteLocation title='Paris' />
         </div>
         <div className="favorites__places">
-          {favoritePlaces.map(el => {
-            return (
-              <PlaceCard
+          {favoritePlaces.map((el) => (
+            <PlaceCard
               className={el.className}
               key={el.id}
               title={el.title}
@@ -26,8 +24,7 @@ export default function FavoritesList( {favoritePlaces}: Array<PlaceCardPropsTyp
               width = {IMAGE_WIDTH.small}
               height = {IMAGE_HEIGHT.small}
             />
-            )
-          })}
+          ))}
         </div>
       </li>
 
@@ -36,9 +33,8 @@ export default function FavoritesList( {favoritePlaces}: Array<PlaceCardPropsTyp
           <FavoriteLocation title='Cologne' />
         </div>
         <div className="favorites__places">
-        {favoritePlaces.map(el => {
-            return (
-              <PlaceCard
+          {favoritePlaces.map((el) => (
+            <PlaceCard
               className={el.className}
               key={el.id}
               title={el.title}
@@ -50,10 +46,9 @@ export default function FavoritesList( {favoritePlaces}: Array<PlaceCardPropsTyp
               width = {IMAGE_WIDTH.small}
               height = {IMAGE_HEIGHT.small}
             />
-            )
-          })}
+          ))}
         </div>
       </li>
     </ul>
-  )
+  );
 }

@@ -5,5 +5,5 @@ export default function FavoriteLocation({ title }): JSX.Element {
         <span>{title}</span>
       </a>
     </div>
-  )
+  );
 }

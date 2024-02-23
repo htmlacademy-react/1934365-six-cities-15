@@ -1,9 +1,9 @@
-import { PlaceCardPropsType } from "../../utils/mocks";
+import { PlaceCardPropsType } from '../../utils/mocks';
 
 export default function PlaceCard({ title, type, price, previewImage, isPremium, className, width, height }: PlaceCardPropsType): JSX.Element {
   return (
     <article className={`${className}__card place-card`}>
-      {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ""}
+      {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
       <div className={`${className}__image-wrapper place-card__image-wrapper"`}>
         <a href="#">
           <img className="place-card__image" src={previewImage} width={width} height={height} alt="Place image" />
@@ -34,5 +34,5 @@ export default function PlaceCard({ title, type, price, previewImage, isPremium,
         <p className="place-card__type">{type}</p>
       </div>
     </article>
-  )
+  );
 }
