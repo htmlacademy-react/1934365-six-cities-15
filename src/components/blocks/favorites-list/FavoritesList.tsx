@@ -33,18 +33,10 @@ export default function FavoritesList(props: {favoritePlaces: Array<PlaceCardPro
           <FavoriteLocation title='Cologne' />
         </div>
         <div className="favorites__places">
-          {props.favoritePlaces.map((el) => (
+          {props.favoritePlaces.map((card) => (
             <PlaceCard
-              className={el.className}
-              key={el.id}
-              title={el.title}
-              type={el.type}
-              price={el.price}
-              previewImage={el.previewImage}
-              rating={el.rating}
-              isPremium={el.isPremium}
-              width = {IMAGE_WIDTH.small}
-              height = {IMAGE_HEIGHT.small}
+              key = {card.id}
+              card = {card}
             />
           ))}
         </div>

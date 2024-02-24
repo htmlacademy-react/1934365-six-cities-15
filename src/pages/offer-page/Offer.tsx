@@ -147,15 +147,10 @@ export default function Offer(): JSX.Element {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {
-                nearPlaces.map((el) => (
+                nearPlaces.map((card) => (
                   <PlaceCard
-                    key={el.id}
-                    title={el.title}
-                    type={el.type}
-                    price={el.price}
-                    previewImage={el.previewImage}
-                    isPremium={el.isPremium}
-                    className={el.className}
+                    key={card.id}
+                    card = {card}
                   />
                 ))
               }
