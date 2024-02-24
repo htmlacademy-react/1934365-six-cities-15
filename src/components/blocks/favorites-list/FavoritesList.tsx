@@ -1,4 +1,3 @@
-import { IMAGE_HEIGHT, IMAGE_WIDTH } from '../../utils/constants';
 import { PlaceCardPropsType } from '../../utils/mocks';
 import FavoriteLocation from '../favorite-location/FavoriteLocation';
 import PlaceCard from '../place-card/PlaceCard';
