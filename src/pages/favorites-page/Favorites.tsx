@@ -1,12 +1,13 @@
+import { Helmet } from 'react-helmet-async';
 import FavoritesList from '../../components/blocks/favorites-list/FavoritesList';
-import Footer from '../../components/layout/footer/Footer';
-import Header from '../../components/layout/header/Header';
 import { favoritePlaces } from '../../components/utils/mocks';
 
 export default function Favorites(): JSX.Element {
   return (
     <div className="page">
-      <Header />
+      <Helmet>
+        <title>Избранное</title>
+      </Helmet>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -15,7 +16,6 @@ export default function Favorites(): JSX.Element {
           </section>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }
