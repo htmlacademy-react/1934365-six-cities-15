@@ -1,8 +1,8 @@
-import { Helmet } from "react-helmet-async";
+import { Helmet } from 'react-helmet-async';
 
 export default function Login(): JSX.Element {
   return (
-    <div className="page page--gray page--login">
+    <>
       <Helmet>
         <title>Страница авторизации</title>
       </Helmet>
@@ -32,6 +32,6 @@ export default function Login(): JSX.Element {
           </section>
         </div>
       </main>
-    </div>
+    </>
   );
 }
