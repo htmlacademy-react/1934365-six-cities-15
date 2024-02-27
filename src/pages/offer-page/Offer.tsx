@@ -1,21 +1,23 @@
+import { Helmet } from 'react-helmet-async';
 import OfferFeature from '../../components/blocks/offer-feature/OfferFeature';
 import OfferGalleryItem from '../../components/blocks/offer-gallery-item/OfferGalleryItem';
 import OfferReview from '../../components/blocks/offer-review/OfferReview';
 import PlaceCard from '../../components/blocks/place-card/PlaceCard';
-import Header from '../../components/layout/header/Header';
 import { favoritePlaceImages, placeFeatures, nearPlaces } from '../../components/utils/mocks';
 
 export default function Offer(): JSX.Element {
   return (
     <div className="page">
-      <Header />
+      <Helmet>
+        <title>Предложение по аренде жилья</title>
+      </Helmet>
 
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
               {favoritePlaceImages.map((image) => (
-                <OfferGalleryItem key={image} image = {image}/>
+                <OfferGalleryItem key={image} image={image} />
               ))}
             </div>
           </div>
@@ -62,7 +64,7 @@ export default function Offer(): JSX.Element {
                 <ul className="offer__inside-list">
                   {
                     placeFeatures.map((feature: string) => (
-                      <OfferFeature key={feature} feature = {feature}/>
+                      <OfferFeature key={feature} feature={feature} />
                     ))
                   }
                 </ul>
@@ -150,7 +152,7 @@ export default function Offer(): JSX.Element {
                 nearPlaces.map((card) => (
                   <PlaceCard
                     key={card.id}
-                    card = {card}
+                    card={card}
                   />
                 ))
               }

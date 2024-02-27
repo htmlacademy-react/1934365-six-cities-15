@@ -1,12 +1,10 @@
 import Location from '../../components/blocks/locations/Locations';
-import Header from '../../components/layout/header/Header';
 import { places, cities } from '../../components/utils/mocks';
 import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList';
 
 export default function Main(props: {placesAmount: number}): JSX.Element {
   return (
     < div className="page page--gray page--main" >
-      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
