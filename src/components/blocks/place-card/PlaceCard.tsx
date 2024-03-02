@@ -1,8 +1,16 @@
 import { PlaceCardPropsType } from '../../utils/mocks';
 
-export default function PlaceCard({ card }: {card: PlaceCardPropsType}): JSX.Element {
+export default function PlaceCard({ card }: {card: PlaceCardPropsType}, onCardHover: (card?: PlaceCardPropsType) => void): JSX.Element {
+  const onMouseOn = () => {
+    onCardHover(card)
+  }
+
+  const onMouseOff = () => {
+    onCardHover()
+  }
+
   return (
-    <article className={`${card.className}__card place-card`}>
+    <article className={`${card.className}__card place-card`} onMouseEnter={onMouseOn} onMouseLeave={onMouseOff}>
       {card.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
       <div className={`${card.className}__image-wrapper place-card__image-wrapper"`}>
         <a href="#">
@@ -36,3 +44,5 @@ export default function PlaceCard({ card }: {card: PlaceCardPropsType}): JSX.Ele
     </article>
   );
 }
+
+

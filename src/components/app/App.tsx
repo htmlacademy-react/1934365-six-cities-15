@@ -10,16 +10,17 @@ import PrivateRoute from '../blocks/private-route/PrivateRoute';
 import { HelmetProvider } from 'react-helmet-async';
 import Layout from '../layout/layout/Layout';
 import { getAutorizationStatus } from '../utils/utils';
+import { CityPropsType, PlaceCardPropsType } from '../utils/mocks';
 
-const autorizationStatus = getAutorizationStatus();
+export default function App(props: {places: Array<PlaceCardPropsType>, cities: Array<CityPropsType>}): JSX.Element {
+  const autorizationStatus = getAutorizationStatus();
 
-export default function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Root} element={<Layout />}>
-            <Route index element={<Main placesAmount={PLACES_AMOUNT} />} />
+          <Route path={AppRoute.Root} element={<Layout />} >
+            <Route index element={<Main placesAmount={PLACES_AMOUNT} places = {props.places} cities={props.cities} />} />
             <Route path={AppRoute.Login} element={
               <PrivateRoute autorizationStatus={autorizationStatus} isReverse>
                 <Login />

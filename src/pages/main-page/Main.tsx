@@ -1,8 +1,8 @@
 import Location from '../../components/blocks/locations/Locations';
-import { places, cities } from '../../components/utils/mocks';
 import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList';
+import { PlaceCardPropsType, CityPropsType, cities, places } from '../../components/utils/mocks';
 
-export default function Main(props: {placesAmount: number}): JSX.Element {
+export default function Main(props: {placesAmount: number, places: Array<PlaceCardPropsType>, cities: Array<CityPropsType>}): JSX.Element {
   return (
     < div className="page page--gray page--main" >
       <main className="page__main page__main--index">
