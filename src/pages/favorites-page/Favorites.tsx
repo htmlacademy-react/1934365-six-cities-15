@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import FavoritesList from '../../components/blocks/favorites-list/FavoritesList';
 import { PlaceCardPropsType } from '../../components/utils/mocks';
 
-export default function Favorites(favoritePlaces: Array<PlaceCardPropsType>): JSX.Element {
+export default function Favorites(props: {favoritePlaces: Array<PlaceCardPropsType>}): JSX.Element {
   return (
     <div className="page">
       <Helmet>
@@ -12,7 +12,7 @@ export default function Favorites(favoritePlaces: Array<PlaceCardPropsType>): JS
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList favoritePlaces = {favoritePlaces} />
+            <FavoritesList favoritePlaces = {props.favoritePlaces} />
           </section>
         </div>
       </main>
