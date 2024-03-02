@@ -12,7 +12,7 @@ import Layout from '../layout/layout/Layout';
 import { getAutorizationStatus } from '../utils/utils';
 import { CityPropsType, PlaceCardPropsType } from '../utils/mocks';
 
-export default function App(props: {places: Array<PlaceCardPropsType>, cities: Array<CityPropsType>}): JSX.Element {
+export default function App(props: {places: Array<PlaceCardPropsType>, cities: Array<CityPropsType>, favoritePlaces: Array<PlaceCardPropsType>}): JSX.Element {
   const autorizationStatus = getAutorizationStatus();
 
   return (
@@ -29,7 +29,7 @@ export default function App(props: {places: Array<PlaceCardPropsType>, cities: A
             />
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute autorizationStatus={autorizationStatus}>
-                <Favorites />
+                <Favorites favoritePlaces = {props.favoritePlaces} />
               </PrivateRoute>
             }
             />

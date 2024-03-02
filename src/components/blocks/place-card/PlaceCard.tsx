@@ -1,6 +1,7 @@
 import { PlaceCardPropsType } from '../../utils/mocks';
 
 export default function PlaceCard({ card }: {card: PlaceCardPropsType}, onCardHover: (card?: PlaceCardPropsType) => void): JSX.Element {
+  console.log(onCardHover)
   const onMouseOn = () => {
     onCardHover(card)
   }

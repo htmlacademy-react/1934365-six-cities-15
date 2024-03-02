@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import FavoritesList from '../../components/blocks/favorites-list/FavoritesList';
-import { favoritePlaces } from '../../components/utils/mocks';
+import { PlaceCardPropsType } from '../../components/utils/mocks';
 
-export default function Favorites(): JSX.Element {
+export default function Favorites(favoritePlaces: Array<PlaceCardPropsType>): JSX.Element {
   return (
     <div className="page">
       <Helmet>
