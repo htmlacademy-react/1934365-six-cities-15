@@ -10,3 +10,7 @@ export enum AutorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN'
 }
+
+export type isAuthType = {
+  isAuth: boolean
+}
