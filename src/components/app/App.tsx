@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from '../../pages/main-page/Main';
 import Offer from '../../pages/offer-page/Offer';
 import { PLACES_AMOUNT } from '../utils/constants';
-import { AppRoute } from '../utils/types';
+import { AppPropsType, AppRoute } from '../utils/types';
 import Login from '../../pages/login-page/Login';
 import NotFound from '../../pages/not-found-page/NotFound';
 import PrivateRoute from '../blocks/private-route/PrivateRoute';
@@ -11,15 +11,15 @@ import { HelmetProvider } from 'react-helmet-async';
 import Layout from '../layout/layout/Layout';
 import { getAutorizationStatus } from '../utils/utils';
 
-const autorizationStatus = getAutorizationStatus();
+export default function App(props: AppPropsType): JSX.Element {
+  const autorizationStatus = getAutorizationStatus();
 
-export default function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Root} element={<Layout />}>
-            <Route index element={<Main placesAmount={PLACES_AMOUNT} />} />
+          <Route path={AppRoute.Root} element={<Layout />} >
+            <Route index element={<Main placesAmount={PLACES_AMOUNT} places = {props.places} cities={props.cities} filters = {props.filters} />} />
             <Route path={AppRoute.Login} element={
               <PrivateRoute autorizationStatus={autorizationStatus} isReverse>
                 <Login />
@@ -28,7 +28,7 @@ export default function App(): JSX.Element {
             />
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute autorizationStatus={autorizationStatus}>
-                <Favorites />
+                <Favorites favoritePlaces = {props.favoritePlaces} />
               </PrivateRoute>
             }
             />

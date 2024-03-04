@@ -1,4 +1,4 @@
-import { CityPropsType } from '../../utils/mocks';
+import { CityPropsType } from '../../utils/types';
 
 export default function Location(props: {cities: Array<CityPropsType>}): JSX.Element {
   return (

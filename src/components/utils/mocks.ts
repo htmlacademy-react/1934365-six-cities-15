@@ -1,22 +1,4 @@
-type HousingType = 'apartment' | 'room' | 'house' | 'hotel'
-export type CityPropsType = {
-  id: number;
-  title: string;
-}
-
-export type PlaceCardPropsType = {
-  'id'?: string;
-  'title': string;
-  'type': HousingType;
-  'price': number;
-  'previewImage': string;
-  'isFavorite'?: boolean;
-  'isPremium': boolean;
-  'rating'?: number;
-  'className'?: string;
-  'width'?: number;
-  'height'?: number;
-}
+import { PlaceCardPropsType, CityPropsType } from './types';
 
 export const places: Array<PlaceCardPropsType> =
 [
@@ -163,3 +145,7 @@ export const cities: Array<CityPropsType> = [
 export const favoritePlaceImages: string[] = ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'https://15.design.htmlacademy.pro/static/hotel/6.jpg'];
 
 export const placeFeatures: string[] = ['Wi-Fi', 'Washing machine', 'Towels', 'Heating', 'Coffee machine', 'Baby seat', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'];
+
+export const offersFilters: string[] = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+
+
