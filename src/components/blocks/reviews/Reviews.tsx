@@ -1,8 +1,8 @@
-import { isAuthType } from "../../utils/types";
-import OfferForm from "../offer-form/OfferForm";
-import OfferReview from "../offer-review/OfferReview";
+import { isAuthType } from '../../utils/types';
+import OfferForm from '../offer-form/OfferForm';
+import OfferReview from '../offer-review/OfferReview';
 
-export default function Reviews(props: {isAuth: isAuthType}): JSX.Element {
+export default function Reviews(props: isAuthType): JSX.Element {
 
   return (
     <>
@@ -12,5 +12,5 @@ export default function Reviews(props: {isAuth: isAuthType}): JSX.Element {
       {props.isAuth && <OfferForm />}
     </>
 
-  )
+  );
 }

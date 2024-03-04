@@ -1,14 +1,16 @@
 import Location from '../../components/blocks/locations/Locations';
+import Map from '../../components/blocks/map/Map';
 import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList';
-import { PlaceCardPropsType, CityPropsType, cities, places } from '../../components/utils/mocks';
+import Select from '../../components/blocks/select/Select';
+import { PlaceCardPropsType, CityPropsType } from '../../components/utils/types';
 
-export default function Main(props: {placesAmount: number, places: Array<PlaceCardPropsType>, cities: Array<CityPropsType>}): JSX.Element {
+export default function Main(props: { placesAmount: number; places: Array<PlaceCardPropsType>; cities: Array<CityPropsType>; filters: string[] }): JSX.Element {
   return (
     < div className="page page--gray page--main" >
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Location cities= {cities} />
+          <Location cities={props.cities} />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -23,19 +25,14 @@ export default function Main(props: {placesAmount: number, places: Array<PlaceCa
                     <use xlinkHref="#icon-arrow-select"></use>
                   </svg>
                 </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
+                <Select filters = {props.filters}/>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCardList places = { places }/>
+                <PlaceCardList places={props.places} />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map />
             </div>
           </div>
         </div>
