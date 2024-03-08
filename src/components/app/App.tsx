@@ -19,7 +19,7 @@ export default function App(props: AppPropsType): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root} element={<Layout />} >
-            <Route index element={<Main placesAmount={PLACES_AMOUNT} places = {props.places} cities={props.cities} filters = {props.filters} />} />
+            <Route index element={<Main placesAmount={PLACES_AMOUNT} places = {props.places} cities={props.cities} filters = {props.filters} city ={props.city} />} />
             <Route path={AppRoute.Login} element={
               <PrivateRoute autorizationStatus={autorizationStatus} isReverse>
                 <Login />

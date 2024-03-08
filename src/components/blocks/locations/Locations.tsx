@@ -10,7 +10,7 @@ export default function Location(props: {cities: Array<CityPropsType>}): JSX.Ele
             className="locations__item"
           >
             <a className="locations__item-link tabs__item" href="#">
-              <span>{el.title}</span>
+              <span>{el.name}</span>
             </a>
           </li>
         ))}

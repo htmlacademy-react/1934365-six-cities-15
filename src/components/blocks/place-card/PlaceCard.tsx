@@ -3,18 +3,18 @@ import { PlaceCardPropsType } from '../../utils/types';
 import { AppRoute } from '../../utils/types';
 import Button from '../../ui/button/Button';
 
-export default function PlaceCard({ card, onCardHover }: { card: PlaceCardPropsType; onCardHover: (card?: PlaceCardPropsType) => void}): JSX.Element {
-  const onMouseOn = () => {
-    onCardHover(card);
-  };
+export default function PlaceCard({ card, onCardHover}: { card: PlaceCardPropsType; onCardHover: (id?: string | null) => void}): JSX.Element {
+  const handleMouseEnter = (): void => {
+    onCardHover?.(card.id);
+  }
 
-  const onMouseOff = () => {
-    onCardHover();
-  };
+  const handleMouseLeave = (): void => {
+    onCardHover?.(null);
+  }
 
   return (
     <Link to={AppRoute.Offer}>
-      <article className={`${card.className}__card place-card`} onMouseEnter={onMouseOn} onMouseLeave={onMouseOff}>
+      <article className={`${card.className}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {card.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
         <div className={`${card.className}__image-wrapper place-card__image-wrapper"`}>
           <a href="#">

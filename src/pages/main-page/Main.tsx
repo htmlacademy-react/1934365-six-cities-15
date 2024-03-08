@@ -1,10 +1,19 @@
+import { useState } from 'react';
 import Location from '../../components/blocks/locations/Locations';
 import Map from '../../components/blocks/map/Map';
 import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList';
 import Select from '../../components/blocks/select/Select';
-import { PlaceCardPropsType, CityPropsType } from '../../components/utils/types';
+import { PlaceCardPropsType, CityPropsType, CityType } from '../../components/utils/types';
 
-export default function Main(props: { placesAmount: number; places: Array<PlaceCardPropsType>; cities: Array<CityPropsType>; filters: string[] }): JSX.Element {
+export default function Main(props: { placesAmount: number; places: Array<PlaceCardPropsType>; cities: Array<CityPropsType>; filters: string[]; city: CityType }): JSX.Element {
+  const [activeCardId, setActiveCardId] = useState<PlaceCardPropsType['id'] | null>(null)
+  function onCardHover(placeId: PlaceCardPropsType['id'] | null): void {
+    props.places.find((place) => {
+      place.id === placeId;
+    })
+    setActiveCardId(placeId)
+  }
+
   return (
     < div className="page page--gray page--main" >
       <main className="page__main page__main--index">
@@ -28,11 +37,11 @@ export default function Main(props: { placesAmount: number; places: Array<PlaceC
                 <Select filters = {props.filters}/>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCardList places={props.places} />
+                <PlaceCardList places={props.places} onCardHover = {onCardHover}/>
               </div>
             </section>
             <div className="cities__right-section">
-              <Map />
+              <Map city={props.city} places = {props.places} activeCardId={activeCardId}/>
             </div>
           </div>
         </div>
