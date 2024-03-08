@@ -1,4 +1,4 @@
-import { CityPropsType } from '../../utils/types';
+import { CityPropsType } from '../../blocks/place-card/types';
 
 export default function Location(props: {cities: Array<CityPropsType>}): JSX.Element {
   return (
@@ -6,7 +6,7 @@ export default function Location(props: {cities: Array<CityPropsType>}): JSX.Ele
       <ul className="locations__list tabs__list">
         {props.cities.map((el) => (
           <li
-            key = {el.id}
+            key = {el.name}
             className="locations__item"
           >
             <a className="locations__item-link tabs__item" href="#">

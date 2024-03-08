@@ -1,4 +1,4 @@
-import { PlaceCardPropsType } from '../../utils/types';
+import { PlaceCardPropsType } from '../../blocks/place-card/types';
 import FavoriteLocation from '../favorite-location/FavoriteLocation';
 import PlaceCard from '../place-card/PlaceCard';
 

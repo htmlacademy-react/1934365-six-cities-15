@@ -1,7 +1,7 @@
-import { PlaceCardPropsType } from '../../utils/types';
+import { PlaceCardPropsType } from '../place-card/types';
 import PlaceCard from '../place-card/PlaceCard';
 
-export default function PlaceCardList(props: { places: Array<PlaceCardPropsType>; onCardHover: (evt: any) => void }): JSX.Element {
+export default function PlaceCardList(props: { places: Array<PlaceCardPropsType>; onCardHover: (placeId: PlaceCardPropsType['id'] | null) => void }): JSX.Element {
 
   return (
     <>

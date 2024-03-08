@@ -3,15 +3,16 @@ import Location from '../../components/blocks/locations/Locations';
 import Map from '../../components/blocks/map/Map';
 import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList';
 import Select from '../../components/blocks/select/Select';
-import { PlaceCardPropsType, CityPropsType, CityType } from '../../components/utils/types';
+import { PlaceCardPropsType, CityPropsType, LocationType } from '../../components/blocks/place-card/types';
 
-export default function Main(props: { placesAmount: number; places: Array<PlaceCardPropsType>; cities: Array<CityPropsType>; filters: string[]; city: CityType }): JSX.Element {
-  const [activeCardId, setActiveCardId] = useState<PlaceCardPropsType['id'] | null>(null)
+export default function Main(props: { placesAmount: number; places: Array<PlaceCardPropsType>; cities: Array<CityPropsType>; filters: string[]; city: LocationType }): JSX.Element {
+  const [activeCardId, setActiveCardId] = useState<PlaceCardPropsType['id'] | null>(null);
   function onCardHover(placeId: PlaceCardPropsType['id'] | null): void {
     props.places.find((place) => {
-      place.id === placeId;
-    })
-    setActiveCardId(placeId)
+      if (place.id === placeId) {
+        setActiveCardId(placeId);
+      }
+    });
   }
 
   return (

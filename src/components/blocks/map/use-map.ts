@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { CityType } from "../../utils/types";
+import { useEffect, useRef, useState } from 'react';
 import leaflet, {Map as LeafletMap} from 'leaflet';
+import { LocationType } from '../place-card/types';
 
-export default function useMap(mapRef: React.RefObject<HTMLDivElement | null>, city: CityType) {
+export default function useMap(mapRef: React.RefObject<HTMLDivElement | null>, city: LocationType) {
   const [map, setMap] = useState<LeafletMap | null>(null);
   const isRenderRef = useRef(false);
 
@@ -15,7 +15,7 @@ export default function useMap(mapRef: React.RefObject<HTMLDivElement | null>, c
         },
         zoom: city.zoom
       }
-      )
+      );
       leaflet
         .tileLayer(
           'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
@@ -27,8 +27,8 @@ export default function useMap(mapRef: React.RefObject<HTMLDivElement | null>, c
       setMap(instance);
       isRenderRef.current = true;
     }
-  }, [mapRef, city])
+  }, [mapRef, city]);
 
-  return map
+  return map;
 
 }

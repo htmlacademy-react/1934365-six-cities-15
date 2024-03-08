@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
-import { PlaceCardPropsType } from '../../utils/types';
+import { PlaceCardPropsType } from './types';
 import { AppRoute } from '../../utils/types';
 import Button from '../../ui/button/Button';
 
-export default function PlaceCard({ card, onCardHover}: { card: PlaceCardPropsType; onCardHover: (id?: string | null) => void}): JSX.Element {
+export default function PlaceCard({ card, onCardHover}: { card: PlaceCardPropsType; onCardHover?: (id: string | null) => void}): JSX.Element {
   const handleMouseEnter = (): void => {
     onCardHover?.(card.id);
-  }
+  };
 
   const handleMouseLeave = (): void => {
     onCardHover?.(null);
-  }
+  };
 
   return (
     <Link to={AppRoute.Offer}>
