@@ -10,7 +10,8 @@ export default function Location({cities, onCityItemClick, activeCity }: Locatio
             key={city.name}
             city={city}
             onCityItemClick = {onCityItemClick}
-            activeCity = {activeCity}/>
+            activeCity = {activeCity}
+          />
         ))}
       </ul>
     </section>

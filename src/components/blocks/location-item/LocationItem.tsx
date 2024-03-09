@@ -1,11 +1,10 @@
-import { CityPropsType } from "../place-card/types";
-import classNames from "classnames";
+import { CityPropsType } from '../place-card/types';
+import classNames from 'classnames';
 
-export default function LocationItem({ city, onCityItemClick, activeCity }: { city: CityPropsType; onCityItemClick: (name: string) => void, activeCity: CityPropsType['name'] }): JSX.Element {
+export default function LocationItem({ city, onCityItemClick, activeCity }: { city: CityPropsType; onCityItemClick: (name: string) => void; activeCity: CityPropsType['name'] }): JSX.Element {
   const handleClick = () => {
     onCityItemClick(city.name);
-    console.log(activeCity)
-  }
+  };
   return (
     < li
       className="locations__item"
@@ -14,10 +13,11 @@ export default function LocationItem({ city, onCityItemClick, activeCity }: { ci
       <a className={classNames('locations__item-link tabs__item',
         { 'tabs__item--active': activeCity === city.name }
       )}
-        href="#">
+      href="#"
+      >
         <span>{city.name}</span>
       </a>
     </li >
 
-  )
+  );
 }

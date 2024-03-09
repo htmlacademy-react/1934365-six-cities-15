@@ -1,4 +1,4 @@
-import { CityPropsType, LocationType, PlaceCardPropsType } from "../../components/blocks/place-card/types";
+import { CityPropsType, LocationType, PlaceCardPropsType } from '../../components/blocks/place-card/types';
 
 export type MainPropsType = {
   placesAmount: number;

@@ -22,6 +22,7 @@ export type PlaceCardPropsType = {
   isFavorite: boolean;
   isPremium: boolean;
   rating?: number;
+  className?: string;
   width?: number;
   height?: number;
 }

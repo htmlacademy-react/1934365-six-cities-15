@@ -1,18 +1,19 @@
-import { CityPropsType, PlaceCardPropsType } from '../place-card/types';
+import { PlaceCardPropsType } from '../place-card/types';
 import PlaceCard from '../place-card/PlaceCard';
+import { PlaceCardListPropsType } from './types';
 
-export default function PlaceCardList(props: { places: Array<PlaceCardPropsType>; onCardHover: (placeId: PlaceCardPropsType['id'] | null) => void; activeCity: CityPropsType['name'] }): JSX.Element {
+export default function PlaceCardList({ places, onCardHover, activeCity }: PlaceCardListPropsType): JSX.Element {
 
   return (
     <>
       {
-        props.places.map((card: PlaceCardPropsType) => (
-          (card.city.name === props.activeCity) ?
-          <PlaceCard
-            key={card.id}
-            card={card}
-            onCardHover={props.onCardHover}
-          /> : null
+        places.map((card: PlaceCardPropsType) => (
+          (card.city.name === activeCity) ?
+            <PlaceCard
+              key={card.id}
+              card={card}
+              onCardHover={onCardHover}
+            /> : null
         ))
       }
     </>

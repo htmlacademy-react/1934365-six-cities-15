@@ -1,36 +1,34 @@
 import { useEffect, useRef } from 'react';
-import { LocationType } from '../../blocks/place-card/types';
-import { PlaceCardPropsType } from '../place-card/types';
 import useMap from './use-map';
 import leaflet from 'leaflet';
+import '../../../../node_modules/leaflet/dist/leaflet.css';
+import { currentCustomIcon, defaultCustomIcon } from './consts';
+import { MapPropsType } from './types';
 
-export default function Map(props: { city: LocationType; places: Array<PlaceCardPropsType>; activeCardId?: PlaceCardPropsType['id'] | null }): JSX.Element {
+export default function Map({city, places, activeCardId, activeCity}: MapPropsType): JSX.Element {
   const MapRef = useRef<HTMLDivElement>(null);
-  const map = useMap(MapRef, props.city);
-  const defaultCustomIcon = leaflet.icon({
-    iconUrl: '../../../markup/img/pin.svg',
-    iconSize: [27, 39],
-    iconAnchor: [14, 39],
-  });
-  const currentCustomIcon = leaflet.icon({
-    iconUrl: '../../../markup/img/pin-active.svg',
-    iconSize: [27, 39],
-    iconAnchor: [14, 39],
-  });
+  const map = useMap(MapRef, city);
+  const currentCity = places.find((el) => el.city.name === activeCity);
+
+  useEffect((): void => {
+    if (map && currentCity) {
+      map.setView([currentCity.city.location.latitude, currentCity.city.location.longitude], city.zoom);
+    }
+  }, [currentCity]);
 
   useEffect((): void => {
     if (map) {
-      props.places.forEach((place) => {
+      places.forEach((place) => {
         leaflet.marker({
           lat: place.location.latitude,
           lng: place.location.longitude
         },
-        {icon: place.id === props.activeCardId ? currentCustomIcon : defaultCustomIcon}
+        {icon: place.id === activeCardId ? currentCustomIcon : defaultCustomIcon}
         )
           .addTo(map);
       });
     }
-  }, [map, props.places, props.activeCardId]);
+  }, [map, places, activeCardId]);
 
   return (
     <section

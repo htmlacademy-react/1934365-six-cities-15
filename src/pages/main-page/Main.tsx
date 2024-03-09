@@ -6,12 +6,12 @@ import Select from '../../components/blocks/select/Select';
 import { PlaceCardPropsType, CityPropsType } from '../../components/blocks/place-card/types';
 import { MainPropsType } from './types';
 
-export default function Main({placesAmount, places, cities, filters, city}: MainPropsType ): JSX.Element {
-  const [activeCardId, setActiveCardId] = useState<PlaceCardPropsType['id'] | null>(null);
+export default function Main({placesAmount, places, cities, filters, city}: MainPropsType): JSX.Element {
+  const [activeCardId, setActiveCardId] = useState<PlaceCardPropsType['id']>(null);
   const [activeCity, setActiveCity] = useState<CityPropsType['name']>(cities[0].name);
 
-  function onCardHover(placeId: PlaceCardPropsType['id'] | null): void {
-    places.find((place) => {
+  function onCardHover(placeId: PlaceCardPropsType['id']): void {
+    places.some((place) => {
       if (place.id === placeId) {
         setActiveCardId(placeId);
       }
@@ -19,11 +19,11 @@ export default function Main({placesAmount, places, cities, filters, city}: Main
   }
 
   function onCityItemClick(cityName: CityPropsType['name']): void {
-    cities.find((city) => {
-      if (city.name === cityName) {
+    cities.find((el) => {
+      if (el.name === cityName) {
         setActiveCity(cityName);
       }
-    })
+    });
   }
 
   return (
@@ -53,7 +53,7 @@ export default function Main({placesAmount, places, cities, filters, city}: Main
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={city} places = {places} activeCardId={activeCardId}/>
+              <Map city={city} places = {places} activeCardId={activeCardId} activeCity = {activeCity}/>
             </div>
           </div>
         </div>
