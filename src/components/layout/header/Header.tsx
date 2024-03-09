@@ -1,10 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import { AppRoute, AutorizationStatus } from '../../utils/types';
-import { getAutorizationStatus } from '../../utils/utils';
+import { AppRoute, AuthorizationStatus } from '../../utils/types';
+import { getAuthorizationStatus } from '../../utils/utils';
 
 export default function Header(): JSX.Element {
   const location = useLocation();
-  const autorizationStatus = getAutorizationStatus();
+  const authorizationStatus = getAuthorizationStatus();
   let classNameLink = '';
   if (location.pathname as AppRoute === AppRoute.Root) {
     classNameLink = 'header__logo-link--active';
@@ -27,7 +27,7 @@ export default function Header(): JSX.Element {
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      {autorizationStatus === AutorizationStatus.Auth ?
+                      {authorizationStatus === AuthorizationStatus.Auth ?
                         <>
                           <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                           <span className="header__favorite-count">3</span>
@@ -36,7 +36,7 @@ export default function Header(): JSX.Element {
                     </Link>
                   </li>
                   {
-                    autorizationStatus === AutorizationStatus.Auth ?
+                    authorizationStatus === AuthorizationStatus.Auth ?
                       <li className="header__nav-item">
                         <a className="header__nav-link" href="#">
                           <span className="header__signout">Sign out</span>

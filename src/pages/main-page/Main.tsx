@@ -1,18 +1,29 @@
 import { useState } from 'react';
-import Location from '../../components/blocks/locations/Locations';
+import LocationList from '../../components/blocks/location-list/LocationsList';
 import Map from '../../components/blocks/map/Map';
 import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList';
 import Select from '../../components/blocks/select/Select';
-import { PlaceCardPropsType, CityPropsType, LocationType } from '../../components/blocks/place-card/types';
+import { PlaceCardPropsType, CityPropsType } from '../../components/blocks/place-card/types';
+import { MainPropsType } from './types';
 
-export default function Main(props: { placesAmount: number; places: Array<PlaceCardPropsType>; cities: Array<CityPropsType>; filters: string[]; city: LocationType }): JSX.Element {
+export default function Main({placesAmount, places, cities, filters, city}: MainPropsType ): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<PlaceCardPropsType['id'] | null>(null);
+  const [activeCity, setActiveCity] = useState<CityPropsType['name']>(cities[0].name);
+
   function onCardHover(placeId: PlaceCardPropsType['id'] | null): void {
-    props.places.find((place) => {
+    places.find((place) => {
       if (place.id === placeId) {
         setActiveCardId(placeId);
       }
     });
+  }
+
+  function onCityItemClick(cityName: CityPropsType['name']): void {
+    cities.find((city) => {
+      if (city.name === cityName) {
+        setActiveCity(cityName);
+      }
+    })
   }
 
   return (
@@ -20,13 +31,13 @@ export default function Main(props: { placesAmount: number; places: Array<PlaceC
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Location cities={props.cities} />
+          <LocationList cities={cities} onCityItemClick = {onCityItemClick} activeCity = {activeCity}/>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{props.placesAmount} places to stay in Amsterdam</b>
+              <b className="places__found">{placesAmount} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -35,14 +46,14 @@ export default function Main(props: { placesAmount: number; places: Array<PlaceC
                     <use xlinkHref="#icon-arrow-select"></use>
                   </svg>
                 </span>
-                <Select filters = {props.filters}/>
+                <Select filters = {filters}/>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCardList places={props.places} onCardHover = {onCardHover}/>
+                <PlaceCardList places={places} onCardHover = {onCardHover} activeCity = {activeCity}/>
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={props.city} places = {props.places} activeCardId={activeCardId}/>
+              <Map city={city} places = {places} activeCardId={activeCardId}/>
             </div>
           </div>
         </div>
