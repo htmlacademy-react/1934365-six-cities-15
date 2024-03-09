@@ -1,3 +1,3 @@
-import { AutorizationStatus } from './types';
+import { AuthorizationStatus } from './types';
 
-export const getAutorizationStatus = () => AutorizationStatus.Auth;
+export const getAuthorizationStatus = () => AuthorizationStatus.Auth;

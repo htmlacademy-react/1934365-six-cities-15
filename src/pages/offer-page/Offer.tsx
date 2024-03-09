@@ -4,11 +4,11 @@ import OfferGalleryItem from '../../components/blocks/offer-gallery-item/OfferGa
 import PlaceCard from '../../components/blocks/place-card/PlaceCard';
 import { favoritePlaceImages, placeFeatures, nearPlaces } from '../../components/utils/mocks';
 import Reviews from '../../components/blocks/reviews/Reviews';
-import { AutorizationStatus } from '../../components/utils/types';
-import { getAutorizationStatus } from '../../components/utils/utils';
+import { AuthorizationStatus } from '../../components/utils/types';
+import { getAuthorizationStatus } from '../../components/utils/utils';
 
 export default function Offer(): JSX.Element {
-  const autorizationStatus = getAutorizationStatus();
+  const authorizationStatus = getAuthorizationStatus();
 
   return (
     <div className="page">
@@ -97,7 +97,7 @@ export default function Offer(): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <Reviews isAuth = {autorizationStatus === AutorizationStatus.Auth} />
+                <Reviews isAuth = {authorizationStatus === AuthorizationStatus.Auth} />
               </section>
             </div>
           </div>
@@ -106,7 +106,7 @@ export default function Offer(): JSX.Element {
 
         <div className="container">
           <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <h2 className="near-places__title">Other places in the neighborhood</h2>
             <div className="near-places__list places__list">
               {
                 nearPlaces.map((card) => (

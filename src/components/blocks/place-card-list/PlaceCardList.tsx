@@ -1,33 +1,21 @@
-import { useState } from 'react';
-import { PlaceCardPropsType } from '../../utils/types';
+import { PlaceCardPropsType } from '../place-card/types';
 import PlaceCard from '../place-card/PlaceCard';
-import { Nullable } from 'vitest';
+import { PlaceCardListPropsType } from './types';
 
-export default function PlaceCardList(props: { places: Array<PlaceCardPropsType> }): JSX.Element {
-  const [activeCard, setActiveCard] = useState<Nullable<PlaceCardPropsType>>(null);
-  const onCardHover = (card?: PlaceCardPropsType) => {
-    setActiveCard(card || null);
-  };
+export default function PlaceCardList({ places, onCardHover, activeCity }: PlaceCardListPropsType): JSX.Element {
 
-  // useEffect(() => {
-  //   console.log('component did update');
-  // }, [activeCard]);
-
-  // useEffect(() => {
-  //   console.warn(activeCard);
-  //   return () => {
-  //     console.log('component will unmount');
-  //   };
-  // });
   return (
     <>
-      {props.places.map((card: PlaceCardPropsType) => (
-        <PlaceCard
-          key = {card.id}
-          card = {card}
-          onCardHover = {onCardHover}
-        />
-      ))}
+      {
+        places.map((card: PlaceCardPropsType) => (
+          (card.city.name === activeCity) ?
+            <PlaceCard
+              key={card.id}
+              card={card}
+              onCardHover={onCardHover}
+            /> : null
+        ))
+      }
     </>
   );
 }
