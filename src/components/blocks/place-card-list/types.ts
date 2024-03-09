@@ -1,7 +1,7 @@
-import { PlaceCardPropsType, CityPropsType } from '../place-card/types';
+import { CityPropsType, PlaceCardType } from '../place-card/types';
 
 export type PlaceCardListPropsType = {
-  places: Array<PlaceCardPropsType>;
-  onCardHover: (placeId: PlaceCardPropsType['id'] | null) => void;
+  places: Array<PlaceCardType>;
+  onCardHover: (placeId: PlaceCardType['id'] | null) => void;
   activeCity: CityPropsType['name'];
 }

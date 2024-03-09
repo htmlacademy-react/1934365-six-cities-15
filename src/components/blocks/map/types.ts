@@ -1,9 +1,10 @@
-import { CityPropsType, LocationType, PlaceCardPropsType } from '../place-card/types';
+import { CityPropsType, LocationType, PlaceCardType } from '../place-card/types';
 
 export type MapPropsType = {
   city: LocationType;
-  places: Array<PlaceCardPropsType>;
-  activeCardId?: PlaceCardPropsType['id'] | null;
+  places: Array<PlaceCardType>;
+  activeCardId?: PlaceCardType['id'] | null;
   activeCity: CityPropsType['name'];
+  className?: string;
 }
 

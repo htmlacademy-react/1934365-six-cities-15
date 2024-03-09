@@ -1,20 +1,23 @@
 import { useEffect, useRef } from 'react';
 import useMap from './use-map';
-import leaflet from 'leaflet';
+import leaflet, { LayerGroup } from 'leaflet';
 import '../../../../node_modules/leaflet/dist/leaflet.css';
 import { currentCustomIcon, defaultCustomIcon } from './consts';
 import { MapPropsType } from './types';
 
-export default function Map({city, places, activeCardId, activeCity}: MapPropsType): JSX.Element {
+export default function Map({city, places, activeCardId, activeCity, className}: MapPropsType): JSX.Element {
   const MapRef = useRef<HTMLDivElement>(null);
+  const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
   const map = useMap(MapRef, city);
   const currentCity = places.find((el) => el.city.name === activeCity);
 
   useEffect((): void => {
     if (map && currentCity) {
       map.setView([currentCity.city.location.latitude, currentCity.city.location.longitude], city.zoom);
+      markerLayer.current.addTo(map);
+      // markerLayer.current.clearLayers();
     }
-  }, [currentCity]);
+  }, [currentCity, map]);
 
   useEffect((): void => {
     if (map) {
@@ -25,15 +28,14 @@ export default function Map({city, places, activeCardId, activeCity}: MapPropsTy
         },
         {icon: place.id === activeCardId ? currentCustomIcon : defaultCustomIcon}
         )
-          .addTo(map);
+          .addTo(markerLayer.current);
       });
     }
   }, [map, places, activeCardId]);
 
   return (
     <section
-      className="cities__map map"
-      style={{ height: '631px' }}
+      className={`${className} map`}
       ref={MapRef}
     >
     </section>

@@ -2,12 +2,15 @@ import { Helmet } from 'react-helmet-async';
 import OfferFeature from '../../components/blocks/offer-feature/OfferFeature';
 import OfferGalleryItem from '../../components/blocks/offer-gallery-item/OfferGalleryItem';
 import PlaceCard from '../../components/blocks/place-card/PlaceCard';
-import { favoritePlaceImages, placeFeatures, nearPlaces } from '../../components/utils/mocks';
-import Reviews from '../../components/blocks/reviews/Reviews';
+import { favoritePlaceImages, placeFeatures } from '../../components/utils/mocks';
 import { AuthorizationStatus } from '../../components/utils/types';
 import { getAuthorizationStatus } from '../../components/utils/utils';
+import ReviewsList from '../../components/blocks/reviews-list/ReviewsList';
+import Map from '../../components/blocks/map/Map';
+import { OfferPropsType } from './types';
+import { IMAGE_WIDTH, IMAGE_HEIGHT } from '../../components/utils/constants';
 
-export default function Offer(): JSX.Element {
+export default function Offer({reviews, city, nearPlaces, activeCardId, activeCity }: OfferPropsType): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
 
   return (
@@ -96,12 +99,12 @@ export default function Offer(): JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <Reviews isAuth = {authorizationStatus === AuthorizationStatus.Auth} />
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewsList isAuth = {authorizationStatus === AuthorizationStatus.Auth} reviews = {reviews} />
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <Map city={city} places = {nearPlaces} activeCardId={activeCardId} activeCity = {activeCity} className = 'offer__map'/>
         </section>
 
         <div className="container">
@@ -113,6 +116,9 @@ export default function Offer(): JSX.Element {
                   <PlaceCard
                     key={card.id}
                     card={card}
+                    className={'near-places'}
+                    width={IMAGE_WIDTH.large}
+                    height={IMAGE_HEIGHT.large}
                   />
                 ))
               }

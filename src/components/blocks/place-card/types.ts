@@ -11,7 +11,7 @@ export type CityPropsType = {
   location: LocationType;
 }
 
-export type PlaceCardPropsType = {
+export type PlaceCardType = {
   id: string | null;
   title: string;
   type: HousingType;
@@ -22,7 +22,12 @@ export type PlaceCardPropsType = {
   isFavorite: boolean;
   isPremium: boolean;
   rating?: number;
+}
+
+export type PlaceCardPropsType = {
+  card: PlaceCardType;
+  onCardHover?: (id: string | null) => void;
   className?: string;
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
 }

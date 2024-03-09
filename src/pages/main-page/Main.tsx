@@ -3,14 +3,14 @@ import LocationList from '../../components/blocks/location-list/LocationsList';
 import Map from '../../components/blocks/map/Map';
 import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList';
 import Select from '../../components/blocks/select/Select';
-import { PlaceCardPropsType, CityPropsType } from '../../components/blocks/place-card/types';
+import { CityPropsType, PlaceCardType } from '../../components/blocks/place-card/types';
 import { MainPropsType } from './types';
 
 export default function Main({placesAmount, places, cities, filters, city}: MainPropsType): JSX.Element {
-  const [activeCardId, setActiveCardId] = useState<PlaceCardPropsType['id']>(null);
+  const [activeCardId, setActiveCardId] = useState<PlaceCardType['id']>(null);
   const [activeCity, setActiveCity] = useState<CityPropsType['name']>(cities[0].name);
 
-  function onCardHover(placeId: PlaceCardPropsType['id']): void {
+  function onCardHover(placeId: PlaceCardType['id']): void {
     places.some((place) => {
       if (place.id === placeId) {
         setActiveCardId(placeId);
@@ -53,7 +53,7 @@ export default function Main({placesAmount, places, cities, filters, city}: Main
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={city} places = {places} activeCardId={activeCardId} activeCity = {activeCity}/>
+              <Map city={city} places = {places} activeCardId={activeCardId} activeCity = {activeCity} className = 'cities__map'/>
             </div>
           </div>
         </div>
