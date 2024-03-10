@@ -1,10 +1,11 @@
-import { CityPropsType, LocationType, PlaceCardType } from '../place-card/types';
+import { OfferType } from '../../../pages/offer-page/types';
+import { CityPropsType, PlaceCardType } from '../place-card/types';
 
 export type MapPropsType = {
-  city: LocationType;
-  places: Array<PlaceCardType>;
+  city: CityPropsType;
+  places: Array<PlaceCardType & OfferType>;
   activeCardId?: PlaceCardType['id'] | null;
-  activeCity: CityPropsType['name'];
+  activeCityName: CityPropsType['name'];
   className?: string;
 }
 

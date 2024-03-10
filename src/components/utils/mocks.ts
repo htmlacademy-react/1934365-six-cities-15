@@ -1,4 +1,5 @@
-import { CityPropsType, LocationType, PlaceCardType } from '../blocks/place-card/types';
+import { OfferType } from '../../pages/offer-page/types';
+import { CityPropsType, PlaceCardType } from '../blocks/place-card/types';
 import { ReviewType } from '../blocks/review-item/types';
 
 export const places: Array<PlaceCardType> =
@@ -2906,148 +2907,6 @@ export const favoritePlaces: Array<PlaceCardType> =
     }
   ];
 
-export const nearPlaces: Array<PlaceCardType> =
-  [
-    {
-      'id': '854bbd80-6ba5-4c41-a0e1-6fc8b5c4fad4',
-      'title': 'The Pondhouse - A Magical Place',
-      'type': 'apartment',
-      'price': 478,
-      'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
-      'city': {
-        'name': 'Paris',
-        'location': {
-          'latitude': 48.85661,
-          'longitude': 2.351499,
-          'zoom': 13
-        }
-      },
-      'location': {
-        'latitude': 48.868610000000004,
-        'longitude': 2.342499,
-        'zoom': 16
-      },
-      'isFavorite': false,
-      'isPremium': true,
-      'rating': 4.7,
-    },
-    {
-      'id': 'b7d55565-278b-4a97-9600-ead99f238222',
-      'title': 'Nice, cozy, warm big bed apartment',
-      'type': 'house',
-      'price': 934,
-      'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/3.jpg',
-      'city': {
-        'name': 'Paris',
-        'location': {
-          'latitude': 48.85661,
-          'longitude': 2.351499,
-          'zoom': 13
-        }
-      },
-      'location': {
-        'latitude': 48.858610000000006,
-        'longitude': 2.330499,
-        'zoom': 16
-      },
-      'isFavorite': false,
-      'isPremium': true,
-      'rating': 3.4,
-    },
-    {
-      'id': '5c581e97-fa51-4032-bae4-aefb75334f00',
-      'title': 'Tile House',
-      'type': 'house',
-      'price': 777,
-      'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
-      'city': {
-        'name': 'Paris',
-        'location': {
-          'latitude': 48.85661,
-          'longitude': 2.351499,
-          'zoom': 13
-        }
-      },
-      'location': {
-        'latitude': 48.834610000000005,
-        'longitude': 2.335499,
-        'zoom': 16
-      },
-      'isFavorite': false,
-      'isPremium': false,
-      'rating': 2.2,
-    },
-    {
-      'id': 'b859adcf-6095-46c9-927e-8764281cf9d5',
-      'title': 'Loft Studio in the Central Area',
-      'type': 'apartment',
-      'price': 378,
-      'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
-      'city': {
-        'name': 'Paris',
-        'location': {
-          'latitude': 48.85661,
-          'longitude': 2.351499,
-          'zoom': 13
-        }
-      },
-      'location': {
-        'latitude': 48.85761,
-        'longitude': 2.358499,
-        'zoom': 16
-      },
-      'isFavorite': false,
-      'isPremium': false,
-      'rating': 1.9,
-    },
-    {
-      'id': '0998f31d-cd7f-42db-a9c2-d97d78ed4385',
-      'title': 'Amazing and Extremely Central Flat',
-      'type': 'hotel',
-      'price': 452,
-      'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
-      'city': {
-        'name': 'Paris',
-        'location': {
-          'latitude': 48.85661,
-          'longitude': 2.351499,
-          'zoom': 13
-        }
-      },
-      'location': {
-        'latitude': 48.87561,
-        'longitude': 2.375499,
-        'zoom': 16
-      },
-      'isFavorite': false,
-      'isPremium': true,
-      'rating': 3.8,
-    },
-    {
-      'id': 'b727dca6-5d2c-43f3-81ef-e5b774849327',
-      'title': 'Loft Studio in the Central Area',
-      'type': 'house',
-      'price': 123,
-      'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
-      'city': {
-        'name': 'Paris',
-        'location': {
-          'latitude': 48.85661,
-          'longitude': 2.351499,
-          'zoom': 13
-        }
-      },
-      'location': {
-        'latitude': 48.87961000000001,
-        'longitude': 2.353499,
-        'zoom': 16
-      },
-      'isFavorite': false,
-      'isPremium': true,
-      'rating': 3,
-    }
-  ];
-
 export const cities: Array<CityPropsType> = [
   {
     name: 'Paris',
@@ -3105,12 +2964,6 @@ export const placeFeatures: string[] = ['Wi-Fi', 'Washing machine', 'Towels', 'H
 
 export const offersFilters: string[] = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
-export const city: LocationType = {
-  latitude: 48.85661,
-  longitude: 2.351499,
-  zoom: 13
-};
-
 export const reviews: Array<ReviewType> = [
   {
     'id': 'a57ddfd5-b953-4a30-8c8d-bd083cd6b62a',
@@ -3134,3 +2987,42 @@ export const reviews: Array<ReviewType> = [
     'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     'rating': 4
   }];
+
+export const offer: OfferType =
+{
+  'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
+  'title': 'Beautiful & luxurious studio at great location',
+  'type': 'apartment',
+  'price': 120,
+  'city': {
+    'name': 'Amsterdam',
+    'location': {
+      'latitude': 52.37454,
+      'longitude': 4.897976,
+      'zoom': 13
+    }
+  },
+  'location': {
+    'latitude': 52.35754,
+    'longitude': 4.9179759999999995,
+    'zoom': 8
+  },
+  'isFavorite': false,
+  'isPremium': false,
+  'rating': 4,
+  'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+  'bedrooms': 3,
+  'goods': [
+    'Heating'
+  ],
+  'host': {
+    'name': 'Oliver Conner',
+    'avatarUrl': 'img/avatar-angelina.jpg',
+    'isPro': true
+  },
+  'images': [
+    'https://url-to-image/image.png'
+  ],
+  'maxAdults': 4
+};
+

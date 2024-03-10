@@ -3,13 +3,13 @@ import PlaceCard from '../place-card/PlaceCard';
 import { PlaceCardListPropsType } from './types';
 import { IMAGE_WIDTH, IMAGE_HEIGHT } from '../../utils/constants';
 
-export default function PlaceCardList({ places, onCardHover, activeCity }: PlaceCardListPropsType): JSX.Element {
+export default function PlaceCardList({ places, onCardHover, activeCityName }: PlaceCardListPropsType): JSX.Element {
 
   return (
     <>
       {
         places.map((card: PlaceCardType) => (
-          (card.city.name === activeCity) ?
+          (card.city.name === activeCityName) ?
             <PlaceCard
               key={card.id}
               card={card}

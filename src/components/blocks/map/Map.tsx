@@ -5,15 +5,15 @@ import '../../../../node_modules/leaflet/dist/leaflet.css';
 import { currentCustomIcon, defaultCustomIcon } from './consts';
 import { MapPropsType } from './types';
 
-export default function Map({city, places, activeCardId, activeCity, className}: MapPropsType): JSX.Element {
+export default function Map({city, places, activeCardId, activeCityName, className}: MapPropsType): JSX.Element {
   const MapRef = useRef<HTMLDivElement>(null);
   const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
   const map = useMap(MapRef, city);
-  const currentCity = places.find((el) => el.city.name === activeCity);
+  const currentCity = places.find((el) => el.city.name === activeCityName);
 
   useEffect((): void => {
     if (map && currentCity) {
-      map.setView([currentCity.city.location.latitude, currentCity.city.location.longitude], city.zoom);
+      map.setView([currentCity.city.location.latitude, currentCity.city.location.longitude], city.location.zoom);
       markerLayer.current.addTo(map);
       // markerLayer.current.clearLayers();
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/App';
-import { places, cities, favoritePlaces, nearPlaces, offersFilters, city, reviews } from './components/utils/mocks';
+import { places, cities, favoritePlaces, offersFilters, reviews, offer } from './components/utils/mocks';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,9 +13,8 @@ root.render(
       cities={cities}
       favoritePlaces={favoritePlaces}
       filters={offersFilters}
-      city={city}
       reviews={reviews}
-      nearPlaces={nearPlaces}
+      offer={offer}
     />
   </React.StrictMode>
 );

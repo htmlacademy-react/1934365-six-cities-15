@@ -6,9 +6,10 @@ import Select from '../../components/blocks/select/Select';
 import { CityPropsType, PlaceCardType } from '../../components/blocks/place-card/types';
 import { MainPropsType } from './types';
 
-export default function Main({placesAmount, places, cities, filters, city}: MainPropsType): JSX.Element {
+export default function MainPage({placesAmount, places, cities, filters }: MainPropsType): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<PlaceCardType['id']>(null);
-  const [activeCity, setActiveCity] = useState<CityPropsType['name']>(cities[0].name);
+  const [activeCity, ] = useState<CityPropsType>(cities[0]);
+  const [activeCityName, setActiveCityName] = useState<CityPropsType['name']>(cities[0].name);
 
   function onCardHover(placeId: PlaceCardType['id']): void {
     places.some((place) => {
@@ -21,7 +22,7 @@ export default function Main({placesAmount, places, cities, filters, city}: Main
   function onCityItemClick(cityName: CityPropsType['name']): void {
     cities.find((el) => {
       if (el.name === cityName) {
-        setActiveCity(cityName);
+        setActiveCityName(cityName);
       }
     });
   }
@@ -31,7 +32,7 @@ export default function Main({placesAmount, places, cities, filters, city}: Main
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <LocationList cities={cities} onCityItemClick = {onCityItemClick} activeCity = {activeCity}/>
+          <LocationList cities={cities} onCityItemClick = {onCityItemClick} activeCityName = {activeCityName}/>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -49,11 +50,11 @@ export default function Main({placesAmount, places, cities, filters, city}: Main
                 <Select filters = {filters}/>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCardList places={places} onCardHover = {onCardHover} activeCity = {activeCity}/>
+                <PlaceCardList places={places} onCardHover = {onCardHover} activeCityName = {activeCityName}/>
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={city} places = {places} activeCardId={activeCardId} activeCity = {activeCity} className = 'cities__map'/>
+              <Map city={activeCity} places = {places} activeCardId={activeCardId} activeCityName = {activeCityName} className = 'cities__map'/>
             </div>
           </div>
         </div>

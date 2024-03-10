@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import leaflet, {Map as LeafletMap} from 'leaflet';
-import { LocationType } from '../place-card/types';
+import { CityPropsType } from '../place-card/types';
 
-export default function useMap(mapRef: React.RefObject<HTMLDivElement | null>, city: LocationType) {
+export default function useMap(mapRef: React.RefObject<HTMLDivElement | null>, city: CityPropsType) {
   const [map, setMap] = useState<LeafletMap | null>(null);
   const isRenderRef = useRef(false);
 
@@ -10,10 +10,10 @@ export default function useMap(mapRef: React.RefObject<HTMLDivElement | null>, c
     if (mapRef.current !== null && !isRenderRef.current) {
       const instance = leaflet.map(mapRef.current, {
         center: {
-          lat: city.latitude,
-          lng: city.longitude
+          lat: city.location.latitude,
+          lng: city.location.longitude
         },
-        zoom: city.zoom
+        zoom: city.location.zoom
       }
       );
       leaflet

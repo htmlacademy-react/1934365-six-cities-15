@@ -9,3 +9,5 @@ export const IMAGE_HEIGHT = {
   small: 110,
   large: 200
 };
+
+export const NEAR_PLACES_AMOUNT = 3;
