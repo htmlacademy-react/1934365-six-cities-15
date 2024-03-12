@@ -1,7 +1,7 @@
-import { CityPropsType } from '../place-card/types';
 import classNames from 'classnames';
+import { LocationItemPropsType } from './types';
 
-export default function LocationItem({ city, onCityItemClick, activeCity }: { city: CityPropsType; onCityItemClick: (name: string) => void; activeCity: CityPropsType['name'] }): JSX.Element {
+export default function LocationItem({ city, onCityItemClick, activeCityName }: LocationItemPropsType): JSX.Element {
   const handleClick = () => {
     onCityItemClick(city.name);
   };
@@ -11,7 +11,7 @@ export default function LocationItem({ city, onCityItemClick, activeCity }: { ci
       onClick={handleClick}
     >
       <a className={classNames('locations__item-link tabs__item',
-        { 'tabs__item--active': activeCity === city.name }
+        { 'tabs__item--active': activeCityName === city.name }
       )}
       href="#"
       >

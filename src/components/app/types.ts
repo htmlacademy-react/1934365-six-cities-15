@@ -1,9 +1,12 @@
-import { PlaceCardPropsType, CityPropsType, LocationType } from '../blocks/place-card/types';
+import { OfferType } from '../../pages/offer-page/types';
+import { CityPropsType, PlaceCardType } from '../blocks/place-card/types';
+import { ReviewType } from '../blocks/review-item/types';
 
 export type AppPropsType = {
-  places: Array<PlaceCardPropsType>;
+  places: Array<PlaceCardType>;
   cities: Array<CityPropsType>;
-  favoritePlaces: Array<PlaceCardPropsType>;
+  favoritePlaces: Array<PlaceCardType>;
   filters: string[];
-  city: LocationType;
+  reviews: Array<ReviewType>;
+  offer: OfferType;
 }

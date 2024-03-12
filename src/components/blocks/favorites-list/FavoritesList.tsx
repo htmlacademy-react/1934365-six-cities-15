@@ -1,8 +1,9 @@
-import { PlaceCardPropsType } from '../../blocks/place-card/types';
+import { PlaceCardType } from '../../blocks/place-card/types';
 import FavoriteLocation from '../favorite-location/FavoriteLocation';
 import PlaceCard from '../place-card/PlaceCard';
+import { IMAGE_HEIGHT, IMAGE_WIDTH } from '../../utils/constants';
 
-export default function FavoritesList(props: { favoritePlaces: Array<PlaceCardPropsType> }): JSX.Element {
+export default function FavoritesList(props: { favoritePlaces: Array<PlaceCardType> }): JSX.Element {
   return (
     <ul className="favorites__list">
       <li className="favorites__locations-items">
@@ -14,6 +15,9 @@ export default function FavoritesList(props: { favoritePlaces: Array<PlaceCardPr
             <PlaceCard
               key={card.id}
               card={card}
+              className='favorites'
+              width={IMAGE_WIDTH.small}
+              height={IMAGE_HEIGHT.small}
             />
           ))}
         </div>
@@ -28,6 +32,9 @@ export default function FavoritesList(props: { favoritePlaces: Array<PlaceCardPr
             <PlaceCard
               key={card.id}
               card={card}
+              className='favorites'
+              width={IMAGE_WIDTH.small}
+              height={IMAGE_HEIGHT.small}
             />
           ))}
         </div>

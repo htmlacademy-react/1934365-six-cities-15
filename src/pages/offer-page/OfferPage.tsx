@@ -1,14 +1,23 @@
 import { Helmet } from 'react-helmet-async';
-import OfferFeature from '../../components/blocks/offer-feature/OfferFeature';
 import OfferGalleryItem from '../../components/blocks/offer-gallery-item/OfferGalleryItem';
 import PlaceCard from '../../components/blocks/place-card/PlaceCard';
-import { favoritePlaceImages, placeFeatures, nearPlaces } from '../../components/utils/mocks';
-import Reviews from '../../components/blocks/reviews/Reviews';
+import { favoritePlaceImages } from '../../components/utils/mocks';
 import { AuthorizationStatus } from '../../components/utils/types';
 import { getAuthorizationStatus } from '../../components/utils/utils';
+import ReviewsList from '../../components/blocks/reviews-list/ReviewsList';
+import Map from '../../components/blocks/map/Map';
+import { OfferPropsType } from './types';
+import { IMAGE_WIDTH, IMAGE_HEIGHT } from '../../components/utils/constants';
+import classNames from 'classnames';
 
-export default function Offer(): JSX.Element {
+export default function OfferPage({ reviews, places, offer }: OfferPropsType): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
+  const nearPlaces = places.filter((place) => {
+    if (place.id !== offer.id && offer.city.name === place.city.name) {
+      return true;
+    }
+  }).slice(0, 3);
+  const nearPlacesPlusCurrent = [...nearPlaces, offer];
 
   return (
     <div className="page">
@@ -32,7 +41,7 @@ export default function Offer(): JSX.Element {
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {offer.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
@@ -50,25 +59,27 @@ export default function Offer(): JSX.Element {
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  Apartment
+                  {offer.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {offer.bedrooms > 1 ? `${offer.bedrooms} Bedrooms` : `${offer.bedrooms} Bedroom`}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  {offer.maxAdults > 1 ? `Max ${offer.maxAdults} adults` : `Max ${offer.maxAdults} adult`}
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">&euro;{offer.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
                   {
-                    placeFeatures.map((feature: string) => (
-                      <OfferFeature key={feature} feature={feature} />
+                    offer.goods.map((good) => (
+                      <li className="offer__inside-item" key={good}>
+                        {good}
+                      </li>
                     ))
                   }
                 </ul>
@@ -76,32 +87,34 @@ export default function Offer(): JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                  <div className={classNames(
+                    'offer__avatar-wrapper user__avatar-wrapper',
+                    { 'offer__avatar-wrapper--pro': offer.host.isPro === true }
+                  )}
+                  >
+                    <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
-                    Angelina
+                    {offer.host.name}
                   </span>
-                  <span className="offer__user-status">
-                    Pro
-                  </span>
+                  {offer.host.isPro ? <span className="offer__user-status">Pro</span> : null}
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                    {offer.description}
                   </p>
-                  <p className="offer__text">
+                  {/* <p className="offer__text">
                     An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
-                  </p>
+                  </p> */}
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <Reviews isAuth = {authorizationStatus === AuthorizationStatus.Auth} />
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewsList isAuth={authorizationStatus === AuthorizationStatus.Auth} reviews={reviews} />
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <Map city={offer.city} places={nearPlacesPlusCurrent} activeCityName={offer.city.name} className='offer__map' />
         </section>
 
         <div className="container">
@@ -113,6 +126,9 @@ export default function Offer(): JSX.Element {
                   <PlaceCard
                     key={card.id}
                     card={card}
+                    className={'near-places'}
+                    width={IMAGE_WIDTH.large}
+                    height={IMAGE_HEIGHT.large}
                   />
                 ))
               }

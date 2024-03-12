@@ -1,18 +1,18 @@
-import Favorites from '../../pages/favorites-page/Favorites';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from '../../pages/main-page/Main';
-import Offer from '../../pages/offer-page/Offer';
 import { PLACES_AMOUNT } from '../utils/constants';
 import { AppRoute } from '../utils/types';
 import { AppPropsType } from './types';
-import Login from '../../pages/login-page/Login';
 import NotFound from '../../pages/not-found-page/NotFound';
 import PrivateRoute from '../blocks/private-route/PrivateRoute';
 import { HelmetProvider } from 'react-helmet-async';
 import Layout from '../layout/layout/Layout';
 import { getAuthorizationStatus as getAuthorizationStatus } from '../utils/utils';
+import OfferPage from '../../pages/offer-page/OfferPage';
+import FavoritesPage from '../../pages/favorites-page/FavoritesPage';
+import LoginPage from '../../pages/login-page/LoginPage';
+import MainPage from '../../pages/main-page/MainPage';
 
-export default function App(props: AppPropsType): JSX.Element {
+export default function App({places, cities, filters, favoritePlaces, reviews, offer}: AppPropsType): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
 
   return (
@@ -20,20 +20,20 @@ export default function App(props: AppPropsType): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root} element={<Layout />} >
-            <Route index element={<Main placesAmount={PLACES_AMOUNT} places = {props.places} cities={props.cities} filters = {props.filters} city ={props.city} />} />
+            <Route index element={<MainPage placesAmount={PLACES_AMOUNT} places = {places} cities={cities} filters = {filters} />} />
             <Route path={AppRoute.Login} element={
               <PrivateRoute authorizationStatus={authorizationStatus} isReverse>
-                <Login />
+                <LoginPage />
               </PrivateRoute>
             }
             />
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute authorizationStatus={authorizationStatus}>
-                <Favorites favoritePlaces = {props.favoritePlaces} />
+                <FavoritesPage favoritePlaces = {favoritePlaces} />
               </PrivateRoute>
             }
             />
-            <Route path={AppRoute.Offer} element={<Offer />} />
+            <Route path={AppRoute.Offer} element={<OfferPage offer={offer} reviews={reviews} places={places} />} />
             <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>
