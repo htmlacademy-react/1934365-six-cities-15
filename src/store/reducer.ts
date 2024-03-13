@@ -1,5 +1,5 @@
-import { createReducer } from "@reduxjs/toolkit"
-import { changeCity } from "./action"
+import { createReducer } from '@reduxjs/toolkit';
+import { changeCity } from './action';
 
 const initialState = {
   city: {
@@ -2773,11 +2773,11 @@ const initialState = {
         'rating': 2.6
       }
     ]
-}
+};
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state) => {
 
-    })
-})
+    });
+});

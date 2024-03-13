@@ -1,4 +1,3 @@
-import { OfferType } from '../../pages/offer-page/types';
 import { CityPropsType, PlaceCardType } from '../blocks/place-card/types';
 import { ReviewType } from '../blocks/review-item/types';
 
@@ -2988,7 +2987,7 @@ export const reviews: Array<ReviewType> = [
     'rating': 4
   }];
 
-export const offer: OfferType =
+export const offer: PlaceCardType =
 {
   'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
   'title': 'Beautiful & luxurious studio at great location',

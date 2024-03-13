@@ -9,14 +9,10 @@ import Map from '../../components/blocks/map/Map';
 import { OfferPropsType } from './types';
 import { IMAGE_WIDTH, IMAGE_HEIGHT } from '../../components/utils/constants';
 import classNames from 'classnames';
+import { nearPlaces } from './utils';
 
-export default function OfferPage({ reviews, places, offer }: OfferPropsType): JSX.Element {
+export default function OfferPage({ reviews, offer }: OfferPropsType): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
-  const nearPlaces = places.filter((place) => {
-    if (place.id !== offer.id && offer.city.name === place.city.name) {
-      return true;
-    }
-  }).slice(0, 3);
   const nearPlacesPlusCurrent = [...nearPlaces, offer];
 
   return (
@@ -62,10 +58,10 @@ export default function OfferPage({ reviews, places, offer }: OfferPropsType): J
                   {offer.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {offer.bedrooms > 1 ? `${offer.bedrooms} Bedrooms` : `${offer.bedrooms} Bedroom`}
+                  {offer.bedrooms !== undefined && offer.bedrooms > 1 ? `${offer.bedrooms} Bedrooms` : `${offer.bedrooms} Bedroom`}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  {offer.maxAdults > 1 ? `Max ${offer.maxAdults} adults` : `Max ${offer.maxAdults} adult`}
+                  {offer.maxAdults !== undefined && offer.maxAdults > 1 ? `Max ${offer.maxAdults} adults` : `Max ${offer.maxAdults} adult`}
                 </li>
               </ul>
               <div className="offer__price">
@@ -76,7 +72,7 @@ export default function OfferPage({ reviews, places, offer }: OfferPropsType): J
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
                   {
-                    offer.goods.map((good) => (
+                    offer.goods?.map((good) => (
                       <li className="offer__inside-item" key={good}>
                         {good}
                       </li>
@@ -89,15 +85,15 @@ export default function OfferPage({ reviews, places, offer }: OfferPropsType): J
                 <div className="offer__host-user user">
                   <div className={classNames(
                     'offer__avatar-wrapper user__avatar-wrapper',
-                    { 'offer__avatar-wrapper--pro': offer.host.isPro === true }
+                    { 'offer__avatar-wrapper--pro': offer.host?.isPro === true }
                   )}
                   >
-                    <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
+                    <img className="offer__avatar user__avatar" src={offer.host?.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
-                    {offer.host.name}
+                    {offer.host?.name}
                   </span>
-                  {offer.host.isPro ? <span className="offer__user-status">Pro</span> : null}
+                  {offer.host?.isPro ? <span className="offer__user-status">Pro</span> : null}
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">

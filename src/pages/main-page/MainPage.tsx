@@ -9,7 +9,7 @@ import { MainPropsType } from './types';
 export default function MainPage({ placesAmount, places, cities, filters }: MainPropsType): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<PlaceCardType['id']>(null);
   const [activeCity,] = useState<CityPropsType>(cities[0]);
-  const [activeCityName, setActiveCityName] = useState<CityPropsType['name']>(cities[0].name);
+  const [activeCityName, setActiveCityName] = useState<CityPropsType['name']>(cities[0]?.name);
   const [isSelected, setIsSelected] = useState(filters[0]);
 
   const onCardHover = (placeId: PlaceCardType['id']): void => {
@@ -18,7 +18,7 @@ export default function MainPage({ placesAmount, places, cities, filters }: Main
         setActiveCardId(placeId);
       }
     });
-  }
+  };
 
   const onCityItemClick = (cityName: CityPropsType['name']): void => {
     cities.find((el) => {
@@ -26,35 +26,35 @@ export default function MainPage({ placesAmount, places, cities, filters }: Main
         setActiveCityName(cityName);
       }
     });
-  }
+  };
 
   const onSelectItemClick = (selectName: string) => {
     filters.find((filter) => {
       if (filter === selectName) {
-        setIsSelected(filter)
+        setIsSelected(filter);
       }
-    })
-  }
+    });
+  };
 
-  const onSelectItemClickForFilters = (places: Array<PlaceCardType>) => {
-    if (isSelected && isSelected === 'Popular') {
-      return places
+  const onSelectItemClickForFilters = (cards: Array<PlaceCardType>) => {
+    const copyPlaces: Array<PlaceCardType> = JSON.parse(JSON.stringify(cards));
+    if (isSelected === 'Popular') {
+      return cards;
+    } else if (isSelected === 'Price: low to high') {
+      const sortedPlacesToHigh: Array<PlaceCardType> = copyPlaces.sort((a, b) => a.price - b.price);
+      return sortedPlacesToHigh;
+    } else if (isSelected === 'Price: high to low') {
+      const sortedPlacesToLow: Array<PlaceCardType> = copyPlaces.sort((a, b) => b.price - a.price);
+      return sortedPlacesToLow;
+    } else if (isSelected === 'Top rated first') {
+      const sortedPlacesToHighRating: Array<PlaceCardType> = copyPlaces.sort((a, b) => b.rating - a.rating);
+      return sortedPlacesToHighRating;
+    } else {
+      return cards;
     }
-    else if (isSelected && isSelected === 'Price: low to high') {
-      const sortedPlacesToHigh: Array<PlaceCardType> = places.sort((a, b) => a.price - b.price)
-      return sortedPlacesToHigh
-    }
-    else if (isSelected && isSelected === 'Price: high to low') {
-      const sortedPlacesToLow: Array<PlaceCardType> = places.sort((a, b) => b.price - a.price)
-      return sortedPlacesToLow
-    }
-    else if (isSelected && isSelected === 'Top rated first') {
-      const sortedPlacesToHighRating: Array<PlaceCardType> = places.sort((a, b) => b.rating - a.rating)
-      return sortedPlacesToHighRating
-    }
-  }
+  };
 
-  const sortedPlaces = onSelectItemClickForFilters(places)
+  const sortedPlaces: Array<PlaceCardType> = onSelectItemClickForFilters(places);
 
   return (
     < div className="page page--gray page--main" >

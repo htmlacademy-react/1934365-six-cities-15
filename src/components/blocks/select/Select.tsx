@@ -7,22 +7,22 @@ export default function Select({ filters, onSelectItemClick, isSelected }: { fil
 
   const onSelectMenuClick = (evt: FormEvent<HTMLFormElement>) => {
     if (evt.currentTarget) {
-      setIsOpen(!isOpen)
+      setIsOpen(!isOpen);
     }
-  }
+  };
   useEffect(() => {
     const onHandleClick = (evt: MouseEvent) => {
       const { target } = evt;
       if (target instanceof Node && !FormRef.current?.contains(target)) {
-        setIsOpen(false)
+        setIsOpen(false);
       }
-    }
-    window.addEventListener('click', onHandleClick)
+    };
+    window.addEventListener('click', onHandleClick);
 
     return () => {
       window.removeEventListener('click', onHandleClick);
     };
-  }, [])
+  }, []);
 
   return (
     <form className="places__sorting" action="#" method="get" onClick={onSelectMenuClick} ref={FormRef}>
@@ -44,8 +44,7 @@ export default function Select({ filters, onSelectItemClick, isSelected }: { fil
             />
           ))}
         </ul>
-        : null
-      }
+        : null}
     </form>
   );
 }
