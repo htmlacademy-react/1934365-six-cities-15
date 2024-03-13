@@ -1,10 +1,15 @@
-export default function SelectItem(props: {filter:string}): JSX.Element {
+import { SelectItemPropsType } from "./types";
 
+export default function SelectItem({filter, isSelected, onSelectItemClick}: SelectItemPropsType): JSX.Element {
+  const handleClick = (): void => {
+    onSelectItemClick(filter)
+  }
   return (
     <li
-      className="places__option places__option--active"
+      className={`places__option ${isSelected} ? 'places__option--active' : ''`}
       tabIndex={0}
-    >{props.filter}
+      onClick={handleClick}
+    >{filter}
     </li>
   );
 }

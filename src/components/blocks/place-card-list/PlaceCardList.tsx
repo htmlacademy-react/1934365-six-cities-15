@@ -5,6 +5,10 @@ import { IMAGE_WIDTH, IMAGE_HEIGHT } from '../../utils/constants';
 
 export default function PlaceCardList({ places, onCardHover, activeCityName }: PlaceCardListPropsType): JSX.Element {
 
+// const sortedPlacesToHigh: Array<PlaceCardType> = places.sort((a, b) => a.price - b.price)
+// const sortedPlacesToLow: Array<PlaceCardType> = places.sort((a, b) => b.price - a.price)
+// const sortedPlacesToHighRating: Array<PlaceCardType> = places.sort((a, b) => b.rating - a.rating)
+
   return (
     <>
       {

@@ -21,7 +21,7 @@ export type PlaceCardType = {
   location: LocationType;
   isFavorite: boolean;
   isPremium: boolean;
-  rating?: number;
+  rating: number;
 }
 
 export type PlaceCardPropsType = {
