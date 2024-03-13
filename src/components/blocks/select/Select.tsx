@@ -1,17 +1,10 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import SelectItem from '../select-item/SelectItem';
 
-export default function Select({ filters }: { filters: string[] }): JSX.Element {
+export default function Select({ filters, onSelectItemClick, isSelected }: { filters: string[]; onSelectItemClick: (selectName: string) => void; isSelected: string }): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSelected, setIsSelected] = useState(filters[0]);
   const FormRef = useRef<HTMLFormElement>(null);
-  const onSelectItemClick = (selectName: string) => {
-    filters.find((filter) => {
-      if (filter === selectName) {
-        setIsSelected(filter)
-      }
-    })
-  }
+
   const onSelectMenuClick = (evt: FormEvent<HTMLFormElement>) => {
     if (evt.currentTarget) {
       setIsOpen(!isOpen)
