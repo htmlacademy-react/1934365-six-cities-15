@@ -2977,15 +2977,125 @@ export const reviews: Array<ReviewType> = [
   },
   {
     'id': 'b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
-    'date': '2019-05-08T14:13:56.569Z',
+    'date': '2020-05-08T14:13:56.569Z',
     'user': {
       'name': 'Oliver Conner',
-      'avatarUrl': 'public/img/avatar.svg',
+      'avatarUrl': '/img/avatar.svg',
       'isPro': false
     },
     'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     'rating': 4
-  }];
+  },
+  {
+    'id': 'c57ddfd5-b953-4a30-8c8d-bd083cd6b62a',
+    'date': '2019-05-08T14:13:56.569Z',
+    'user': {
+      'name': 'Max',
+      'avatarUrl': '../img/avatar-max.jpg',
+      'isPro': true
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+    'rating': 5
+  },
+  {
+    'id': 'd67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
+    'date': '2021-05-08T14:13:56.569Z',
+    'user': {
+      'name': 'Oliver Conner',
+      'avatarUrl': '/img/avatar.svg',
+      'isPro': false
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'rating': 4
+  },
+  {
+    'id': 'e57ddfd5-b953-4a30-8c8d-bd083cd6b62a',
+    'date': '2021-11-08T14:13:56.569Z',
+    'user': {
+      'name': 'Max',
+      'avatarUrl': '../img/avatar-max.jpg',
+      'isPro': true
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+    'rating': 5
+  },
+  {
+    'id': 'f67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
+    'date': '2024-03-08T14:13:56.569Z',
+    'user': {
+      'name': 'Oliver Conner',
+      'avatarUrl': '/img/avatar.svg',
+      'isPro': false
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'rating': 4
+  },
+  {
+    'id': 'o57ddfd5-b953-4a30-8c8d-bd083cd6b62a',
+    'date': '2023-05-08T14:13:56.569Z',
+    'user': {
+      'name': 'Max',
+      'avatarUrl': '../img/avatar-max.jpg',
+      'isPro': true
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+    'rating': 5
+  },
+  {
+    'id': 'l67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
+    'date': '2023-01-08T14:13:56.569Z',
+    'user': {
+      'name': 'Oliver Conner',
+      'avatarUrl': '/img/avatar.svg',
+      'isPro': false
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'rating': 4
+  },  {
+    'id': 'm57ddfd5-b953-4a30-8c8d-bd083cd6b62a',
+    'date': '2022-04-08T14:13:56.569Z',
+    'user': {
+      'name': 'Max',
+      'avatarUrl': '../img/avatar-max.jpg',
+      'isPro': true
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+    'rating': 5
+  },
+  {
+    'id': 'n67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
+    'date': '2019-05-08T14:13:56.569Z',
+    'user': {
+      'name': 'Oliver Conner',
+      'avatarUrl': '/img/avatar.svg',
+      'isPro': false
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'rating': 4
+  },
+  {
+    'id': 'u57ddfd5-b953-4a30-8c8d-bd083cd6b62a',
+    'date': '2019-05-08T14:13:56.569Z',
+    'user': {
+      'name': 'Max',
+      'avatarUrl': '../img/avatar-max.jpg',
+      'isPro': true
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+    'rating': 5
+  },
+  {
+    'id': 'z67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
+    'date': '2019-05-08T14:13:56.569Z',
+    'user': {
+      'name': 'Oliver Conner',
+      'avatarUrl': '/img/avatar.svg',
+      'isPro': false
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'rating': 4
+  }
+];
 
 export const offer: PlaceCardType =
 {
@@ -3008,7 +3118,7 @@ export const offer: PlaceCardType =
   },
   'isFavorite': false,
   'isPremium': false,
-  'rating': 4,
+  'rating': 4.8,
   'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
   'bedrooms': 3,
   'goods': [

@@ -1,6 +1,12 @@
+import { getRatingStatus } from '../../utils/utils';
 import { ReviewType } from './types';
 
 export default function ReviewItem({ review }: { review: ReviewType }): JSX.Element {
+  const date = new Date(review.date);
+  const options: Intl.DateTimeFormatOptions = {year: "numeric", month: "long"};
+  const reviewDate = new Intl.DateTimeFormat('en-US', options).format(date);
+  const reviewDateTime = new Date().toISOString().split('T')[0];
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -15,14 +21,14 @@ export default function ReviewItem({ review }: { review: ReviewType }): JSX.Elem
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{ width: `${getRatingStatus(review.rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time className="reviews__time" dateTime={review.date}>{review.date}</time>
+        <time className="reviews__time" dateTime={reviewDateTime}>{reviewDate}</time>
       </div>
     </li>
   );

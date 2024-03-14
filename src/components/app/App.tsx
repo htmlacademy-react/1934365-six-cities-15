@@ -33,7 +33,7 @@ export default function App({places, cities, filters, favoritePlaces, reviews, o
               </PrivateRoute>
             }
             />
-            <Route path={AppRoute.Offer} element={<OfferPage offer={offer} reviews={reviews} places={places} />} />
+            <Route path={AppRoute.Offer} element={<OfferPage offer={offer} reviews={reviews} />} />
             <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>

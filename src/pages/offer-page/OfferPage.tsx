@@ -3,17 +3,18 @@ import OfferGalleryItem from '../../components/blocks/offer-gallery-item/OfferGa
 import PlaceCard from '../../components/blocks/place-card/PlaceCard';
 import { favoritePlaceImages } from '../../components/utils/mocks';
 import { AuthorizationStatus } from '../../components/utils/types';
-import { getAuthorizationStatus } from '../../components/utils/utils';
+import { getAuthorizationStatus, getRatingStatus } from '../../components/utils/utils';
 import ReviewsList from '../../components/blocks/reviews-list/ReviewsList';
 import Map from '../../components/blocks/map/Map';
 import { OfferPropsType } from './types';
 import { IMAGE_WIDTH, IMAGE_HEIGHT } from '../../components/utils/constants';
 import classNames from 'classnames';
-import { nearPlaces } from './utils';
+import { nearPlaces, reviewsList } from './utils';
 
-export default function OfferPage({ reviews, offer }: OfferPropsType): JSX.Element {
+export default function OfferPage({ offer }: OfferPropsType): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
   const nearPlacesPlusCurrent = [...nearPlaces, offer];
+  const activeCardId = offer.id;
 
   return (
     <div className="page">
@@ -48,10 +49,10 @@ export default function OfferPage({ reviews, offer }: OfferPropsType): JSX.Eleme
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%' }}></span>
-                  <span className="visually-hidden">Rating</span>
+                  <span style={{ width: `${getRatingStatus(offer.rating)}%` }}></span>
+                  <span className="visually-hidden">{offer.rating}</span>
                 </div>
-                <span className="offer__rating-value rating__value">4.8</span>
+                <span className="offer__rating-value rating__value">{offer.rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
@@ -105,12 +106,17 @@ export default function OfferPage({ reviews, offer }: OfferPropsType): JSX.Eleme
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsList isAuth={authorizationStatus === AuthorizationStatus.Auth} reviews={reviews} />
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsList.length}</span></h2>
+                <ReviewsList isAuth={authorizationStatus === AuthorizationStatus.Auth} reviews={reviewsList} />
               </section>
             </div>
           </div>
-          <Map city={offer.city} places={nearPlacesPlusCurrent} activeCityName={offer.city.name} className='offer__map' />
+          <Map
+            city={offer.city}
+            places={nearPlacesPlusCurrent}
+            activeCityName={offer.city.name}
+            activeCardId={activeCardId}
+            className='offer__map' />
         </section>
 
         <div className="container">
