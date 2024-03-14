@@ -6,11 +6,12 @@ import Select from '../../components/blocks/select/Select';
 import { CityPropsType, PlaceCardType } from '../../components/blocks/place-card/types';
 import { MainPropsType } from './types';
 
-export default function MainPage({ placesAmount, places, cities, filters }: MainPropsType): JSX.Element {
+export default function MainPage({ places, cities, filters }: MainPropsType): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<PlaceCardType['id']>(null);
   const [activeCity,] = useState<CityPropsType>(cities[0]);
   const [activeCityName, setActiveCityName] = useState<CityPropsType['name']>(cities[0]?.name);
   const [isSelected, setIsSelected] = useState(filters[0]);
+  const filteredPlaces = places.filter((place) => activeCityName === place.city.name);
 
   const onCardHover = (placeId: PlaceCardType['id']): void => {
     places.some((place) => {
@@ -54,7 +55,7 @@ export default function MainPage({ placesAmount, places, cities, filters }: Main
     }
   };
 
-  const sortedPlaces: Array<PlaceCardType> = onSelectItemClickForFilters(places);
+  const sortedPlaces: Array<PlaceCardType> = onSelectItemClickForFilters(filteredPlaces);
 
   return (
     < div className="page page--gray page--main" >
@@ -67,7 +68,7 @@ export default function MainPage({ placesAmount, places, cities, filters }: Main
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesAmount} places to stay in Amsterdam</b>
+              <b className="places__found">{filteredPlaces.length} places to stay in {activeCityName}</b>
               <Select filters={filters} onSelectItemClick={onSelectItemClick} isSelected={isSelected} />
               <div className="cities__places-list places__list tabs__content">
                 <PlaceCardList places={sortedPlaces} onCardHover={onCardHover} activeCityName={activeCityName} />

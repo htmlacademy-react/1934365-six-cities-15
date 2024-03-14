@@ -50,6 +50,29 @@ export const places: Array<PlaceCardType> =
       'rating': 1.9
     },
     {
+      'id': '183b21a0-204f-4311-946f-50bb96c3d5f8',
+      'title': 'Penthouse, 4-5 rooms + 5 balconies',
+      'type': 'apartment',
+      'price': 148,
+      'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
+      'city': {
+        'name': 'Paris',
+        'location': {
+          'latitude': 48.85661,
+          'longitude': 2.351499,
+          'zoom': 13
+        }
+      },
+      'location': {
+        'latitude': 48.858610090000006,
+        'longitude': 2.337499,
+        'zoom': 16
+      },
+      'isFavorite': false,
+      'isPremium': true,
+      'rating': 1.9
+    },
+    {
       'id': '896c26ff-f555-4d47-bc71-85cdeeae5d71',
       'title': 'Penthouse, 4-5 rooms + 5 balconies',
       'type': 'room',
@@ -3051,7 +3074,7 @@ export const reviews: Array<ReviewType> = [
     },
     'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     'rating': 4
-  },  {
+  }, {
     'id': 'm57ddfd5-b953-4a30-8c8d-bd083cd6b62a',
     'date': '2022-04-08T14:13:56.569Z',
     'user': {

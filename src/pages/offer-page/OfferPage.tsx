@@ -116,7 +116,8 @@ export default function OfferPage({ offer }: OfferPropsType): JSX.Element {
             places={nearPlacesPlusCurrent}
             activeCityName={offer.city.name}
             activeCardId={activeCardId}
-            className='offer__map' />
+            className='offer__map'
+          />
         </section>
 
         <div className="container">

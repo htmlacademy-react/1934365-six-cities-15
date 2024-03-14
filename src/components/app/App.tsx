@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { PLACES_AMOUNT } from '../utils/constants';
 import { AppRoute } from '../utils/types';
 import { AppPropsType } from './types';
 import NotFound from '../../pages/not-found-page/NotFound';
@@ -20,7 +19,7 @@ export default function App({places, cities, filters, favoritePlaces, reviews, o
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root} element={<Layout />} >
-            <Route index element={<MainPage placesAmount={PLACES_AMOUNT} places = {places} cities={cities} filters = {filters} />} />
+            <Route index element={<MainPage places = {places} cities={cities} filters = {filters} />} />
             <Route path={AppRoute.Login} element={
               <PrivateRoute authorizationStatus={authorizationStatus} isReverse>
                 <LoginPage />

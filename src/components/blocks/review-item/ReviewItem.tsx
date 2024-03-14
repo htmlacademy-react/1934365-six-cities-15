@@ -3,7 +3,7 @@ import { ReviewType } from './types';
 
 export default function ReviewItem({ review }: { review: ReviewType }): JSX.Element {
   const date = new Date(review.date);
-  const options: Intl.DateTimeFormatOptions = {year: "numeric", month: "long"};
+  const options: Intl.DateTimeFormatOptions = {year: 'numeric', month: 'long'};
   const reviewDate = new Intl.DateTimeFormat('en-US', options).format(date);
   const reviewDateTime = new Date().toISOString().split('T')[0];
 

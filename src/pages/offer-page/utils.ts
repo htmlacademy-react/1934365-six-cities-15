@@ -7,5 +7,5 @@ export const nearPlaces = places.filter((place) => {
   }
 }).slice(0, NEAR_PLACES_AMOUNT);
 
-export const reviewsList = reviews.sort((a, b) => {return new Date(b.date).getTime() - new Date(a.date).getTime()})
+export const reviewsList = reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, MAX_REVIEW_ITEMS_AMOUNT);
