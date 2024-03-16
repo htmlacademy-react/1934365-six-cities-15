@@ -5,13 +5,20 @@ import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList
 import Select from '../../components/blocks/select/Select';
 import { CityPropsType, PlaceCardType } from '../../components/blocks/place-card/types';
 import { MainPropsType } from './types';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { changeCity } from '../../store/action';
 
 export default function MainPage({ places, cities, filters }: MainPropsType): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<PlaceCardType['id']>(null);
-  const [activeCity,] = useState<CityPropsType>(cities[0]);
   const [activeCityName, setActiveCityName] = useState<CityPropsType['name']>(cities[0]?.name);
   const [isSelected, setIsSelected] = useState(filters[0]);
   const filteredPlaces = places.filter((place) => activeCityName === place.city.name);
+  const activeCity = cities[0];
+
+  const offers = useAppSelector((state) => console.log(state))
+  // console.log(offers)
+  // const currentCity = useAppSelector((state) => state.city)
+  // const dispatch = useAppDispatch();
 
   const onCardHover = (placeId: PlaceCardType['id']): void => {
     places.some((place) => {
@@ -20,7 +27,6 @@ export default function MainPage({ places, cities, filters }: MainPropsType): JS
       }
     });
   };
-
   const onCityItemClick = (cityName: CityPropsType['name']): void => {
     cities.find((el) => {
       if (el.name === cityName) {
@@ -28,7 +34,6 @@ export default function MainPage({ places, cities, filters }: MainPropsType): JS
       }
     });
   };
-
   const onSelectItemClick = (selectName: string) => {
     filters.find((filter) => {
       if (filter === selectName) {
@@ -36,7 +41,6 @@ export default function MainPage({ places, cities, filters }: MainPropsType): JS
       }
     });
   };
-
   const onSelectItemClickForFilters = (cards: Array<PlaceCardType>) => {
     const copyPlaces: Array<PlaceCardType> = JSON.parse(JSON.stringify(cards));
     if (isSelected === 'Popular') {
@@ -54,7 +58,6 @@ export default function MainPage({ places, cities, filters }: MainPropsType): JS
       return cards;
     }
   };
-
   const sortedPlaces: Array<PlaceCardType> = onSelectItemClickForFilters(filteredPlaces);
 
   return (
