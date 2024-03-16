@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { ActionType, changeCity } from './action';
+import { changeCity } from './action';
 import { cities, places } from '../components/utils/mocks';
 import { CityPropsType, PlaceCardType } from '../components/blocks/place-card/types';
 
@@ -13,14 +13,10 @@ const initialState: InitialStateType = {
   places
 }
 
-export const reducer = (state = initialState, action: {payload: unknown, type: ActionType}): InitialStateType  => {
-  switch(action.type) {
-    case ActionType.ChangeCity:
-      return {
-        ...state,
-        city: action.payload as CityPropsType
-      }
-  }
-}
-
+export const reducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(changeCity, (state, action) => {
+      state.city = action.payload
+    });
+});
 

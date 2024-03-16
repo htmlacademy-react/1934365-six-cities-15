@@ -15,10 +15,9 @@ export default function MainPage({ places, cities, filters }: MainPropsType): JS
   const filteredPlaces = places.filter((place) => activeCityName === place.city.name);
   const activeCity = cities[0];
 
-  const offers = useAppSelector((state) => console.log(state))
-  // console.log(offers)
-  // const currentCity = useAppSelector((state) => state.city)
-  // const dispatch = useAppDispatch();
+  const offers = useAppSelector((state) => state.places)
+  const currentCity = useAppSelector((state) => state.city)
+  const dispatch = useAppDispatch();
 
   const onCardHover = (placeId: PlaceCardType['id']): void => {
     places.some((place) => {
@@ -65,7 +64,7 @@ export default function MainPage({ places, cities, filters }: MainPropsType): JS
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <LocationList cities={cities} onCityItemClick={onCityItemClick} activeCityName={activeCityName} />
+          <LocationList cities={cities} onCityItemClick={dispatch(changeCity(currentCity))} activeCityName={activeCityName} />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
