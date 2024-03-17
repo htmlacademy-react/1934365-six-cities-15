@@ -11,3 +11,5 @@ export const IMAGE_HEIGHT = {
 };
 
 export const NEAR_PLACES_AMOUNT = 3;
+
+export const MAX_REVIEW_ITEMS_AMOUNT = 10;

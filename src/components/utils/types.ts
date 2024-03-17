@@ -14,5 +14,3 @@ export enum AuthorizationStatus {
 export type isAuthType = {
   isAuth: boolean;
 }
-
-

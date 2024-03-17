@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { PlaceCardPropsType } from './types';
 import { AppRoute } from '../../utils/types';
 import Button from '../../ui/button/Button';
+import { getRatingStatus } from '../../utils/utils';
 
 export default function PlaceCard({ card, onCardHover, className, width, height}: PlaceCardPropsType): JSX.Element {
   const handleMouseEnter = (): void => {
@@ -30,7 +31,7 @@ export default function PlaceCard({ card, onCardHover, className, width, height}
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{width: `${getRatingStatus(card.rating)}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

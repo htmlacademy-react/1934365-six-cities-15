@@ -1,4 +1,5 @@
 type HousingType = 'apartment' | 'room' | 'house' | 'hotel';
+export type CitiesList = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf'
 
 export type LocationType = {
   latitude: number;
@@ -7,7 +8,7 @@ export type LocationType = {
 }
 
 export type CityPropsType = {
-  name: string;
+  name: CitiesList;
   location: LocationType;
 }
 
@@ -16,12 +17,22 @@ export type PlaceCardType = {
   title: string;
   type: HousingType;
   price: number;
-  previewImage: string;
+  previewImage?: string;
   city: CityPropsType;
   location: LocationType;
   isFavorite: boolean;
   isPremium: boolean;
-  rating?: number;
+  rating: number;
+  description?: string;
+  bedrooms?: number;
+  goods?: [string];
+  host?: {
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
+  };
+  images?: [string];
+  maxAdults?: number;
 }
 
 export type PlaceCardPropsType = {

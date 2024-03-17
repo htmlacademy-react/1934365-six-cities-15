@@ -18,6 +18,5 @@ export default function LocationItem({ city, onCityItemClick, activeCityName }: 
         <span>{city.name}</span>
       </a>
     </li >
-
   );
 }
