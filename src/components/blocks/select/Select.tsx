@@ -10,6 +10,7 @@ export default function Select({ filters, onSelectItemClick, isSelected }: { fil
       setIsOpen(!isOpen);
     }
   };
+
   useEffect(() => {
     const onHandleClick = (evt: MouseEvent) => {
       const { target } = evt;

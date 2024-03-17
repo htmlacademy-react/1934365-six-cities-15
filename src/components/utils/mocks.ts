@@ -3157,4 +3157,3 @@ export const offer: PlaceCardType =
   ],
   'maxAdults': 4
 };
-
