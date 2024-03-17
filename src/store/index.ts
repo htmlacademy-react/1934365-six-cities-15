@@ -5,5 +5,5 @@ import { AppDispatch, State } from './state';
 
 export const store = configureStore({reducer});
 
-export const useAppDispatch = () => useDispatch<AppDispatch>;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<State> = useSelector;

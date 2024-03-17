@@ -1,4 +1,5 @@
 type HousingType = 'apartment' | 'room' | 'house' | 'hotel';
+export type CitiesList = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf'
 
 export type LocationType = {
   latitude: number;
@@ -7,7 +8,7 @@ export type LocationType = {
 }
 
 export type CityPropsType = {
-  name: string;
+  name: CitiesList;
   location: LocationType;
 }
 

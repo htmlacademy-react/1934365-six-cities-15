@@ -1,7 +1,7 @@
-import { CityPropsType } from '../place-card/types';
+import { CitiesList, CityPropsType } from '../place-card/types';
 
 export type LocationItemPropsType = {
   city: CityPropsType;
-  onCityItemClick: (name: string) => void;
+  onCityItemClick: (name: CitiesList) => void;
   activeCityName: CityPropsType['name'];
 }

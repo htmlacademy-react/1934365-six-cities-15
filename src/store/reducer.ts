@@ -5,18 +5,18 @@ import { CityPropsType, PlaceCardType } from '../components/blocks/place-card/ty
 
 type InitialStateType = {
   city: CityPropsType;
-  places: Array<PlaceCardType>
+  places: Array<PlaceCardType>;
 }
 
 const initialState: InitialStateType = {
-  city: cities[0],
+  city: cities[2],
   places
-}
+};
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state, action) => {
-      state.city = action.payload
+      state.city.name = action.payload.name;
     });
 });
 

@@ -6,7 +6,7 @@ type UserType = {
 
 export type ReviewType = {
   id: string;
-  date: string | Date;
+  date: string;
   user: UserType;
   comment: string;
   rating: number;

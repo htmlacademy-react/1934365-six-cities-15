@@ -3,33 +3,25 @@ import LocationList from '../../components/blocks/location-list/LocationsList';
 import Map from '../../components/blocks/map/Map';
 import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList';
 import Select from '../../components/blocks/select/Select';
-import { CityPropsType, PlaceCardType } from '../../components/blocks/place-card/types';
+import { CitiesList, PlaceCardType } from '../../components/blocks/place-card/types';
 import { MainPropsType } from './types';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { changeCity } from '../../store/action';
 
 export default function MainPage({ places, cities, filters }: MainPropsType): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<PlaceCardType['id']>(null);
-  const [activeCityName, setActiveCityName] = useState<CityPropsType['name']>(cities[0]?.name);
   const [isSelected, setIsSelected] = useState(filters[0]);
-  const filteredPlaces = places.filter((place) => activeCityName === place.city.name);
+  const currentCity = useAppSelector((state) => state.city);
+  const filteredPlaces = places.filter((place) => currentCity.name === place.city.name);
   const activeCity = cities[0];
 
-  const offers = useAppSelector((state) => state.places)
-  const currentCity = useAppSelector((state) => state.city)
+  // const offers = useAppSelector((state) => state.places)
   const dispatch = useAppDispatch();
 
   const onCardHover = (placeId: PlaceCardType['id']): void => {
     places.some((place) => {
       if (place.id === placeId) {
         setActiveCardId(placeId);
-      }
-    });
-  };
-  const onCityItemClick = (cityName: CityPropsType['name']): void => {
-    cities.find((el) => {
-      if (el.name === cityName) {
-        setActiveCityName(cityName);
       }
     });
   };
@@ -41,7 +33,7 @@ export default function MainPage({ places, cities, filters }: MainPropsType): JS
     });
   };
   const onSelectItemClickForFilters = (cards: Array<PlaceCardType>) => {
-    const copyPlaces: Array<PlaceCardType> = JSON.parse(JSON.stringify(cards));
+    const copyPlaces: Array<PlaceCardType> = JSON.parse(JSON.stringify(cards)) as Array<PlaceCardType>;
     if (isSelected === 'Popular') {
       return cards;
     } else if (isSelected === 'Price: low to high') {
@@ -64,20 +56,20 @@ export default function MainPage({ places, cities, filters }: MainPropsType): JS
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <LocationList cities={cities} onCityItemClick={dispatch(changeCity(currentCity))} activeCityName={activeCityName} />
+          <LocationList cities={cities} onCityItemClick={(cityName: CitiesList) => dispatch(changeCity({name: cityName}))} activeCityName={currentCity.name} />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{filteredPlaces.length} places to stay in {activeCityName}</b>
+              <b className="places__found">{filteredPlaces.length} places to stay in {currentCity.name}</b>
               <Select filters={filters} onSelectItemClick={onSelectItemClick} isSelected={isSelected} />
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCardList places={sortedPlaces} onCardHover={onCardHover} activeCityName={activeCityName} />
+                <PlaceCardList places={sortedPlaces} onCardHover={onCardHover} activeCityName={currentCity.name} />
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={activeCity} places={places} activeCardId={activeCardId} activeCityName={activeCityName} className='cities__map' />
+              <Map city={activeCity} places={places} activeCardId={activeCardId} activeCityName={currentCity.name} className='cities__map' />
             </div>
           </div>
         </div>
