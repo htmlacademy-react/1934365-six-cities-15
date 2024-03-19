@@ -11,7 +11,7 @@ import FavoritesPage from '../../pages/favorites-page/FavoritesPage';
 import LoginPage from '../../pages/login-page/LoginPage';
 import MainPage from '../../pages/main-page/MainPage';
 
-export default function App({places, cities, filters, favoritePlaces, reviews, offer}: AppPropsType): JSX.Element {
+export default function App({places, cities, favoritePlaces, reviews, offer}: AppPropsType): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
 
   return (
@@ -19,7 +19,7 @@ export default function App({places, cities, filters, favoritePlaces, reviews, o
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root} element={<Layout />} >
-            <Route index element={<MainPage places = {places} cities={cities} filters = {filters} />} />
+            <Route index element={<MainPage places = {places} cities={cities} />} />
             <Route path={AppRoute.Login} element={
               <PrivateRoute authorizationStatus={authorizationStatus} isReverse>
                 <LoginPage />

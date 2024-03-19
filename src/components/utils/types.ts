@@ -14,3 +14,11 @@ export enum AuthorizationStatus {
 export type isAuthType = {
   isAuth: boolean;
 }
+
+export enum offersFilters {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first'
+}
+

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/App';
-import { places, cities, favoritePlaces, offersFilters, reviews, offer } from './components/utils/mocks';
+import { places, cities, favoritePlaces, reviews, offer } from './components/utils/mocks';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
@@ -15,7 +15,6 @@ root.render(
       <App places={places}
         cities={cities}
         favoritePlaces={favoritePlaces}
-        filters={offersFilters}
         reviews={reviews}
         offer={offer}
       />

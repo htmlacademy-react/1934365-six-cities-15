@@ -2984,7 +2984,7 @@ export const favoritePlaceImages: string[] = ['img/room.jpg', 'img/apartment-01.
 
 export const placeFeatures: string[] = ['Wi-Fi', 'Washing machine', 'Towels', 'Heating', 'Coffee machine', 'Baby seat', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'];
 
-export const offersFilters: string[] = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+// export const offersFilters: string[] = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
 export const reviews: Array<ReviewType> = [
   {

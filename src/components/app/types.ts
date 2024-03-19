@@ -5,7 +5,6 @@ export type AppPropsType = {
   places: Array<PlaceCardType>;
   cities: Array<CityPropsType>;
   favoritePlaces: Array<PlaceCardType>;
-  filters: string[];
   reviews: Array<ReviewType>;
   offer: PlaceCardType;
 }

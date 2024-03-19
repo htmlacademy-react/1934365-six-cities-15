@@ -3,5 +3,4 @@ import { CityPropsType, PlaceCardType } from '../../components/blocks/place-card
 export type MainPropsType = {
   places: Array<PlaceCardType>;
   cities: Array<CityPropsType>;
-  filters: string[];
 }

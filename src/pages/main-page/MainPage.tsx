@@ -7,10 +7,11 @@ import { CitiesList, PlaceCardType } from '../../components/blocks/place-card/ty
 import { MainPropsType } from './types';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { changeCity } from '../../store/action';
+import { offersFilters } from '../../components/utils/types';
 
-export default function MainPage({ places, cities, filters }: MainPropsType): JSX.Element {
+export default function MainPage({ places, cities }: MainPropsType): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<PlaceCardType['id']>(null);
-  const [isSelected, setIsSelected] = useState(filters[0]);
+  const [isSelected, setIsSelected] = useState(offersFilters.Popular);
   const currentCity = useAppSelector((state) => state.city);
   const filteredPlaces = places.filter((place) => currentCity.name === place.city.name);
   const activeCity = cities[0];
@@ -26,23 +27,24 @@ export default function MainPage({ places, cities, filters }: MainPropsType): JS
     });
   };
   const onSelectItemClick = (selectName: string) => {
-    filters.find((filter) => {
+    Object.values(offersFilters).find((filter) => {
       if (filter === selectName) {
         setIsSelected(filter);
       }
     });
   };
+
   const onSelectItemClickForFilters = (cards: Array<PlaceCardType>) => {
     const copyPlaces: Array<PlaceCardType> = JSON.parse(JSON.stringify(cards)) as Array<PlaceCardType>;
-    if (isSelected === 'Popular') {
+    if (isSelected === offersFilters.Popular) {
       return cards;
-    } else if (isSelected === 'Price: low to high') {
+    } else if (isSelected === offersFilters.PriceLowToHigh) {
       const sortedPlacesToHigh: Array<PlaceCardType> = copyPlaces.sort((a, b) => a.price - b.price);
       return sortedPlacesToHigh;
-    } else if (isSelected === 'Price: high to low') {
+    } else if (isSelected === offersFilters.PriceHighToLow) {
       const sortedPlacesToLow: Array<PlaceCardType> = copyPlaces.sort((a, b) => b.price - a.price);
       return sortedPlacesToLow;
-    } else if (isSelected === 'Top rated first') {
+    } else if (isSelected === offersFilters.TopRatedFirst) {
       const sortedPlacesToHighRating: Array<PlaceCardType> = copyPlaces.sort((a, b) => b.rating - a.rating);
       return sortedPlacesToHighRating;
     } else {
@@ -63,7 +65,7 @@ export default function MainPage({ places, cities, filters }: MainPropsType): JS
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{filteredPlaces.length} places to stay in {currentCity.name}</b>
-              <Select filters={filters} onSelectItemClick={onSelectItemClick} isSelected={isSelected} />
+              <Select filters={offersFilters} onSelectItemClick={onSelectItemClick} isSelected={isSelected} />
               <div className="cities__places-list places__list tabs__content">
                 <PlaceCardList places={sortedPlaces} onCardHover={onCardHover} activeCityName={currentCity.name} />
               </div>
