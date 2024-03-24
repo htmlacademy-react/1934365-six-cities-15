@@ -10,9 +10,16 @@ import OfferPage from '../../pages/offer-page/OfferPage';
 import FavoritesPage from '../../pages/favorites-page/FavoritesPage';
 import LoginPage from '../../pages/login-page/LoginPage';
 import MainPage from '../../pages/main-page/MainPage';
+import { useAppDispatch } from '../../store/hooks';
+import { useEffect } from 'react';
+import { fetchAllOffers } from '../../store/thunks/offers';
 
 export default function App({places, cities, favoritePlaces, reviews, offer}: AppPropsType): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(fetchAllOffers)
+  }, [])
 
   return (
     <HelmetProvider>

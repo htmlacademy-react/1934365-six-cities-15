@@ -22,3 +22,5 @@ export enum offersFilters {
   TopRatedFirst = 'Top rated first'
 }
 
+export enum RequestStatus {Idle, Loading, Success, Failed}
+

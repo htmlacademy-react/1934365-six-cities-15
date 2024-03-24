@@ -5,19 +5,20 @@ import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList
 import Select from '../../components/blocks/select/Select';
 import { CitiesList, PlaceCardType } from '../../components/blocks/place-card/types';
 import { MainPropsType } from './types';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { changeCity } from '../../store/action';
-import { offersFilters } from '../../components/utils/types';
+import { useActionCreators, useAppSelector } from '../../store/hooks';
+import { RequestStatus, offersFilters } from '../../components/utils/types';
+import { offersActions, offersSelectors } from '../../store/slices/offers';
 
 export default function MainPage({ places, cities }: MainPropsType): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<PlaceCardType['id']>(null);
   const [isSelected, setIsSelected] = useState(offersFilters.Popular);
-  const currentCity = useAppSelector((state) => state.city);
-  const filteredPlaces = places.filter((place) => currentCity.name === place.city.name);
-  const activeCity = cities[0];
 
-  // const offers = useAppSelector((state) => state.places)
-  const dispatch = useAppDispatch();
+  const currentCity = useAppSelector(offersSelectors.city);
+  const offers = useAppSelector(offersSelectors.offers);
+  const status = useAppSelector(offersSelectors.status)
+  const {changeCity} = useActionCreators(offersActions)
+
+  const filteredPlaces = places.filter((place) => currentCity.name === place.city.name);
 
   const onCardHover = (placeId: PlaceCardType['id']): void => {
     places.some((place) => {
@@ -53,25 +54,33 @@ export default function MainPage({ places, cities }: MainPropsType): JSX.Element
   };
   const sortedPlaces: Array<PlaceCardType> = onSelectItemClickForFilters(filteredPlaces);
 
+  if (status === RequestStatus.Loading) {
+    return (
+      <div>Loading...</div>
+    )
+  }
+
+  // const offersByCity = Object.groupBy(offers, offer === offer.city.name)
+
   return (
     < div className="page page--gray page--main" >
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <LocationList cities={cities} onCityItemClick={(cityName: CitiesList) => dispatch(changeCity({name: cityName}))} activeCityName={currentCity.name} />
+          <LocationList cities={cities} onCityItemClick={(cityName: CitiesList) => changeCity({name: cityName})} activeCityName={currentCity.name} />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{filteredPlaces.length} places to stay in {currentCity.name}</b>
+              <b className="places__found">{filteredPlaces.length} place{filteredPlaces.length > 1 && 's'} to stay in {currentCity.name}</b>
               <Select filters={offersFilters} onSelectItemClick={onSelectItemClick} isSelected={isSelected} />
               <div className="cities__places-list places__list tabs__content">
                 <PlaceCardList places={sortedPlaces} onCardHover={onCardHover} activeCityName={currentCity.name} />
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={activeCity} places={places} activeCardId={activeCardId} activeCityName={currentCity.name} className='cities__map' />
+              <Map city={currentCity} places={places} activeCardId={activeCardId} activeCityName={currentCity.name} className='cities__map' />
             </div>
           </div>
         </div>
