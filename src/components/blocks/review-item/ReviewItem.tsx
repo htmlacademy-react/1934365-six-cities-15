@@ -1,11 +1,8 @@
 import { getRatingStatus } from '../../utils/utils';
 import { ReviewType } from './types';
+import { generateDate } from './utils';
 
 export default function ReviewItem({ review }: { review: ReviewType }): JSX.Element {
-  const date = new Date(review.date);
-  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long' };
-  const reviewDate = new Intl.DateTimeFormat('en-US', options).format(date);
-  const reviewDateTime = new Date().toISOString().split('T')[0];
 
   return (
     <li className="reviews__item">
@@ -28,7 +25,7 @@ export default function ReviewItem({ review }: { review: ReviewType }): JSX.Elem
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time className="reviews__time" dateTime={reviewDateTime}>{reviewDate}</time>
+        <time className="reviews__time" dateTime={new Date().toISOString().split('T')[0]}>{generateDate(review)}</time>
       </div>
     </li>
   );
