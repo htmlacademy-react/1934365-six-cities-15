@@ -8,6 +8,7 @@ import { MainPropsType } from './types';
 import { useActionCreators, useAppSelector } from '../../store/hooks';
 import { RequestStatus, offersFilters } from '../../components/utils/types';
 import { offersActions, offersSelectors } from '../../store/slices/offers';
+import Loader from '../../components/ui/loader/loader';
 
 export default function MainPage({ places, cities }: MainPropsType): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<PlaceCardType['id']>(null);
@@ -16,12 +17,13 @@ export default function MainPage({ places, cities }: MainPropsType): JSX.Element
   const currentCity = useAppSelector(offersSelectors.city);
   const offers = useAppSelector(offersSelectors.offers);
   const status = useAppSelector(offersSelectors.status)
+  const activeId = useAppSelector(offersSelectors.activeId)
   const {changeCity} = useActionCreators(offersActions)
 
-  const filteredPlaces = places.filter((place) => currentCity.name === place.city.name);
+  const filteredPlaces = offers.filter((place) => currentCity.name === place.city.name);
 
   const onCardHover = (placeId: PlaceCardType['id']): void => {
-    places.some((place) => {
+    offers.some((place) => {
       if (place.id === placeId) {
         setActiveCardId(placeId);
       }
@@ -56,7 +58,7 @@ export default function MainPage({ places, cities }: MainPropsType): JSX.Element
 
   if (status === RequestStatus.Loading) {
     return (
-      <div>Loading...</div>
+      <Loader />
     )
   }
 
@@ -80,7 +82,7 @@ export default function MainPage({ places, cities }: MainPropsType): JSX.Element
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={currentCity} places={places} activeCardId={activeCardId} activeCityName={currentCity.name} className='cities__map' />
+              <Map city={currentCity} places={offers} activeCardId={activeCardId} activeCityName={currentCity.name} className='cities__map' />
             </div>
           </div>
         </div>

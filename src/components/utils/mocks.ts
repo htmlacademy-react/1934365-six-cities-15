@@ -4,52 +4,6 @@ import { ReviewType } from '../blocks/review-item/types';
 export const places: Array<PlaceCardType> =
   [
     {
-      'id': '41835b72-07e8-4586-b482-12cac643bc46',
-      'title': 'The Joshua Tree House',
-      'type': 'room',
-      'price': 266,
-      'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/20.jpg',
-      'city': {
-        'name': 'Paris',
-        'location': {
-          'latitude': 48.85661,
-          'longitude': 2.351499,
-          'zoom': 13
-        }
-      },
-      'location': {
-        'latitude': 48.868610000000004,
-        'longitude': 2.342499,
-        'zoom': 16
-      },
-      'isFavorite': false,
-      'isPremium': true,
-      'rating': 2
-    },
-    {
-      'id': '983b21a0-204f-4311-946f-50bb96c3d5f8',
-      'title': 'Penthouse, 4-5 rooms + 5 balconies',
-      'type': 'apartment',
-      'price': 147,
-      'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
-      'city': {
-        'name': 'Paris',
-        'location': {
-          'latitude': 48.85661,
-          'longitude': 2.351499,
-          'zoom': 13
-        }
-      },
-      'location': {
-        'latitude': 48.858610000000006,
-        'longitude': 2.330499,
-        'zoom': 16
-      },
-      'isFavorite': false,
-      'isPremium': true,
-      'rating': 1.9
-    },
-    {
       'id': '183b21a0-204f-4311-946f-50bb96c3d5f8',
       'title': 'Penthouse, 4-5 rooms + 5 balconies',
       'type': 'apartment',
