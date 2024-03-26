@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { getToken } from "./token";
 
 enum Default {
-  BaseUrl = 'https://15.design.htmlacademy.pro/spec/six-cities',
+  BaseUrl = 'https://15.design.htmlacademy.pro/six-cities',
   Timeout = 5000
 }
 

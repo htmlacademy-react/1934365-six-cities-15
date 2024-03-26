@@ -10,15 +10,15 @@ import OfferPage from '../../pages/offer-page/OfferPage';
 import FavoritesPage from '../../pages/favorites-page/FavoritesPage';
 import LoginPage from '../../pages/login-page/LoginPage';
 import MainPage from '../../pages/main-page/MainPage';
-import { useAppDispatch } from '../../store/hooks';
+import { useActionCreators } from '../../store/hooks';
 import { useEffect } from 'react';
-import { fetchAllOffers } from '../../store/thunks/offers';
+import { offersActions } from '../../store/slices/offers';
 
-export default function App({places, cities, favoritePlaces, reviews, offer}: AppPropsType): JSX.Element {
+export default function App({ places, cities, favoritePlaces, reviews, offer }: AppPropsType): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
-  const dispatch = useAppDispatch()
+  const { fetchAllOffers } = useActionCreators(offersActions)
   useEffect(() => {
-    dispatch(fetchAllOffers)
+    fetchAllOffers()
   }, [])
 
   return (
@@ -26,7 +26,7 @@ export default function App({places, cities, favoritePlaces, reviews, offer}: Ap
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root} element={<Layout />} >
-            <Route index element={<MainPage places = {places} cities={cities} />} />
+            <Route index element={<MainPage places={places} cities={cities} />} />
             <Route path={AppRoute.Login} element={
               <PrivateRoute authorizationStatus={authorizationStatus} isReverse>
                 <LoginPage />
@@ -35,7 +35,7 @@ export default function App({places, cities, favoritePlaces, reviews, offer}: Ap
             />
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute authorizationStatus={authorizationStatus}>
-                <FavoritesPage favoritePlaces = {favoritePlaces} />
+                <FavoritesPage favoritePlaces={favoritePlaces} />
               </PrivateRoute>
             }
             />
