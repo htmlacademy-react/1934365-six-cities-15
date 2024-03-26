@@ -10,22 +10,21 @@ import { RequestStatus, offersFilters } from '../../components/utils/types';
 import { offersActions, offersSelectors } from '../../store/slices/offers';
 import Loader from '../../components/ui/loader/loader';
 
-export default function MainPage({ places, cities }: MainPropsType): JSX.Element {
-  const [activeCardId, setActiveCardId] = useState<PlaceCardType['id']>(null);
+export default function MainPage({ cities }: MainPropsType): JSX.Element {
   const [isSelected, setIsSelected] = useState(offersFilters.Popular);
 
   const currentCity = useAppSelector(offersSelectors.city);
   const offers = useAppSelector(offersSelectors.offers);
   const status = useAppSelector(offersSelectors.status)
   const activeId = useAppSelector(offersSelectors.activeId)
-  const {changeCity} = useActionCreators(offersActions)
+  const {changeCity, setActiveId} = useActionCreators(offersActions)
 
   const filteredPlaces = offers.filter((place) => currentCity.name === place.city.name);
 
   const onCardHover = (placeId: PlaceCardType['id']): void => {
     offers.some((place) => {
       if (place.id === placeId) {
-        setActiveCardId(placeId);
+        setActiveId(placeId);
       }
     });
   };
@@ -82,7 +81,7 @@ export default function MainPage({ places, cities }: MainPropsType): JSX.Element
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={currentCity} places={offers} activeCardId={activeCardId} activeCityName={currentCity.name} className='cities__map' />
+              <Map city={currentCity} places={offers} activeCardId={activeId} activeCityName={currentCity.name} className='cities__map' />
             </div>
           </div>
         </div>

@@ -37,9 +37,9 @@ const offersSlice = createSlice({
     changeCity: (state, action: PayloadAction<{ name: CityPropsType['name'] }>) => {
       state.city.name = action.payload.name;
     },
-    // setActiveId: (state, action: PlaceCardType['id']) => {
-    //   state.activeId = action.payload
-    // }
+    setActiveId: (state, action: PayloadAction<PlaceCardType['id']>) => {
+      state.activeId = action.payload
+    }
   },
   selectors: {
     city: (state) => state.city,
