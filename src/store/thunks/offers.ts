@@ -9,4 +9,16 @@ const fetchAllOffers = createAsyncThunk<PlaceCardType[], undefined, { extra: Axi
     return response.data
   })
 
-export { fetchAllOffers }
+const fetchFullOffer = createAsyncThunk<PlaceCardType, string, { extra: AxiosInstance }>
+('fetchOffers/One', async (offerId, { extra: api }) => {
+  const response = await api.get<PlaceCardType>(`${Endpoint.Offers}/${offerId}`);
+  return response.data
+})
+
+const fetchNearbyOffers = createAsyncThunk<PlaceCardType[], string, { extra: AxiosInstance }>
+('fetchOffers/nearby', async (offerId, { extra: api }) => {
+  const response = await api.get<PlaceCardType[]>(`${Endpoint.Offers}/${offerId}/nearby`);
+  return response.data
+})
+
+export { fetchAllOffers, fetchFullOffer, fetchNearbyOffers }

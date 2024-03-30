@@ -75,7 +75,7 @@ export default function MainPage({ cities }: MainPropsType): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{filteredPlaces.length} place{filteredPlaces.length > 1 && 's'} to stay in {currentCity.name}</b>
-              <Select filters={offersFilters} onSelectItemClick={onSelectItemClick} isSelected={isSelected} />
+              <Select filters={Object.values(offersFilters)} onSelectItemClick={onSelectItemClick} isSelected={isSelected} />
               <div className="cities__places-list places__list tabs__content">
                 <PlaceCardList places={sortedPlaces} onCardHover={onCardHover} activeCityName={currentCity.name} />
               </div>

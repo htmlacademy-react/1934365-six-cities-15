@@ -1,11 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../utils/types';
-import { getAuthorizationStatus } from '../../utils/utils';
+import { AppRoute } from '../../utils/types';
+import { useActionCreators, useAppSelector, useAuth } from '../../../store/hooks';
+import { userActions, userSliceSelectors } from '../../../store/slices/user';
 
 export default function Header(): JSX.Element {
   const location = useLocation();
-  const authorizationStatus = getAuthorizationStatus();
+  const isAuthorized = useAuth();
+  const user = useAppSelector(userSliceSelectors.user)
+  const { logout } = useActionCreators(userActions)
   let classNameLink = '';
+
   if (location.pathname as AppRoute === AppRoute.Root) {
     classNameLink = 'header__logo-link--active';
   }
@@ -27,20 +31,22 @@ export default function Header(): JSX.Element {
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      {authorizationStatus === AuthorizationStatus.Auth ?
+                      {isAuthorized ?
                         <>
-                          <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                          <span className="header__user-name user__name">{user?.email}</span>
                           <span className="header__favorite-count">3</span>
                         </>
                         : <span className="header__login">Sign in</span>}
                     </Link>
                   </li>
                   {
-                    authorizationStatus === AuthorizationStatus.Auth ?
+                    isAuthorized ?
                       <li className="header__nav-item">
-                        <a className="header__nav-link" href="#">
+                        <Link className="header__nav-link"
+                          to="#"
+                          onClick={() => logout()}>
                           <span className="header__signout">Sign out</span>
-                        </a>
+                        </Link>
                       </li>
                       : null
                   }

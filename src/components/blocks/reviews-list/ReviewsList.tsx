@@ -7,7 +7,7 @@ export default function Reviews({ isAuth, reviews }: { isAuth: boolean; reviews:
   return (
     <>
       <ul className="reviews__list">
-        {reviews.map((review) => (
+        {reviews?.map((review) => (
           <ReviewItem
             key={review.id}
             review={review}

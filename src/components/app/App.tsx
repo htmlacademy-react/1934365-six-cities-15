@@ -5,21 +5,30 @@ import NotFound from '../../pages/not-found-page/NotFound';
 import PrivateRoute from '../blocks/private-route/PrivateRoute';
 import { HelmetProvider } from 'react-helmet-async';
 import Layout from '../layout/layout/Layout';
-import { getAuthorizationStatus as getAuthorizationStatus } from '../utils/utils';
 import OfferPage from '../../pages/offer-page/OfferPage';
 import FavoritesPage from '../../pages/favorites-page/FavoritesPage';
-import LoginPage from '../../pages/login-page/LoginPage';
 import MainPage from '../../pages/main-page/MainPage';
-import { useActionCreators } from '../../store/hooks';
+import { useActionCreators, useAppSelector } from '../../store/hooks';
 import { useEffect } from 'react';
 import { offersActions } from '../../store/slices/offers';
+import { userActions, userSliceSelectors } from '../../store/slices/user';
+import { getToken } from '../../services/token';
+import LoginPage from '../../pages/login-page/LoginPage';
 
-export default function App({ places, cities, favoritePlaces, reviews, offer }: AppPropsType): JSX.Element {
-  const authorizationStatus = getAuthorizationStatus();
+export default function App({ places, cities, favoritePlaces }: AppPropsType): JSX.Element {
   const { fetchAllOffers } = useActionCreators(offersActions)
+  const { checkAuth } = useActionCreators(userActions)
+  const userStatus = useAppSelector(userSliceSelectors.userStatus)
+
   useEffect(() => {
     fetchAllOffers()
   }, [])
+  const token = getToken();
+  useEffect(() => {
+    if (token) {
+      checkAuth()
+    }
+  }, [token, checkAuth])
 
   return (
     <HelmetProvider>
@@ -28,18 +37,18 @@ export default function App({ places, cities, favoritePlaces, reviews, offer }: 
           <Route path={AppRoute.Root} element={<Layout />} >
             <Route index element={<MainPage places={places} cities={cities} />} />
             <Route path={AppRoute.Login} element={
-              <PrivateRoute authorizationStatus={authorizationStatus} isReverse>
+              <PrivateRoute authorizationStatus={userStatus}>
                 <LoginPage />
               </PrivateRoute>
             }
             />
             <Route path={AppRoute.Favorites} element={
-              <PrivateRoute authorizationStatus={authorizationStatus}>
+              <PrivateRoute authorizationStatus={userStatus}>
                 <FavoritesPage favoritePlaces={favoritePlaces} />
               </PrivateRoute>
             }
             />
-            <Route path={AppRoute.Offer} element={<OfferPage offer={offer} reviews={reviews} />} />
+            <Route path={AppRoute.Offer} element={<OfferPage />} />
             <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>
