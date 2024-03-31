@@ -8,17 +8,16 @@ import Layout from '../layout/layout/Layout';
 import OfferPage from '../../pages/offer-page/OfferPage';
 import FavoritesPage from '../../pages/favorites-page/FavoritesPage';
 import MainPage from '../../pages/main-page/MainPage';
-import { useActionCreators, useAppSelector } from '../../store/hooks';
+import { useActionCreators } from '../../store/hooks';
 import { useEffect } from 'react';
 import { offersActions } from '../../store/slices/offers';
-import { userActions, userSliceSelectors } from '../../store/slices/user';
+import { userActions } from '../../store/slices/user';
 import { getToken } from '../../services/token';
 import LoginPage from '../../pages/login-page/LoginPage';
 
 export default function App({ cities, favoritePlaces }: AppPropsType): JSX.Element {
   const { fetchAllOffers } = useActionCreators(offersActions);
   const { checkAuth } = useActionCreators(userActions);
-  const userStatus = useAppSelector(userSliceSelectors.userStatus);
 
   useEffect(() => {
     fetchAllOffers();
@@ -37,13 +36,13 @@ export default function App({ cities, favoritePlaces }: AppPropsType): JSX.Eleme
           <Route path={AppRoute.Root} element={<Layout />} >
             <Route index element={<MainPage cities={cities} />} />
             <Route path={AppRoute.Login} element={
-              <PrivateRoute authorizationStatus={userStatus}>
+              <PrivateRoute onlyForNoAuth>
                 <LoginPage />
               </PrivateRoute>
             }
             />
             <Route path={AppRoute.Favorites} element={
-              <PrivateRoute authorizationStatus={userStatus}>
+              <PrivateRoute>
                 <FavoritesPage favoritePlaces={favoritePlaces} />
               </PrivateRoute>
             }
