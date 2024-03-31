@@ -22,7 +22,7 @@ export default function OfferPage(): JSX.Element {
   const nearPlaces = useAppSelector(fullOfferSliceSelectors.nearbyOffers);
   const status = useAppSelector(fullOfferSliceSelectors.status);
   const reviews = useAppSelector(reviewSliceSelectors.reviews);
-  const authStatus = useAppSelector(userSliceSelectors.userStatus)
+  const authStatus = useAppSelector(userSliceSelectors.userStatus);
 
   const { fetchFullOffer, fetchNearbyOffers } = useActionCreators(fullOfferActions);
   const { fetchComments } = useActionCreators(reviewActions);
@@ -30,23 +30,23 @@ export default function OfferPage(): JSX.Element {
   const { id } = useParams();
   useEffect(() => {
     Promise.all([fetchFullOffer(id as string), fetchNearbyOffers(id as string), fetchComments(id as string)]);
-  }, [fetchFullOffer, fetchNearbyOffers, fetchComments, id])
+  }, [fetchFullOffer, fetchNearbyOffers, fetchComments, id]);
 
   const activeCardId = fullOffer?.id;
-  const nearPlacesShortened = nearPlaces?.slice(0, NEAR_PLACES_AMOUNT)
+  const nearPlacesShortened = nearPlaces?.slice(0, NEAR_PLACES_AMOUNT);
   const nearPlacesPlusCurrent = [...nearPlacesShortened, fullOffer];
-  const sortedReviews = getSortedReviews(reviews)
+  const sortedReviews = getSortedReviews(reviews);
 
   if (status === RequestStatus.Loading) {
     return (
       <Loader />
-    )
+    );
   }
 
   if (status === RequestStatus.Failed || !fullOffer) {
     return (
       <NotFound />
-    )
+    );
   }
 
   return (

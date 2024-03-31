@@ -1,5 +1,5 @@
-import axios, { AxiosInstance } from "axios";
-import { getToken } from "./token";
+import axios, { AxiosInstance } from 'axios';
+import { getToken } from './token';
 
 enum Default {
   BaseUrl = 'https://15.design.htmlacademy.pro/six-cities',
@@ -10,16 +10,15 @@ export const createAPI = (): AxiosInstance => {
   const api = axios.create({
     baseURL: Default.BaseUrl as string,
     timeout: Default.Timeout as number
-  })
+  });
 
   api.interceptors.request.use((config) => {
     const token = getToken();
-    console.log(token)
     if (token && config.headers) {
-      config.headers['X-Token'] = token
+      config.headers['X-Token'] = token;
     }
-    return config
-  })
+    return config;
+  });
 
-  return api
-}
+  return api;
+};

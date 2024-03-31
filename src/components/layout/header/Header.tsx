@@ -6,8 +6,8 @@ import { userActions, userSliceSelectors } from '../../../store/slices/user';
 export default function Header(): JSX.Element {
   const location = useLocation();
   const isAuthorized = useAuth();
-  const user = useAppSelector(userSliceSelectors.user)
-  const { logout } = useActionCreators(userActions)
+  const user = useAppSelector(userSliceSelectors.user);
+  const { logout } = useActionCreators(userActions);
   let classNameLink = '';
 
   if (location.pathname as AppRoute === AppRoute.Root) {
@@ -44,7 +44,8 @@ export default function Header(): JSX.Element {
                       <li className="header__nav-item">
                         <Link className="header__nav-link"
                           to="#"
-                          onClick={() => logout()}>
+                          onClick={() => logout()}
+                        >
                           <span className="header__signout">Sign out</span>
                         </Link>
                       </li>

@@ -19,8 +19,8 @@ export default function LoginPage(): JSX.Element {
     setFormData({
       ...formData,
       [name]: value
-    })
-  }
+    });
+  };
   function handleSubmit(evt: FormEvent<HtmlLoginForm>) {
     evt.preventDefault();
     login(formData);
@@ -38,7 +38,8 @@ export default function LoginPage(): JSX.Element {
             <h1 className="login__title">Sign in</h1>
             <form
               className="login__form form"
-              onSubmit={handleSubmit}>
+              onSubmit={handleSubmit}
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
@@ -47,7 +48,8 @@ export default function LoginPage(): JSX.Element {
                   name="email"
                   placeholder="Email"
                   required
-                  onChange={handleChange} />
+                  onChange={handleChange}
+                />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
@@ -57,10 +59,13 @@ export default function LoginPage(): JSX.Element {
                   placeholder="Password"
                   required
                   onChange={handleChange}
-                  minLength={8}/>
+                  minLength={8}
+                />
               </div>
               <button
-                className="login__submit form__submit button" type="submit">Sign in</button>
+                className="login__submit form__submit button" type="submit"
+              >Sign in
+              </button>
             </form>
           </section>
           <section className="locations locations--login locations--current">

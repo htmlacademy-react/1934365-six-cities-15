@@ -25,16 +25,16 @@ export enum offersFilters {
 export enum RequestStatus { Idle, Loading, Success, Failed }
 
 export type User = {
-  name: string
-  avatarUrl: string
-  isPro: boolean
-  email: string
-  token: string
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+  email: string;
+  token: string;
 }
 
 export type loginData = {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 

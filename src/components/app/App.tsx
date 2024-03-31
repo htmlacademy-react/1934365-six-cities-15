@@ -16,19 +16,19 @@ import { getToken } from '../../services/token';
 import LoginPage from '../../pages/login-page/LoginPage';
 
 export default function App({ places, cities, favoritePlaces }: AppPropsType): JSX.Element {
-  const { fetchAllOffers } = useActionCreators(offersActions)
-  const { checkAuth } = useActionCreators(userActions)
-  const userStatus = useAppSelector(userSliceSelectors.userStatus)
+  const { fetchAllOffers } = useActionCreators(offersActions);
+  const { checkAuth } = useActionCreators(userActions);
+  const userStatus = useAppSelector(userSliceSelectors.userStatus);
 
   useEffect(() => {
-    fetchAllOffers()
-  }, [])
+    fetchAllOffers();
+  }, []);
   const token = getToken();
   useEffect(() => {
     if (token) {
-      checkAuth()
+      checkAuth();
     }
-  }, [token, checkAuth])
+  }, [token, checkAuth]);
 
   return (
     <HelmetProvider>

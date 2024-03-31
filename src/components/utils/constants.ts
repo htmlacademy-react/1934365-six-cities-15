@@ -20,4 +20,4 @@ export const Endpoint = {
   Login: '/login',
   Logout: '/logout',
   Offers: '/offers'
-}
+};

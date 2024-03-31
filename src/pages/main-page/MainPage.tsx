@@ -15,9 +15,9 @@ export default function MainPage({ cities }: MainPropsType): JSX.Element {
 
   const currentCity = useAppSelector(offersSelectors.city);
   const offers = useAppSelector(offersSelectors.offers);
-  const status = useAppSelector(offersSelectors.status)
-  const activeId = useAppSelector(offersSelectors.activeId)
-  const {changeCity, setActiveId} = useActionCreators(offersActions)
+  const status = useAppSelector(offersSelectors.status);
+  const activeId = useAppSelector(offersSelectors.activeId);
+  const {changeCity, setActiveId} = useActionCreators(offersActions);
 
   const filteredPlaces = offers.filter((place) => currentCity.name === place.city.name);
 
@@ -28,7 +28,7 @@ export default function MainPage({ cities }: MainPropsType): JSX.Element {
       }
     });
   };
-  const onSelectItemClick = (selectName: string) => {
+  const onSelectItemClick = (selectName: offersFilters) => {
     Object.values(offersFilters).find((filter) => {
       if (filter === selectName) {
         setIsSelected(filter);
@@ -58,7 +58,7 @@ export default function MainPage({ cities }: MainPropsType): JSX.Element {
   if (status === RequestStatus.Loading) {
     return (
       <Loader />
-    )
+    );
   }
 
   // const offersByCity = Object.groupBy(offers, offer === offer.city.name)
