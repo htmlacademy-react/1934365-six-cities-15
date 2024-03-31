@@ -1,7 +1,7 @@
 export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offer/:id',
+  Offer = '/offers/:id',
   Root = '/'
 }
 
@@ -22,5 +22,19 @@ export enum offersFilters {
   TopRatedFirst = 'Top rated first'
 }
 
-export enum RequestStatus {Idle, Loading, Success, Failed}
+export enum RequestStatus { Idle, Loading, Success, Failed }
+
+export type User = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+  email: string;
+  token: string;
+}
+
+export type loginData = {
+  email: string;
+  password: string;
+}
+
 

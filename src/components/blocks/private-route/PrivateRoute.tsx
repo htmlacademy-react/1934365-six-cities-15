@@ -1,16 +1,27 @@
-import { Navigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../utils/types';
+import { Navigate, useLocation } from 'react-router-dom';
+import { AppRoute } from '../../utils/types';
+import { useAppSelector } from '../../../store/hooks';
+import { userSliceSelectors } from '../../../store/slices/user';
+
 
 type PrivateRouteProps = {
-  authorizationStatus: AuthorizationStatus;
-  isReverse?: boolean;
+  onlyForNoAuth?: boolean;
   children: JSX.Element;
 }
 
-export default function PrivateRoute({authorizationStatus,isReverse, children}: PrivateRouteProps): JSX.Element {
-  return (
-    authorizationStatus === (isReverse ? AuthorizationStatus.NoAuth : AuthorizationStatus.Auth)
-      ? children
-      : <Navigate to={isReverse ? AppRoute.Root : AppRoute.Login} />
-  );
+export default function PrivateRoute({ onlyForNoAuth, children }: PrivateRouteProps): JSX.Element {
+  const user = useAppSelector(userSliceSelectors.user);
+  const location = useLocation();
+  console.log(user)
+
+  if (onlyForNoAuth && user) {
+    const from = location.state.from || {pathname: AppRoute.Root}
+    return <Navigate to={from} />
+  }
+
+  if (!onlyForNoAuth && !user) {
+    return <Navigate state={{from: location}} to={AppRoute.Login} />
+  }
+
+  return children;
 }

@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { PlaceCardPropsType } from './types';
-import { AppRoute } from '../../utils/types';
 import Button from '../../ui/button/Button';
 import { getRatingStatus } from '../../utils/utils';
 
@@ -17,7 +16,7 @@ export default function PlaceCard({ card, onCardHover, className, width, height}
     <article className={`${className}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {card.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
       <div className={`${className}__image-wrapper place-card__image-wrapper"`}>
-        <Link to={AppRoute.Offer}>
+        <Link to={`/offers/${card.id}`}>
           <img className="place-card__image" src={card.previewImage} width={width} height={height} alt="Place image" />
         </Link>
       </div>
@@ -36,7 +35,7 @@ export default function PlaceCard({ card, onCardHover, className, width, height}
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Offer}>{card.title}</Link>
+          <Link to={`/offers/${card.id}`}>{card.title}</Link>
         </h2>
         <p className="place-card__type">{card.type}</p>
       </div>

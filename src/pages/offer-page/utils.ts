@@ -1,11 +1,9 @@
-import { MAX_REVIEW_ITEMS_AMOUNT, NEAR_PLACES_AMOUNT } from '../../components/utils/constants';
-import { places, offer, reviews } from '../../components/utils/mocks';
+import { ReviewType } from '../../components/blocks/review-item/types';
+import { MAX_REVIEW_ITEMS_AMOUNT } from '../../components/utils/constants';
 
-export const nearPlaces = places.filter((place) => {
-  if (place.id !== offer.id && offer.city.name === place.city.name) {
-    return true;
+export const getSortedReviews = (reviews: ReviewType[] | []) => {
+  if (reviews.length > 0) {
+    const arr = [...reviews];
+    return arr.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, MAX_REVIEW_ITEMS_AMOUNT);
   }
-}).slice(0, NEAR_PLACES_AMOUNT);
-
-export const reviewsList = reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  .slice(0, MAX_REVIEW_ITEMS_AMOUNT);
+};
