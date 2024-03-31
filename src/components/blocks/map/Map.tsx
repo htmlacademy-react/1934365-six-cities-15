@@ -9,7 +9,7 @@ export default function Map({city, places, activeCardId, activeCityName, classNa
   const MapRef = useRef<HTMLDivElement>(null);
   const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
   const map = useMap(MapRef, city);
-  const currentCity = places.find((el) => el.city.name === activeCityName);
+  const currentCity = places?.find((el) => el.city.name === activeCityName);
 
   useEffect((): void => {
     if (map && currentCity) {
@@ -21,7 +21,7 @@ export default function Map({city, places, activeCardId, activeCityName, classNa
 
   useEffect((): void => {
     if (map) {
-      places.forEach((place) => {
+      places?.forEach((place) => {
         leaflet.marker({
           lat: place.location.latitude,
           lng: place.location.longitude

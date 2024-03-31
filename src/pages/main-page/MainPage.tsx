@@ -3,16 +3,14 @@ import LocationList from '../../components/blocks/location-list/LocationsList';
 import Map from '../../components/blocks/map/Map';
 import PlaceCardList from '../../components/blocks/place-card-list/PlaceCardList';
 import Select from '../../components/blocks/select/Select';
-import { CitiesList, PlaceCardType } from '../../components/blocks/place-card/types';
-import { MainPropsType } from './types';
+import { CitiesList, CityPropsType, PlaceCardType } from '../../components/blocks/place-card/types';
 import { useActionCreators, useAppSelector } from '../../store/hooks';
 import { RequestStatus, offersFilters } from '../../components/utils/types';
 import { offersActions, offersSelectors } from '../../store/slices/offers';
 import Loader from '../../components/ui/loader/loader';
 
-export default function MainPage({ cities }: MainPropsType): JSX.Element {
+export default function MainPage({cities}: {cities: Array<CityPropsType>}): JSX.Element {
   const [isSelected, setIsSelected] = useState(offersFilters.Popular);
-
   const currentCity = useAppSelector(offersSelectors.city);
   const offers = useAppSelector(offersSelectors.offers);
   const status = useAppSelector(offersSelectors.status);

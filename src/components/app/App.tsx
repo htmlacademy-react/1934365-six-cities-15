@@ -15,7 +15,7 @@ import { userActions, userSliceSelectors } from '../../store/slices/user';
 import { getToken } from '../../services/token';
 import LoginPage from '../../pages/login-page/LoginPage';
 
-export default function App({ places, cities, favoritePlaces }: AppPropsType): JSX.Element {
+export default function App({ cities, favoritePlaces }: AppPropsType): JSX.Element {
   const { fetchAllOffers } = useActionCreators(offersActions);
   const { checkAuth } = useActionCreators(userActions);
   const userStatus = useAppSelector(userSliceSelectors.userStatus);
@@ -35,7 +35,7 @@ export default function App({ places, cities, favoritePlaces }: AppPropsType): J
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root} element={<Layout />} >
-            <Route index element={<MainPage places={places} cities={cities} />} />
+            <Route index element={<MainPage cities={cities} />} />
             <Route path={AppRoute.Login} element={
               <PrivateRoute authorizationStatus={userStatus}>
                 <LoginPage />

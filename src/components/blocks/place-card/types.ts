@@ -36,7 +36,7 @@ export type PlaceCardType = {
 }
 
 export type PlaceCardPropsType = {
-  card: PlaceCardType;
+  card: PlaceCardType | null;
   onCardHover?: (id: string | null) => void;
   className?: string;
   width: number;
