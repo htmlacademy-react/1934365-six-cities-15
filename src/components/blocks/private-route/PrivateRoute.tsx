@@ -12,13 +12,14 @@ type PrivateRouteProps = {
 export default function PrivateRoute({ onlyForNoAuth, children }: PrivateRouteProps): JSX.Element {
   const user = useAppSelector(userSliceSelectors.user);
   const location = useLocation();
-  console.log(user)
 
+  // если есть авторизация и страница логина
   if (onlyForNoAuth && user) {
-    const from = location.state.from || {pathname: AppRoute.Root}
+    const from = location.state?.from || {pathname: AppRoute.Root}
     return <Navigate to={from} />
   }
 
+  // если пользователь неавторизован и не страница логина
   if (!onlyForNoAuth && !user) {
     return <Navigate state={{from: location}} to={AppRoute.Login} />
   }
