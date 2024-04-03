@@ -23,6 +23,7 @@ export enum offersFilters {
 }
 
 export enum RequestStatus { Idle, Loading, Success, Failed }
+export enum FavoriteStatus { Removed, Added }
 
 export type User = {
   name: string;

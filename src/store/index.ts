@@ -4,6 +4,7 @@ import { createAPI } from '../services/api';
 import { fullOfferSlice } from './slices/full-offer';
 import { reviewSlice } from './slices/review';
 import { userSlice } from './slices/user';
+import { favoritesSlice } from './slices/favorites';
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({thunk: {extraArgument: createAPI()}}),
@@ -11,6 +12,7 @@ export const store = configureStore({
     [offersSlice.name]: offersSlice.reducer,
     [fullOfferSlice.name]: fullOfferSlice.reducer,
     [reviewSlice.name]: reviewSlice.reducer,
-    [userSlice.name]: userSlice.reducer
+    [userSlice.name]: userSlice.reducer,
+    [favoritesSlice.name]: favoritesSlice.reducer
   }
 });

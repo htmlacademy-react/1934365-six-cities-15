@@ -49,6 +49,7 @@ export default function LoginPage(): JSX.Element {
                   placeholder="Email"
                   required
                   onChange={handleChange}
+                  value={formData.email}
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -59,7 +60,8 @@ export default function LoginPage(): JSX.Element {
                   placeholder="Password"
                   required
                   onChange={handleChange}
-                  minLength={8}
+                  value={formData.password}
+                  minLength={2}
                 />
               </div>
               <button

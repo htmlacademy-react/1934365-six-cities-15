@@ -16,6 +16,7 @@ import NotFound from '../not-found-page/NotFound';
 import { reviewActions, reviewSliceSelectors } from '../../store/slices/review';
 import { getSortedReviews } from './utils';
 import { userSliceSelectors } from '../../store/slices/user';
+import { PlaceCardType } from '../../components/blocks/place-card/types';
 
 export default function OfferPage(): JSX.Element {
   const fullOffer = useAppSelector(fullOfferSliceSelectors.offer);
@@ -33,8 +34,9 @@ export default function OfferPage(): JSX.Element {
   }, [fetchFullOffer, fetchNearbyOffers, fetchComments, id]);
 
   const activeCardId = fullOffer?.id;
-  const nearPlacesShortened = nearPlaces?.slice(0, NEAR_PLACES_AMOUNT);
-  const nearPlacesPlusCurrent = [...nearPlacesShortened, fullOffer];
+
+  const nearPlacesShortened = nearPlaces.slice(0, NEAR_PLACES_AMOUNT);
+  const nearPlacesPlusCurrent = [...[nearPlacesShortened], fullOffer] as PlaceCardType[];
   const sortedReviews = getSortedReviews(reviews);
 
   if (status === RequestStatus.Loading) {

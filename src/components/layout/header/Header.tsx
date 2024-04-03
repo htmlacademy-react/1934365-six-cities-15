@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../utils/types';
-import { useActionCreators, useAppSelector, useAuth } from '../../../store/hooks';
+import { useActionCreators, useAppSelector, useAuth, useFavoriteCount } from '../../../store/hooks';
 import { userActions, userSliceSelectors } from '../../../store/slices/user';
 
 export default function Header(): JSX.Element {
@@ -9,6 +9,7 @@ export default function Header(): JSX.Element {
   const user = useAppSelector(userSliceSelectors.user);
   const { logout } = useActionCreators(userActions);
   let classNameLink = '';
+  const favoriteCount = useFavoriteCount();
 
   if (location.pathname as AppRoute === AppRoute.Root) {
     classNameLink = 'header__logo-link--active';
@@ -34,7 +35,7 @@ export default function Header(): JSX.Element {
                       {isAuthorized ?
                         <>
                           <span className="header__user-name user__name">{user?.email}</span>
-                          <span className="header__favorite-count">3</span>
+                          <span className="header__favorite-count">{favoriteCount}</span>
                         </>
                         : <span className="header__login">Sign in</span>}
                     </Link>
