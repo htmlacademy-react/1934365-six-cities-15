@@ -15,7 +15,7 @@ import { userActions } from '../../store/slices/user';
 import { getToken } from '../../services/token';
 import LoginPage from '../../pages/login-page/LoginPage';
 
-export default function App({ cities, favoritePlaces }: AppPropsType): JSX.Element {
+export default function App({ cities }: AppPropsType): JSX.Element {
   const { fetchAllOffers } = useActionCreators(offersActions);
   const { checkAuth } = useActionCreators(userActions);
 
@@ -43,7 +43,7 @@ export default function App({ cities, favoritePlaces }: AppPropsType): JSX.Eleme
             />
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute>
-                <FavoritesPage favoritePlaces={favoritePlaces} />
+                <FavoritesPage />
               </PrivateRoute>
             }
             />

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PlaceCardPropsType } from './types';
-import Button from '../../ui/button/Button';
 import { getRatingStatus } from '../../utils/utils';
+import FavoriteButton from '../../ui/button/FavoriteButton';
 
 export default function PlaceCard({ card, onCardHover, className, width, height}: PlaceCardPropsType): JSX.Element {
   const handleMouseEnter = (): void => {
@@ -26,7 +26,7 @@ export default function PlaceCard({ card, onCardHover, className, width, height}
             <b className="place-card__price-value">&euro;{card.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <Button />
+          <FavoriteButton isFavorite={card.isFavorite} offerId={card.id} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

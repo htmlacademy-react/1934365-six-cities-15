@@ -8,7 +8,7 @@ type InitialStateType = {
   city: CityPropsType;
   places: Array<PlaceCardType>;
   status: RequestStatus;
-  activeId: PlaceCardType['id'];
+  activeId: PlaceCardType['id'] | null;
 }
 
 const initialState: InitialStateType = {

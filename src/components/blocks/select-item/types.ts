@@ -1,5 +1,7 @@
+import { offersFilters } from '../../utils/types';
+
 export type SelectItemPropsType = {
-  filter:string;
+  filter: offersFilters;
   isSelected: boolean;
-  onSelectItemClick: (selectName: string)=> void;
+  onSelectItemClick: (selectName: offersFilters)=> void;
 }

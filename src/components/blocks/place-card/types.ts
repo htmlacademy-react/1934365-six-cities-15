@@ -13,7 +13,7 @@ export type CityPropsType = {
 }
 
 export type PlaceCardType = {
-  id: string | null;
+  id: string;
   title: string;
   type: HousingType;
   price: number;
@@ -36,7 +36,7 @@ export type PlaceCardType = {
 }
 
 export type PlaceCardPropsType = {
-  card: PlaceCardType | null;
+  card: PlaceCardType;
   onCardHover?: (id: string | null) => void;
   className?: string;
   width: number;

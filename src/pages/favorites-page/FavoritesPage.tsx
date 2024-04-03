@@ -1,21 +1,27 @@
 import { Helmet } from 'react-helmet-async';
 import FavoritesList from '../../components/blocks/favorites-list/FavoritesList';
-import { PlaceCardType } from '../../components/blocks/place-card/types';
+import { useAppSelector } from '../../store/hooks';
+import { favoriteSelectors } from '../../store/slices/favorites';
+import FavoritesEmpty from '../favorites-empty/FavoritesEmpty';
 
-export default function FavoritesPage(props: {favoritePlaces: Array<PlaceCardType>}): JSX.Element {
+export default function FavoritesPage(): JSX.Element {
+  const favoritePlaces = useAppSelector(favoriteSelectors.favorites);
+  const hasFavorites = favoritePlaces.length > 0;
   return (
     <div className="page">
       <Helmet>
         <title>Избранное</title>
       </Helmet>
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList favoritePlaces = {props.favoritePlaces} />
-          </section>
-        </div>
-      </main>
+      {hasFavorites ?
+        <main className="page__main page__main--favorites">
+          <div className="page__favorites-container container">
+            <section className="favorites">
+              <h1 className="favorites__title">Saved listing</h1>
+              <FavoritesList favoritePlaces={favoritePlaces} />
+            </section>
+          </div>
+        </main>
+        : <FavoritesEmpty />}
     </div>
   );
 }

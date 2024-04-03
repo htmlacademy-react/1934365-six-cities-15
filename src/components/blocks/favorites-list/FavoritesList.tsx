@@ -11,7 +11,7 @@ export default function FavoritesList(props: { favoritePlaces: Array<PlaceCardTy
           <FavoriteLocation title='Paris' />
         </div>
         <div className="favorites__places">
-          {props.favoritePlaces.map((card) => (
+          {props.favoritePlaces?.map((card) => (
             <PlaceCard
               key={card.id}
               card={card}
@@ -28,7 +28,7 @@ export default function FavoritesList(props: { favoritePlaces: Array<PlaceCardTy
           <FavoriteLocation title='Cologne' />
         </div>
         <div className="favorites__places">
-          {props.favoritePlaces.map((card) => (
+          {props.favoritePlaces?.map((card) => (
             <PlaceCard
               key={card.id}
               card={card}
