@@ -1,4 +1,4 @@
-import { offersFilters } from "../../utils/types";
+import { offersFilters } from '../../utils/types';
 
 export type SelectItemPropsType = {
   filter:string;
