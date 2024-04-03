@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/App';
-import { cities, favoritePlaces } from './components/utils/mocks';
+import { cities } from './components/utils/mocks';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
@@ -14,7 +14,6 @@ root.render(
     <Provider store={store}>
       <App
         cities={cities}
-        favoritePlaces={favoritePlaces}
       />
     </Provider>
   </React.StrictMode>

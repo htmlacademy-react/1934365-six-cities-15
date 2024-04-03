@@ -19,7 +19,7 @@ export default function MainPage({cities}: {cities: Array<CityPropsType>}): JSX.
 
   const filteredPlaces = offers.filter((place) => currentCity.name === place.city.name);
 
-  const onCardHover = (placeId: PlaceCardType['id']): void => {
+  const onCardHover = (placeId: PlaceCardType['id'] | null): void => {
     offers.some((place) => {
       if (place.id === placeId) {
         setActiveId(placeId);
