@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { PlaceCardType } from '../../components/blocks/place-card/types';
 import { RequestStatus } from '../../components/utils/types';
 import { changeFavorite, fetchFavorites } from '../thunks/favorites';
-import { fetchAllOffers } from '../thunks/offers';
 
 type InitialStateType = {
   offers: PlaceCardType[];
@@ -40,7 +39,7 @@ const favoritesSlice = createSlice({
             break;
           case 0:
             state.offers = state.offers.filter(({ id }) => id !== action.payload.offer.id);
-        };
+        }
       }),
   initialState,
   name: 'favorites',

@@ -15,7 +15,7 @@ function FavoriteButton({ bemBlock = 'place-card', isFavorite, offerId, width = 
   const height = width * Default.HeightCoefficient;
   const { changeFavorite } = useActionCreators(favoriteActions);
   const handleClick = () => {
-    changeFavorite({ offerId, status: !!isFavorite ? 0 : 1 });
+    changeFavorite({ offerId, status: isFavorite ? 0 : 1 });
   };
 
   return (
@@ -28,5 +28,5 @@ function FavoriteButton({ bemBlock = 'place-card', isFavorite, offerId, width = 
   );
 }
 
-export default memo(FavoriteButton)
+export default memo(FavoriteButton);
 
