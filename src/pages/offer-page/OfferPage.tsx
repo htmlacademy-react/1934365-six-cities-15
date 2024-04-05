@@ -36,7 +36,7 @@ export default function OfferPage(): JSX.Element {
   const activeCardId = fullOffer?.id;
 
   const nearPlacesShortened = nearPlaces.slice(0, NEAR_PLACES_AMOUNT);
-  const nearPlacesPlusCurrent = [...[nearPlacesShortened], fullOffer] as PlaceCardType[];
+  const nearPlacesPlusCurrent = [...nearPlacesShortened, fullOffer] as PlaceCardType[];
   const sortedReviews = getSortedReviews(reviews);
 
   if (status === RequestStatus.Loading) {

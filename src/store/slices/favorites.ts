@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { PlaceCardType } from '../../components/blocks/place-card/types';
 import { RequestStatus } from '../../components/utils/types';
 import { changeFavorite, fetchFavorites } from '../thunks/favorites';
+import { fetchAllOffers } from '../thunks/offers';
 
 type InitialStateType = {
   offers: PlaceCardType[];
@@ -34,12 +35,12 @@ const favoritesSlice = createSlice({
       })
       .addCase(changeFavorite.fulfilled, (state, action) => {
         switch (action.payload.status) {
-          case true:
+          case 1:
             state.offers.push(action.payload.offer);
             break;
-          case false:
+          case 0:
             state.offers = state.offers.filter(({ id }) => id !== action.payload.offer.id);
-        }
+        };
       }),
   initialState,
   name: 'favorites',

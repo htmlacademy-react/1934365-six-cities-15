@@ -2,8 +2,9 @@ import classNames from 'classnames';
 import { Default, FavoriteButtonTypeProps } from './types';
 import { useActionCreators } from '../../../store/hooks';
 import { favoriteActions } from '../../../store/slices/favorites';
+import { memo } from 'react';
 
-export default function FavoriteButton({ bemBlock = 'place-card', isFavorite = false, offerId, width = 18 }: FavoriteButtonTypeProps): JSX.Element {
+function FavoriteButton({ bemBlock = 'place-card', isFavorite, offerId, width = 18 }: FavoriteButtonTypeProps): JSX.Element {
   const favoriteLabel = `${isFavorite ? 'In' : 'To'} bookmarks`;
   const buttonClass = `${bemBlock}__bookmark-button`;
   const favoriteClass = classNames(
@@ -14,7 +15,7 @@ export default function FavoriteButton({ bemBlock = 'place-card', isFavorite = f
   const height = width * Default.HeightCoefficient;
   const { changeFavorite } = useActionCreators(favoriteActions);
   const handleClick = () => {
-    changeFavorite({ offerId, status: !isFavorite });
+    changeFavorite({ offerId, status: !!isFavorite ? 0 : 1 });
   };
 
   return (
@@ -26,4 +27,6 @@ export default function FavoriteButton({ bemBlock = 'place-card', isFavorite = f
     </button>
   );
 }
+
+export default memo(FavoriteButton)
 

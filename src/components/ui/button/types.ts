@@ -1,6 +1,6 @@
 export type FavoriteButtonTypeProps = {
   bemBlock?: 'offer' | 'place-card';
-  isFavorite: boolean | null | undefined;
+  isFavorite: number;
   offerId: string;
   width?: number;
 }
