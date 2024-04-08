@@ -8,14 +8,17 @@ import { useActionCreators, useAppSelector } from '../../store/hooks';
 import { RequestStatus, offersFilters } from '../../components/utils/types';
 import { offersActions, offersSelectors } from '../../store/slices/offers';
 import Loader from '../../components/ui/loader/loader';
+import MainEmpty from '../main-empty/MainEmpty';
+import classNames from 'classnames';
 
-export default function MainPage({cities}: {cities: Array<CityPropsType>}): JSX.Element {
+export default function MainPage({ cities }: { cities: Array<CityPropsType> }): JSX.Element {
   const [isSelected, setIsSelected] = useState(offersFilters.Popular);
   const currentCity = useAppSelector(offersSelectors.city);
   const offers = useAppSelector(offersSelectors.offers);
   const status = useAppSelector(offersSelectors.status);
   const activeId = useAppSelector(offersSelectors.activeId);
-  const {changeCity, setActiveId} = useActionCreators(offersActions);
+  const { changeCity, setActiveId } = useActionCreators(offersActions);
+  const hasOffers = offers.length > 0;
 
   const filteredPlaces = offers.filter((place) => currentCity.name === place.city.name);
 
@@ -59,29 +62,33 @@ export default function MainPage({cities}: {cities: Array<CityPropsType>}): JSX.
     );
   }
 
-  // const offersByCity = Object.groupBy(offers, offer === offer.city.name)
-
   return (
     < div className="page page--gray page--main" >
-      <main className="page__main page__main--index">
+      <main className={classNames(
+        'page__main page__main--index',
+        { 'page__main--index-empty': hasOffers === false}
+      )}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <LocationList cities={cities} onCityItemClick={(cityName: CitiesList) => changeCity({name: cityName})} activeCityName={currentCity.name} />
+          <LocationList cities={cities} onCityItemClick={(cityName: CitiesList) => changeCity({ name: cityName })} activeCityName={currentCity.name} />
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{filteredPlaces.length} place{filteredPlaces.length > 1 && 's'} to stay in {currentCity.name}</b>
-              <Select filters={Object.values(offersFilters)} onSelectItemClick={onSelectItemClick} isSelected={isSelected} />
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCardList places={sortedPlaces} onCardHover={onCardHover} activeCityName={currentCity.name} />
+          {hasOffers ?
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{filteredPlaces.length} place{filteredPlaces.length > 1 && 's'} to stay in {currentCity.name}</b>
+                <Select filters={Object.values(offersFilters)} onSelectItemClick={onSelectItemClick} isSelected={isSelected} />
+                <div className="cities__places-list places__list tabs__content">
+                  <PlaceCardList places={sortedPlaces} onCardHover={onCardHover} activeCityName={currentCity.name} />
+                </div>
+              </section>
+              <div className="cities__right-section">
+                <Map city={currentCity} places={offers} activeCardId={activeId} activeCityName={currentCity.name} className='cities__map' />
               </div>
-            </section>
-            <div className="cities__right-section">
-              <Map city={currentCity} places={offers} activeCardId={activeId} activeCityName={currentCity.name} className='cities__map' />
             </div>
-          </div>
+            : <MainEmpty />}
         </div>
       </main>
     </div >

@@ -2,7 +2,7 @@ import OfferForm from '../offer-form/OfferForm';
 import ReviewItem from '../review-item/ReviewItem';
 import { ReviewType } from '../review-item/types';
 
-export default function Reviews({ isAuth, reviews }: { isAuth: boolean; reviews: Array<ReviewType> | undefined }): JSX.Element {
+export default function Reviews({ isAuth, reviews, id }: { isAuth: boolean; reviews: Array<ReviewType> | undefined; id: string }): JSX.Element {
 
   return (
     <>
@@ -14,7 +14,7 @@ export default function Reviews({ isAuth, reviews }: { isAuth: boolean; reviews:
           />
         ))}
       </ul>
-      {isAuth && <OfferForm />}
+      {isAuth && <OfferForm id={id} />}
     </>
 
   );

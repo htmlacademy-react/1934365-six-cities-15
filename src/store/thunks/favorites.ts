@@ -5,12 +5,12 @@ import { AxiosInstance } from 'axios';
 
 type ChangeProps = {
   offerId: string;
-  status: boolean;
+  status: number;
 }
 
 type ChangeResponse = {
   offer: PlaceCardType;
-  status: boolean;
+  status: number;
 }
 
 const fetchFavorites = createAsyncThunk<PlaceCardType[], undefined, { extra: AxiosInstance }>

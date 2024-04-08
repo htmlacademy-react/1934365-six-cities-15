@@ -13,7 +13,7 @@ export default function PlaceCard({ card, onCardHover, className, width, height}
   };
 
   return (
-    <article className={`${className}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <article className={`${className}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
       {card.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
       <div className={`${className}__image-wrapper place-card__image-wrapper"`}>
         <Link to={`/offers/${card.id}`}>

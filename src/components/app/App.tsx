@@ -14,14 +14,23 @@ import { offersActions } from '../../store/slices/offers';
 import { userActions } from '../../store/slices/user';
 import { getToken } from '../../services/token';
 import LoginPage from '../../pages/login-page/LoginPage';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App({ cities }: AppPropsType): JSX.Element {
   const { fetchAllOffers } = useActionCreators(offersActions);
   const { checkAuth } = useActionCreators(userActions);
 
   useEffect(() => {
-    fetchAllOffers();
+    fetchAllOffers()
+      .unwrap()
+      .then(() => {})
+      .catch(() => {
+        toast.error('Server error');
+      }
+      );
   }, []);
+
   const token = getToken();
   useEffect(() => {
     if (token) {
@@ -52,6 +61,7 @@ export default function App({ cities }: AppPropsType): JSX.Element {
           </Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer/>
     </HelmetProvider>
   );
 }

@@ -12,7 +12,7 @@ const fetchComments = createAsyncThunk<ReviewType[], PlaceCardType['id'], {extra
 
 type PostCommentsPropsType = {
   body: {
-    comments: string;
+    comment: string;
     rating: number;
   };
   offerId: PlaceCardType['id'];
@@ -20,7 +20,8 @@ type PostCommentsPropsType = {
 
 const postComment = createAsyncThunk<ReviewType, PostCommentsPropsType, {extra: AxiosInstance}>
 ('comments/post', async({body, offerId}, {extra: api}) => {
-  const response = await api.post<ReviewType>(`${Endpoint.Comments}/${offerId}`, body);
+  const data = {comment: body.comment, rating: Number(body.rating)};
+  const response = await api.post<ReviewType>(`${Endpoint.Comments}/${offerId}`, data);
   return response.data;
 });
 

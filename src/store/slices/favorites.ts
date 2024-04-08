@@ -34,10 +34,10 @@ const favoritesSlice = createSlice({
       })
       .addCase(changeFavorite.fulfilled, (state, action) => {
         switch (action.payload.status) {
-          case true:
+          case 1:
             state.offers.push(action.payload.offer);
             break;
-          case false:
+          case 0:
             state.offers = state.offers.filter(({ id }) => id !== action.payload.offer.id);
         }
       }),

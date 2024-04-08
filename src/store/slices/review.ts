@@ -1,16 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RequestStatus } from '../../components/utils/types';
 import { ReviewType } from '../../components/blocks/review-item/types';
 import { fetchComments, postComment } from '../thunks/comments';
 
 type ReviewStateType = {
-  reviews: ReviewType[] | [];
+  reviews: ReviewType[];
   status: RequestStatus;
+  serverError: string;
 }
 
 const initialState: ReviewStateType = {
   reviews: [],
-  status: RequestStatus.Idle
+  status: RequestStatus.Idle,
+  serverError: ''
 };
 
 const reviewSlice = createSlice({
@@ -29,9 +31,9 @@ const reviewSlice = createSlice({
       .addCase(postComment.pending, (state) => {
         state.status = RequestStatus.Loading;
       })
-      .addCase(postComment.fulfilled, (state, action) => {
+      .addCase(postComment.fulfilled, (state, action: PayloadAction<ReviewType>) => {
         state.status = RequestStatus.Success;
-        state.reviews?.push(action.payload);
+        state.reviews.push(action.payload);
       })
       .addCase(postComment.rejected, (state) => {
         state.status = RequestStatus.Failed;
@@ -46,6 +48,6 @@ const reviewSlice = createSlice({
   }
 });
 
-const reviewActions = {... reviewSlice.actions, fetchComments};
+const reviewActions = {... reviewSlice.actions, fetchComments, postComment};
 const reviewSliceSelectors = {...reviewSlice.selectors};
 export { reviewSlice, reviewActions, reviewSliceSelectors};
