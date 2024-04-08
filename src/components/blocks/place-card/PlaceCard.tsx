@@ -12,11 +12,6 @@ export default function PlaceCard({ card, onCardHover, className, width, height}
     onCardHover?.(null);
   };
 
-  const onFavoriteButtonClick = () => {
-    // console.log('click')
-    // console.log(card.isFavorite)
-  };
-
   return (
     <article className={`${className}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
       {card.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
@@ -31,7 +26,7 @@ export default function PlaceCard({ card, onCardHover, className, width, height}
             <b className="place-card__price-value">&euro;{card.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton isFavorite={card.isFavorite} offerId={card.id} onClick={(onFavoriteButtonClick)}/>
+          <FavoriteButton isFavorite={card.isFavorite} offerId={card.id} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

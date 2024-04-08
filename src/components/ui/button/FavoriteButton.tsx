@@ -18,7 +18,7 @@ function FavoriteButton({ bemBlock = 'place-card', isFavorite, offerId, width = 
   const { changeFavorite } = useActionCreators(favoriteActions);
   const handleClick = () => {
     changeFavorite({ offerId, status: isFavoriteButton ? 0 : 1 });
-    setIsFavoriteButton(isFavoriteButton ? 0 : 1);
+    setIsFavoriteButton(isFavoriteButton ? false : true);
     fetchAllOffers();
   };
 
