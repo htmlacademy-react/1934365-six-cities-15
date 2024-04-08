@@ -1,4 +1,7 @@
-import { Fragment, ReactEventHandler, useState } from 'react';
+import { Fragment, MouseEvent, ReactEventHandler, useState } from 'react';
+import { useActionCreators } from '../../../store/hooks';
+import { reviewActions } from '../../../store/slices/review';
+import { toast } from 'react-toastify';
 
 type EventHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>
 
@@ -10,12 +13,30 @@ const rating = [
   { value: 1, label: 'terribly' },
 ];
 
-export default function OfferForm(): JSX.Element {
-  const [review, setReview] = useState({ rating: 0, review: '' });
+export default function OfferForm({ id }: { id: string }): JSX.Element {
+  const [review, setReview] = useState({ rating: 0, comment: '' });
   const onChangeReviewHandler: EventHandler = (evt) => {
     const { name, value } = evt.currentTarget;
     setReview({ ...review, [name]: value });
   };
+  const { postComment } = useActionCreators(reviewActions);
+
+  const onSubmitButtonClick = (evt: MouseEvent) => {
+    evt.preventDefault();
+    postComment({ body: review, offerId: id })
+      .unwrap()
+      .then(() => {
+        document.querySelectorAll<HTMLScriptElement>('.form__star-image').forEach((el) => {
+          el.style.fill = '#c7c7c7';
+        });
+        setReview({ rating: 0, comment: '' });
+      })
+      .catch(() => {
+        toast.error('Server error');
+      }
+      );
+  };
+
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -41,10 +62,11 @@ export default function OfferForm(): JSX.Element {
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
-        name="review"
+        name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
         maxLength={300}
         onChange={onChangeReviewHandler}
+        value={review.comment}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -52,11 +74,13 @@ export default function OfferForm(): JSX.Element {
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button
-          className="reviews__submit form__submit button" type="submit"
-          disabled={review.rating === 0 || review.review.length < 50}
+          className="reviews__submit form__submit button" type="button"
+          disabled={review.rating === 0 || review.comment.length < 50}
+          onClick={(evt) => onSubmitButtonClick(evt)}
         >Submit
         </button>
       </div>
     </form>
   );
 }
+

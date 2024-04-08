@@ -5,7 +5,7 @@ import { AuthorizationStatus, RequestStatus } from '../../components/utils/types
 import { getRatingStatus } from '../../components/utils/utils';
 import ReviewsList from '../../components/blocks/reviews-list/ReviewsList';
 import Map from '../../components/blocks/map/Map';
-import { IMAGE_WIDTH, IMAGE_HEIGHT, NEAR_PLACES_AMOUNT } from '../../components/utils/constants';
+import { IMAGE_WIDTH, IMAGE_HEIGHT, NEAR_PLACES_AMOUNT, MAX_OFFER_IMAGES_AMOUNT } from '../../components/utils/constants';
 import classNames from 'classnames';
 import { useActionCreators, useAppSelector } from '../../store/hooks';
 import { fullOfferActions, fullOfferSliceSelectors } from '../../store/slices/full-offer';
@@ -17,6 +17,7 @@ import { reviewActions, reviewSliceSelectors } from '../../store/slices/review';
 import { getSortedReviews } from './utils';
 import { userSliceSelectors } from '../../store/slices/user';
 import { PlaceCardType } from '../../components/blocks/place-card/types';
+import FavoriteButton from '../../components/ui/button/FavoriteButton';
 
 export default function OfferPage(): JSX.Element {
   const fullOffer = useAppSelector(fullOfferSliceSelectors.offer);
@@ -63,7 +64,7 @@ export default function OfferPage(): JSX.Element {
             <div className="offer__gallery">
               {fullOffer.images?.map((image) => (
                 <OfferGalleryItem key={image} image={image} />
-              ))}
+              )).slice(0, MAX_OFFER_IMAGES_AMOUNT)}
             </div>
           </div>
           <div className="offer__container container">
@@ -75,12 +76,7 @@ export default function OfferPage(): JSX.Element {
                 <h1 className="offer__name">
                   {fullOffer?.title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <FavoriteButton bemBlock = 'offer' width={31} isFavorite={fullOffer.isFavorite} offerId={fullOffer.id}/>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
@@ -139,7 +135,7 @@ export default function OfferPage(): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews?.length}</span></h2>
-                <ReviewsList isAuth={authStatus === AuthorizationStatus.Auth} reviews={sortedReviews} />
+                <ReviewsList isAuth={authStatus === AuthorizationStatus.Auth} reviews={sortedReviews} id={fullOffer.id} />
               </section>
             </div>
           </div>

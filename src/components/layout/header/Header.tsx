@@ -45,7 +45,9 @@ export default function Header(): JSX.Element {
                       <li className="header__nav-item">
                         <Link className="header__nav-link"
                           to="#"
+                          /* eslint-disable */
                           onClick={() => logout()}
+                          /* eslint-enable */
                         >
                           <span className="header__signout">Sign out</span>
                         </Link>
