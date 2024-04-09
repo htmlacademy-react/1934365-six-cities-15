@@ -1,7 +1,5 @@
 import { CityPropsType } from '../blocks/place-card/types';
 
-export const PLACES_AMOUNT: number = 312;
-
 export const IMAGE_WIDTH = {
   small: 150,
   large: 260
@@ -16,6 +14,10 @@ export const NEAR_PLACES_AMOUNT = 3;
 
 export const MAX_REVIEW_ITEMS_AMOUNT = 10;
 
+export const MIN_TEXT_LENGTH = 50;
+
+export const MAX_TEXT_LENGTH = 300;
+
 export const Endpoint = {
   Comments: '/comments',
   Favorite: '/favorite',
@@ -26,7 +28,7 @@ export const Endpoint = {
 
 export const MAX_OFFER_IMAGES_AMOUNT = 6;
 
-export const cities: Array<CityPropsType> = [
+export const CITIES: Array<CityPropsType> = [
   {
     name: 'Paris',
     location: {

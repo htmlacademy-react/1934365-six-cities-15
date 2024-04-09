@@ -1,19 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute } from '../utils/types';
 import { AppPropsType } from './types';
-import NotFound from '../../pages/not-found-page/NotFound';
-import PrivateRoute from '../blocks/private-route/PrivateRoute';
+import NotFound from '../../pages/not-found-page/not-found';
+import PrivateRoute from '../blocks/private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
-import Layout from '../layout/layout/Layout';
-import OfferPage from '../../pages/offer-page/OfferPage';
-import FavoritesPage from '../../pages/favorites-page/FavoritesPage';
-import MainPage from '../../pages/main-page/MainPage';
+import Layout from '../layout/layout/layout';
+import OfferPage from '../../pages/offer-page/offer-page';
+import FavoritesPage from '../../pages/favorites-page/favorites-page';
+import MainPage from '../../pages/main-page/main-page';
 import { useActionCreators } from '../../store/hooks';
 import { useEffect } from 'react';
 import { offersActions } from '../../store/slices/offers';
 import { userActions } from '../../store/slices/user';
 import { getToken } from '../../services/token';
-import LoginPage from '../../pages/login-page/LoginPage';
+import LoginPage from '../../pages/login-page/login-page';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

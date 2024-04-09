@@ -1,6 +1,6 @@
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { CityPropsType, PlaceCardType } from '../../components/blocks/place-card/types';
-import { cities } from '../../components/utils/constants';
+import { CITIES } from '../../components/utils/constants';
 import { RequestStatus } from '../../components/utils/types';
 import { fetchAllOffers } from '../thunks/offers';
 
@@ -12,7 +12,7 @@ type InitialStateType = {
 }
 
 const initialState: InitialStateType = {
-  city: cities[0],
+  city: CITIES[0],
   places: [],
   status: RequestStatus.Idle,
   activeId: null,

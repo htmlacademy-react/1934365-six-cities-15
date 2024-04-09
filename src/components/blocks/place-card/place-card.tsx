@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PlaceCardPropsType } from './types';
 import { getRatingStatus } from '../../utils/utils';
-import FavoriteButton from '../../ui/button/FavoriteButton';
+import FavoriteButton from '../../ui/button/favorite-button';
 
 export default function PlaceCard({ card, onCardHover, className, width, height}: PlaceCardPropsType): JSX.Element {
   const handleMouseEnter = (): void => {
