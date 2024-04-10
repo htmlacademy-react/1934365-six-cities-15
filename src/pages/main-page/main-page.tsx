@@ -85,7 +85,7 @@ export default function MainPage({ cities }: { cities: Array<CityPropsType> }): 
                 </div>
               </section>
               <div className="cities__right-section">
-                <Map city={currentCity} places={offers} activeCardId={activeId} activeCityName={currentCity.name} className='cities__map' />
+                <Map city={currentCity} places={filteredPlaces} activeCardId={activeId} activeCityName={currentCity.name} className='cities__map' />
               </div>
             </div>
             : <MainEmpty />}

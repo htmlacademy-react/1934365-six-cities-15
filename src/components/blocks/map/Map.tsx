@@ -15,7 +15,7 @@ export default function Map({city, places, activeCardId, activeCityName, classNa
     if (map && currentCity) {
       map.setView([currentCity.city.location.latitude, currentCity.city.location.longitude], city.location.zoom);
       markerLayer.current.addTo(map);
-      // markerLayer.current.clearLayers();
+      markerLayer.current.clearLayers();
     }
   }, [currentCity, map]);
 
