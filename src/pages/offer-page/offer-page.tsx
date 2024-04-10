@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Loader from '../../components/ui/loader/loader.tsx';
 import NotFound from '../not-found-page/not-found.tsx';
-import { reviewActions, reviewSliceSelectors } from '../../store/slices/review.ts';
+import { reviewActions, reviewSelectors } from '../../store/slices/review.ts';
 import { getSortedReviews } from './utils.ts';
 import { userSliceSelectors } from '../../store/slices/user.ts';
 import { PlaceCardType } from '../../components/blocks/place-card/types.ts';
@@ -23,7 +23,7 @@ export default function OfferPage(): JSX.Element {
   const fullOffer = useAppSelector(fullOfferSliceSelectors.offer);
   const nearPlaces = useAppSelector(fullOfferSliceSelectors.nearbyOffers);
   const status = useAppSelector(fullOfferSliceSelectors.status);
-  const reviews = useAppSelector(reviewSliceSelectors.reviews);
+  const reviews = useAppSelector(reviewSelectors.reviews);
   const authStatus = useAppSelector(userSliceSelectors.userStatus);
 
   const { fetchFullOffer, fetchNearbyOffers } = useActionCreators(fullOfferActions);

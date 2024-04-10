@@ -1,26 +1,32 @@
-import { Fragment, MouseEvent, ReactEventHandler, useState } from 'react';
-import { useActionCreators } from '../../../store/hooks';
-import { reviewActions } from '../../../store/slices/review';
+import { Fragment, MouseEvent, useState } from 'react';
+import { useActionCreators, useAppSelector } from '../../../store/hooks';
+import { reviewActions, reviewSelectors } from '../../../store/slices/review';
 import { toast } from 'react-toastify';
-import { MAX_TEXT_LENGTH, MIN_TEXT_LENGTH } from '../../utils/constants';
-
-type EventHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>
-
-const RATING = [
-  { value: 5, label: 'perfect' },
-  { value: 4, label: 'good' },
-  { value: 3, label: 'not bad' },
-  { value: 2, label: 'badly' },
-  { value: 1, label: 'terribly' },
-];
+import { MAX_TEXT_LENGTH, MIN_TEXT_LENGTH, RATING } from '../../utils/constants';
+import { EventHandler } from './types';
+import { RequestStatus } from '../../utils/types';
 
 export default function OfferForm({ id }: { id: string }): JSX.Element {
   const [review, setReview] = useState({ rating: 0, comment: '' });
+  // console.log(review)
   const handleInputChange: EventHandler = (evt) => {
     const { name, value } = evt.currentTarget;
     setReview({ ...review, [name]: value });
   };
   const { postComment } = useActionCreators(reviewActions);
+  const reviewStatus = useAppSelector(reviewSelectors.reviewStatus);
+  const isLoading = reviewStatus === RequestStatus.Loading;
+  const starRating = review.rating;
+  console.log(starRating)
+  if (starRating === 0) {
+    document.querySelectorAll<HTMLScriptElement>('.form__star-image').forEach((el) => {
+      el.style.fill = '#c7c7c7';
+    });
+  } else {
+    document.querySelectorAll<HTMLScriptElement>('.form__star-image').forEach((el) => {
+      el.style.fill = 'red';
+    });
+  }
 
   const onSubmitButtonClick = (evt: MouseEvent) => {
     evt.preventDefault();
@@ -51,6 +57,7 @@ export default function OfferForm({ id }: { id: string }): JSX.Element {
               id={`${el.value}-stars`}
               type="radio"
               onChange={handleInputChange}
+              disabled={isLoading}
             />
             <label htmlFor={`${el.value}-stars`} className="reviews__rating-label form__rating-label" title={el.label}>
               <svg className="form__star-image" width="37" height="33">
@@ -68,6 +75,7 @@ export default function OfferForm({ id }: { id: string }): JSX.Element {
         maxLength={MAX_TEXT_LENGTH}
         onChange={handleInputChange}
         value={review.comment}
+        disabled={isLoading}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -76,7 +84,7 @@ export default function OfferForm({ id }: { id: string }): JSX.Element {
         </p>
         <button
           className="reviews__submit form__submit button" type="button"
-          disabled={review.rating === 0 || review.comment.length < MIN_TEXT_LENGTH}
+          disabled={review.rating === 0 || review.comment.length < MIN_TEXT_LENGTH || isLoading}
           onClick={(evt) => onSubmitButtonClick(evt)}
         >Submit
         </button>

@@ -49,5 +49,5 @@ const reviewSlice = createSlice({
 });
 
 const reviewActions = {... reviewSlice.actions, fetchComments, postComment};
-const reviewSliceSelectors = {...reviewSlice.selectors};
-export { reviewSlice, reviewActions, reviewSliceSelectors};
+const reviewSelectors = {...reviewSlice.selectors};
+export { reviewSlice, reviewActions, reviewSelectors};
