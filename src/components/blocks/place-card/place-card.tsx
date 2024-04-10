@@ -12,7 +12,7 @@ export default function PlaceCard({ card, onCardHover, className, width, height}
     onCardHover?.(null);
   };
 
-const cardTypeWithUpperCase = card.type[0].toUpperCase() + card.type.slice(1);
+  const cardTypeWithUpperCase = card.type[0].toUpperCase() + card.type.slice(1);
 
   return (
     <article className={`${className}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >

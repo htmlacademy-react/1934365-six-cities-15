@@ -8,7 +8,6 @@ import { RequestStatus } from '../../utils/types';
 
 export default function OfferForm({ id }: { id: string }): JSX.Element {
   const [review, setReview] = useState({ rating: 0, comment: '' });
-  // console.log(review)
   const handleInputChange: EventHandler = (evt) => {
     const { name, value } = evt.currentTarget;
     setReview({ ...review, [name]: value });
@@ -16,26 +15,15 @@ export default function OfferForm({ id }: { id: string }): JSX.Element {
   const { postComment } = useActionCreators(reviewActions);
   const reviewStatus = useAppSelector(reviewSelectors.reviewStatus);
   const isLoading = reviewStatus === RequestStatus.Loading;
-  const starRating = review.rating;
-  console.log(starRating)
-  if (starRating === 0) {
-    document.querySelectorAll<HTMLScriptElement>('.form__star-image').forEach((el) => {
-      el.style.fill = '#c7c7c7';
-    });
-  } else {
-    document.querySelectorAll<HTMLScriptElement>('.form__star-image').forEach((el) => {
-      el.style.fill = 'red';
-    });
-  }
 
   const onSubmitButtonClick = (evt: MouseEvent) => {
     evt.preventDefault();
     postComment({ body: review, offerId: id })
       .unwrap()
       .then(() => {
-        // document.querySelectorAll<HTMLScriptElement>('.form__star-image').forEach((el) => {
-        //   el.style.fill = '#c7c7c7';
-        // });
+        document.querySelectorAll<HTMLInputElement>('.form__rating-input').forEach((el) => {
+          el.checked = false;
+        });
         setReview({ rating: 0, comment: '' });
       })
       .catch(() => {

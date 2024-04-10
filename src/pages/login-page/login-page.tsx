@@ -2,6 +2,9 @@ import { FormEvent, ReactEventHandler, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useActionCreators } from '../../store/hooks';
 import { userActions } from '../../store/slices/user';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../components/utils/types';
 
 type HtmlLoginForm = HTMLFormElement & {
   email: HTMLInputElement;
@@ -25,7 +28,11 @@ export default function LoginPage(): JSX.Element {
     evt.preventDefault();
     login(formData);
   }
-
+  function handleButtonClick() {
+    if (!formData.password.match(/^(?=.*\d)(?=.*[a-zA-Z]).{2,}$/)) {
+      toast.error('Password must contain 1 letter and 1 digit');
+    }
+  }
   return (
     <>
       <Helmet>
@@ -66,15 +73,16 @@ export default function LoginPage(): JSX.Element {
               </div>
               <button
                 className="login__submit form__submit button" type="submit"
+                onClick={handleButtonClick}
               >Sign in
               </button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link className="locations__item-link" to={AppRoute.Root}>
                 <span>Amsterdam</span>
-              </a>
+              </Link>
             </div>
           </section>
         </div>
