@@ -11,11 +11,7 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
-export type isAuthType = {
-  isAuth: boolean;
-}
-
-export enum offersFilters {
+export enum OffersFilters {
   Popular = 'Popular',
   PriceLowToHigh = 'Price: low to high',
   PriceHighToLow = 'Price: high to low',
@@ -23,7 +19,6 @@ export enum offersFilters {
 }
 
 export enum RequestStatus { Idle, Loading, Success, Failed }
-export enum FavoriteStatus { Removed, Added }
 
 export type User = {
   name: string;

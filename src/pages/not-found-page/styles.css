@@ -1,0 +1,23 @@
+.error {
+  background-color: #ffffff;
+}
+
+.error__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1440px;
+  align-items: center;
+  justify-items: center;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.error__header {
+  color: blue;
+  font-size: 60px;
+}
+
+.error__text {
+  color: blue;
+  font-size: 28px;
+}

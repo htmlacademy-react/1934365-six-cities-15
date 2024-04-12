@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
-import SelectItem from '../select-item/SelectItem';
+import SelectItem from '../select-item/select-item';
 import { SelectPropsType } from './types';
-import { offersFilters } from '../../utils/types';
+import { OffersFilters } from '../../utils/types';
 
 export default function Select({ filters, onSelectItemClick, isSelected }: SelectPropsType): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +38,7 @@ export default function Select({ filters, onSelectItemClick, isSelected }: Selec
       </span>
       {isOpen ?
         <ul className="places__options places__options--custom places__options--opened" >
-          {Object.values(filters).map((filter: offersFilters) => (
+          {Object.values(filters).map((filter: OffersFilters) => (
             <SelectItem
               key={filter}
               filter={filter}

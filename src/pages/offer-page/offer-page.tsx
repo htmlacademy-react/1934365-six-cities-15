@@ -1,29 +1,29 @@
 import { Helmet } from 'react-helmet-async';
-import OfferGalleryItem from '../../components/blocks/offer-gallery-item/OfferGalleryItem';
-import PlaceCard from '../../components/blocks/place-card/PlaceCard';
-import { AuthorizationStatus, RequestStatus } from '../../components/utils/types';
-import { getRatingStatus } from '../../components/utils/utils';
-import ReviewsList from '../../components/blocks/reviews-list/ReviewsList';
-import Map from '../../components/blocks/map/Map';
-import { IMAGE_WIDTH, IMAGE_HEIGHT, NEAR_PLACES_AMOUNT, MAX_OFFER_IMAGES_AMOUNT } from '../../components/utils/constants';
+import OfferGalleryItem from '../../components/blocks/offer-gallery-item/offer-gallery-item.tsx';
+import PlaceCard from '../../components/blocks/place-card/place-card.tsx';
+import { AuthorizationStatus, RequestStatus } from '../../components/utils/types.ts';
+import { getRatingStatus } from '../../components/utils/utils.ts';
+import ReviewsList from '../../components/blocks/reviews-list/reviews-list.tsx';
+import { IMAGE_WIDTH, IMAGE_HEIGHT, NEAR_PLACES_AMOUNT, MAX_OFFER_IMAGES_AMOUNT } from '../../components/utils/constants.ts';
 import classNames from 'classnames';
-import { useActionCreators, useAppSelector } from '../../store/hooks';
-import { fullOfferActions, fullOfferSliceSelectors } from '../../store/slices/full-offer';
+import { useActionCreators, useAppSelector } from '../../store/hooks.ts';
+import { fullOfferActions, fullOfferSliceSelectors } from '../../store/slices/full-offer.ts';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Loader from '../../components/ui/loader/loader';
-import NotFound from '../not-found-page/NotFound';
-import { reviewActions, reviewSliceSelectors } from '../../store/slices/review';
-import { getSortedReviews } from './utils';
-import { userSliceSelectors } from '../../store/slices/user';
-import { PlaceCardType } from '../../components/blocks/place-card/types';
-import FavoriteButton from '../../components/ui/button/FavoriteButton';
+import Loader from '../../components/ui/loader/loader.tsx';
+import NotFound from '../not-found-page/not-found.tsx';
+import { reviewActions, reviewSelectors } from '../../store/slices/review.ts';
+import { getSortedReviews } from './utils.ts';
+import { userSliceSelectors } from '../../store/slices/user.ts';
+import { PlaceCardType } from '../../components/blocks/place-card/types.ts';
+import FavoriteButton from '../../components/ui/button/favorite-button.tsx';
+import Map from '../../components/blocks/map/map.tsx';
 
 export default function OfferPage(): JSX.Element {
   const fullOffer = useAppSelector(fullOfferSliceSelectors.offer);
   const nearPlaces = useAppSelector(fullOfferSliceSelectors.nearbyOffers);
   const status = useAppSelector(fullOfferSliceSelectors.status);
-  const reviews = useAppSelector(reviewSliceSelectors.reviews);
+  const reviews = useAppSelector(reviewSelectors.reviews);
   const authStatus = useAppSelector(userSliceSelectors.userStatus);
 
   const { fetchFullOffer, fetchNearbyOffers } = useActionCreators(fullOfferActions);

@@ -1,12 +1,13 @@
 import { Helmet } from 'react-helmet-async';
-import FavoritesList from '../../components/blocks/favorites-list/FavoritesList';
+import FavoritesList from '../../components/blocks/favorites-list/favorites-list';
 import { useAppSelector } from '../../store/hooks';
 import { favoriteSelectors } from '../../store/slices/favorites';
-import FavoritesEmpty from '../favorites-empty/FavoritesEmpty';
+import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 export default function FavoritesPage(): JSX.Element {
   const favoritePlaces = useAppSelector(favoriteSelectors.favorites);
   const hasFavorites = favoritePlaces.length > 0;
+
   return (
     <div className="page">
       <Helmet>

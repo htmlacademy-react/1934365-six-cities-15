@@ -1,25 +1,27 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AppRoute } from '../utils/types';
-import { AppPropsType } from './types';
-import NotFound from '../../pages/not-found-page/NotFound';
-import PrivateRoute from '../blocks/private-route/PrivateRoute';
+import { AppRoute, RequestStatus } from '../utils/types.ts';
+import { AppPropsType } from './types.ts';
+import NotFound from '../../pages/not-found-page/not-found.tsx';
+import PrivateRoute from '../blocks/private-route/private-route.tsx';
 import { HelmetProvider } from 'react-helmet-async';
-import Layout from '../layout/layout/Layout';
-import OfferPage from '../../pages/offer-page/OfferPage';
-import FavoritesPage from '../../pages/favorites-page/FavoritesPage';
-import MainPage from '../../pages/main-page/MainPage';
-import { useActionCreators } from '../../store/hooks';
+import OfferPage from '../../pages/offer-page/offer-page.tsx';
+import FavoritesPage from '../../pages/favorites-page/favorites-page.tsx';
+import MainPage from '../../pages/main-page/main-page.tsx';
+import { useActionCreators, useAppSelector } from '../../store/hooks.ts';
 import { useEffect } from 'react';
-import { offersActions } from '../../store/slices/offers';
-import { userActions } from '../../store/slices/user';
-import { getToken } from '../../services/token';
-import LoginPage from '../../pages/login-page/LoginPage';
+import { offersActions } from '../../store/slices/offers.ts';
+import { userActions, userSliceSelectors } from '../../store/slices/user.ts';
+import { getToken } from '../../services/token.ts';
+import LoginPage from '../../pages/login-page/login-page.tsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../ui/loader/loader.tsx';
+import Layout from '../layout/layout/layout.tsx';
 
 export default function App({ cities }: AppPropsType): JSX.Element {
   const { fetchAllOffers } = useActionCreators(offersActions);
   const { checkAuth } = useActionCreators(userActions);
+  const requestStatus = useAppSelector(userSliceSelectors.userRequestStatus);
 
   useEffect(() => {
     fetchAllOffers()
@@ -37,6 +39,12 @@ export default function App({ cities }: AppPropsType): JSX.Element {
       checkAuth();
     }
   }, [token, checkAuth]);
+
+  if (requestStatus === RequestStatus.Loading) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <HelmetProvider>

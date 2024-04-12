@@ -1,6 +1,6 @@
-import { PlaceCardType } from '../../blocks/place-card/types';
-import FavoriteLocation from '../favorite-location/FavoriteLocation';
-import PlaceCard from '../place-card/PlaceCard';
+import { PlaceCardType } from '../place-card/types';
+import FavoriteLocation from '../favorite-location/favorite-location';
+import PlaceCard from '../place-card/place-card';
 import { IMAGE_HEIGHT, IMAGE_WIDTH } from '../../utils/constants';
 
 export default function FavoritesList({favoritePlaces}: {favoritePlaces: Array<PlaceCardType>}): JSX.Element {

@@ -1,4 +1,4 @@
-type HousingType = 'apartment' | 'room' | 'house' | 'hotel';
+type HousingType = 'Apartment' | 'Room' | 'House' | 'Hotel';
 export type CitiesList = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf'
 
 export type LocationType = {

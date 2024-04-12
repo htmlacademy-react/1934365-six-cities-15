@@ -1,5 +1,5 @@
 import { PlaceCardType } from '../place-card/types';
-import PlaceCard from '../place-card/PlaceCard';
+import PlaceCard from '../place-card/place-card';
 import { PlaceCardListPropsType } from './types';
 import { IMAGE_WIDTH, IMAGE_HEIGHT } from '../../utils/constants';
 

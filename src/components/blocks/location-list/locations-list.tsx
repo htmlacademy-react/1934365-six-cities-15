@@ -1,4 +1,4 @@
-import LocationItem from '../location-item/LocationItem';
+import LocationItem from '../location-item/location-item';
 import { LocationListPropsType } from './types';
 
 export default function Location({cities, onCityItemClick, activeCityName }: LocationListPropsType): JSX.Element {

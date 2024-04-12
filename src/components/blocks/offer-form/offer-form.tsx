@@ -1,33 +1,28 @@
-import { Fragment, MouseEvent, ReactEventHandler, useState } from 'react';
-import { useActionCreators } from '../../../store/hooks';
-import { reviewActions } from '../../../store/slices/review';
+import { Fragment, MouseEvent, useState } from 'react';
+import { useActionCreators, useAppSelector } from '../../../store/hooks';
+import { reviewActions, reviewSelectors } from '../../../store/slices/review';
 import { toast } from 'react-toastify';
-
-type EventHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>
-
-const rating = [
-  { value: 5, label: 'perfect' },
-  { value: 4, label: 'good' },
-  { value: 3, label: 'not bad' },
-  { value: 2, label: 'badly' },
-  { value: 1, label: 'terribly' },
-];
+import { MAX_TEXT_LENGTH, MIN_TEXT_LENGTH, RATING } from '../../utils/constants';
+import { EventHandler } from './types';
+import { RequestStatus } from '../../utils/types';
 
 export default function OfferForm({ id }: { id: string }): JSX.Element {
   const [review, setReview] = useState({ rating: 0, comment: '' });
-  const onChangeReviewHandler: EventHandler = (evt) => {
+  const handleInputChange: EventHandler = (evt) => {
     const { name, value } = evt.currentTarget;
     setReview({ ...review, [name]: value });
   };
   const { postComment } = useActionCreators(reviewActions);
+  const reviewStatus = useAppSelector(reviewSelectors.reviewStatus);
+  const isLoading = reviewStatus === RequestStatus.Loading;
 
   const onSubmitButtonClick = (evt: MouseEvent) => {
     evt.preventDefault();
     postComment({ body: review, offerId: id })
       .unwrap()
       .then(() => {
-        document.querySelectorAll<HTMLScriptElement>('.form__star-image').forEach((el) => {
-          el.style.fill = '#c7c7c7';
+        document.querySelectorAll<HTMLInputElement>('.form__rating-input').forEach((el) => {
+          el.checked = false;
         });
         setReview({ rating: 0, comment: '' });
       })
@@ -41,7 +36,7 @@ export default function OfferForm({ id }: { id: string }): JSX.Element {
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {rating.map((el) => (
+        {RATING.map((el) => (
           <Fragment key={el.value}>
             <input
               className="form__rating-input visually-hidden"
@@ -49,7 +44,8 @@ export default function OfferForm({ id }: { id: string }): JSX.Element {
               value={el.value}
               id={`${el.value}-stars`}
               type="radio"
-              onChange={onChangeReviewHandler}
+              onChange={handleInputChange}
+              disabled={isLoading}
             />
             <label htmlFor={`${el.value}-stars`} className="reviews__rating-label form__rating-label" title={el.label}>
               <svg className="form__star-image" width="37" height="33">
@@ -64,9 +60,10 @@ export default function OfferForm({ id }: { id: string }): JSX.Element {
         id="review"
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        maxLength={300}
-        onChange={onChangeReviewHandler}
+        maxLength={MAX_TEXT_LENGTH}
+        onChange={handleInputChange}
         value={review.comment}
+        disabled={isLoading}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -75,7 +72,7 @@ export default function OfferForm({ id }: { id: string }): JSX.Element {
         </p>
         <button
           className="reviews__submit form__submit button" type="button"
-          disabled={review.rating === 0 || review.comment.length < 50}
+          disabled={review.rating === 0 || review.comment.length < MIN_TEXT_LENGTH || isLoading}
           onClick={(evt) => onSubmitButtonClick(evt)}
         >Submit
         </button>

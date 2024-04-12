@@ -3,7 +3,6 @@ import { Default, FavoriteButtonTypeProps } from './types';
 import { useActionCreators} from '../../../store/hooks';
 import { favoriteActions } from '../../../store/slices/favorites';
 import { memo, useState } from 'react';
-import { fetchAllOffers } from '../../../store/thunks/offers';
 
 function FavoriteButton({ bemBlock = 'place-card', isFavorite, offerId, width = 18 }: FavoriteButtonTypeProps): JSX.Element {
   const [isFavoriteButton, setIsFavoriteButton] = useState(isFavorite);
@@ -18,8 +17,7 @@ function FavoriteButton({ bemBlock = 'place-card', isFavorite, offerId, width = 
   const { changeFavorite } = useActionCreators(favoriteActions);
   const handleClick = () => {
     changeFavorite({ offerId, status: isFavoriteButton ? 0 : 1 });
-    setIsFavoriteButton(isFavoriteButton);
-    fetchAllOffers();
+    setIsFavoriteButton(!isFavoriteButton);
   };
 
   return (

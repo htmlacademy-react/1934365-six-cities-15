@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import Header from '../header/Header';
-import Footer from '../footer/Footer';
-import { AppRoute } from '../../utils/types';
+import { AppRoute } from '../../utils/types.ts';
+import Header from '../header/header.tsx';
+import Footer from '../footer/footer.tsx';
 
 export default function Layout(): JSX.Element {
   const location = useLocation();
