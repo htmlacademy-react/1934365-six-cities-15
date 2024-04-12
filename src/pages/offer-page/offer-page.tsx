@@ -17,7 +17,7 @@ import { getSortedReviews } from './utils.ts';
 import { userSliceSelectors } from '../../store/slices/user.ts';
 import { PlaceCardType } from '../../components/blocks/place-card/types.ts';
 import FavoriteButton from '../../components/ui/button/favorite-button.tsx';
-import MapCopy from '../../components/blocks/map/map-copy.tsx';
+import Map from '../../components/blocks/map/map.tsx';
 
 export default function OfferPage(): JSX.Element {
   const fullOffer = useAppSelector(fullOfferSliceSelectors.offer);
@@ -139,7 +139,7 @@ export default function OfferPage(): JSX.Element {
               </section>
             </div>
           </div>
-          <MapCopy
+          <Map
             city={fullOffer?.city}
             places={nearPlacesPlusCurrent}
             activeCityName={fullOffer?.city.name}

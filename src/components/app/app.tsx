@@ -16,9 +16,9 @@ import LoginPage from '../../pages/login-page/login-page.tsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../ui/loader/loader.tsx';
-import LayoutCopy from '../layout/layout/layout-copy.tsx';
+import Layout from '../layout/layout/layout.tsx';
 
-export default function AppCopy({ cities }: AppPropsType): JSX.Element {
+export default function App({ cities }: AppPropsType): JSX.Element {
   const { fetchAllOffers } = useActionCreators(offersActions);
   const { checkAuth } = useActionCreators(userActions);
   const requestStatus = useAppSelector(userSliceSelectors.userRequestStatus);
@@ -50,7 +50,7 @@ export default function AppCopy({ cities }: AppPropsType): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Root} element={<LayoutCopy />} >
+          <Route path={AppRoute.Root} element={<Layout />} >
             <Route index element={<MainPage cities={cities} />} />
             <Route path={AppRoute.Login} element={
               <PrivateRoute onlyForNoAuth>

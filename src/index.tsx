@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { CITIES } from './components/utils/constants';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import AppCopy from './components/app/app-copy';
+import App from './components/app/app';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <AppCopy
+      <App
         cities={CITIES}
       />
     </Provider>

@@ -8,8 +8,8 @@ import { offersActions, offersSelectors } from '../../store/slices/offers';
 import Loader from '../../components/ui/loader/loader';
 import MainEmpty from '../main-empty/main-empty';
 import classNames from 'classnames';
-import MapCopy from '../../components/blocks/map/map-copy.tsx';
-import SelectCopy from '../../components/blocks/select/select-copy.tsx';
+import Select from '../../components/blocks/select/select.tsx';
+import Map from '../../components/blocks/map/map.tsx';
 
 export default function MainPage({ cities }: { cities: Array<CityPropsType> }): JSX.Element {
   const [isSelected, setIsSelected] = useState(OffersFilters.Popular);
@@ -78,13 +78,13 @@ export default function MainPage({ cities }: { cities: Array<CityPropsType> }): 
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{filteredPlaces.length} place{filteredPlaces.length > 1 && 's'} to stay in {currentCity.name}</b>
-                <SelectCopy filters={Object.values(OffersFilters)} onSelectItemClick={onSelectItemClick} isSelected={isSelected} />
+                <Select filters={Object.values(OffersFilters)} onSelectItemClick={onSelectItemClick} isSelected={isSelected} />
                 <div className="cities__places-list places__list tabs__content">
                   <PlaceCardList places={sortedPlaces} onCardHover={onCardHover} activeCityName={currentCity.name} />
                 </div>
               </section>
               <div className="cities__right-section">
-                <MapCopy city={currentCity} places={filteredPlaces} activeCardId={activeId} activeCityName={currentCity.name} className='cities__map' />
+                <Map city={currentCity} places={filteredPlaces} activeCardId={activeId} activeCityName={currentCity.name} className='cities__map' />
               </div>
             </div>
             : <MainEmpty />}

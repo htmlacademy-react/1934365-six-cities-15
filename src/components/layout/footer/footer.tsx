@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../utils/types';
 
-export default function FooterCopy(): JSX.Element {
+export default function Footer(): JSX.Element {
   return (
     <footer className="footer container">
       <Link to={AppRoute.Root} className="footer__logo-link">
