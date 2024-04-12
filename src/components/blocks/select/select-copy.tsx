@@ -3,7 +3,7 @@ import SelectItem from '../select-item/select-item';
 import { SelectPropsType } from './types';
 import { OffersFilters } from '../../utils/types';
 
-export default function Select({ filters, onSelectItemClick, isSelected }: SelectPropsType): JSX.Element {
+export default function SelectCopy({ filters, onSelectItemClick, isSelected }: SelectPropsType): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const FormRef = useRef<HTMLFormElement>(null);
 

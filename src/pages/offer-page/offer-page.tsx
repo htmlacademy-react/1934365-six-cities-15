@@ -4,7 +4,6 @@ import PlaceCard from '../../components/blocks/place-card/place-card.tsx';
 import { AuthorizationStatus, RequestStatus } from '../../components/utils/types.ts';
 import { getRatingStatus } from '../../components/utils/utils.ts';
 import ReviewsList from '../../components/blocks/reviews-list/reviews-list.tsx';
-import Map from '../../components/blocks/map/map.tsx';
 import { IMAGE_WIDTH, IMAGE_HEIGHT, NEAR_PLACES_AMOUNT, MAX_OFFER_IMAGES_AMOUNT } from '../../components/utils/constants.ts';
 import classNames from 'classnames';
 import { useActionCreators, useAppSelector } from '../../store/hooks.ts';
@@ -18,6 +17,7 @@ import { getSortedReviews } from './utils.ts';
 import { userSliceSelectors } from '../../store/slices/user.ts';
 import { PlaceCardType } from '../../components/blocks/place-card/types.ts';
 import FavoriteButton from '../../components/ui/button/favorite-button.tsx';
+import MapCopy from '../../components/blocks/map/map-copy.tsx';
 
 export default function OfferPage(): JSX.Element {
   const fullOffer = useAppSelector(fullOfferSliceSelectors.offer);
@@ -139,7 +139,7 @@ export default function OfferPage(): JSX.Element {
               </section>
             </div>
           </div>
-          <Map
+          <MapCopy
             city={fullOffer?.city}
             places={nearPlacesPlusCurrent}
             activeCityName={fullOffer?.city.name}

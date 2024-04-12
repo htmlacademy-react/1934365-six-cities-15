@@ -1,9 +1,9 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import Header from '../header/header.tsx';
-import Footer from '../footer/footer.tsx';
 import { AppRoute } from '../../utils/types';
+import FooterCopy from '../footer/footer-copy.tsx';
+import HeaderCopy from '../header/header-copy.tsx';
 
-export default function Layout(): JSX.Element {
+export default function LayoutCopy(): JSX.Element {
   const location = useLocation();
   let classNamePage = '';
   if (location.pathname as AppRoute === AppRoute.Root) {
@@ -14,9 +14,9 @@ export default function Layout(): JSX.Element {
 
   return (
     <div className={`page ${classNamePage}`}>
-      <Header />
+      <HeaderCopy />
       <Outlet />
-      {location.pathname as AppRoute === AppRoute.Favorites ? <Footer /> : null}
+      {location.pathname as AppRoute === AppRoute.Favorites ? <FooterCopy /> : null}
     </div>
   );
 }

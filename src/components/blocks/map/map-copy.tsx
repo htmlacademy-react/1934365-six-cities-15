@@ -5,7 +5,7 @@ import '../../../../node_modules/leaflet/dist/leaflet.css';
 import { currentCustomIcon, defaultCustomIcon } from './consts';
 import { MapPropsType } from './types';
 
-export default function Map({city, places, activeCardId, activeCityName, className}: MapPropsType): JSX.Element {
+export default function MapCopy({city, places, activeCardId, activeCityName, className}: MapPropsType): JSX.Element {
   const MapRef = useRef<HTMLDivElement>(null);
   const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
   const map = useMap(MapRef, city);

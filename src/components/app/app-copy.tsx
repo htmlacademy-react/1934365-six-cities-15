@@ -4,7 +4,6 @@ import { AppPropsType } from './types.ts';
 import NotFound from '../../pages/not-found-page/not-found.tsx';
 import PrivateRoute from '../blocks/private-route/private-route.tsx';
 import { HelmetProvider } from 'react-helmet-async';
-import Layout from '../layout/layout/layout.tsx';
 import OfferPage from '../../pages/offer-page/offer-page.tsx';
 import FavoritesPage from '../../pages/favorites-page/favorites-page.tsx';
 import MainPage from '../../pages/main-page/main-page.tsx';
@@ -17,8 +16,9 @@ import LoginPage from '../../pages/login-page/login-page.tsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../ui/loader/loader.tsx';
+import LayoutCopy from '../layout/layout/layout-copy.tsx';
 
-export default function App({ cities }: AppPropsType): JSX.Element {
+export default function AppCopy({ cities }: AppPropsType): JSX.Element {
   const { fetchAllOffers } = useActionCreators(offersActions);
   const { checkAuth } = useActionCreators(userActions);
   const requestStatus = useAppSelector(userSliceSelectors.userRequestStatus);
@@ -50,7 +50,7 @@ export default function App({ cities }: AppPropsType): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Root} element={<Layout />} >
+          <Route path={AppRoute.Root} element={<LayoutCopy />} >
             <Route index element={<MainPage cities={cities} />} />
             <Route path={AppRoute.Login} element={
               <PrivateRoute onlyForNoAuth>

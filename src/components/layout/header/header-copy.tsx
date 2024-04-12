@@ -3,7 +3,7 @@ import { AppRoute } from '../../utils/types';
 import { useActionCreators, useAppSelector, useAuth, useFavoriteCount } from '../../../store/hooks';
 import { userActions, userSliceSelectors } from '../../../store/slices/user';
 
-export default function Header(): JSX.Element {
+export default function HeaderCopy(): JSX.Element {
   const location = useLocation();
   const isAuthorized = useAuth();
   const user = useAppSelector(userSliceSelectors.user);
