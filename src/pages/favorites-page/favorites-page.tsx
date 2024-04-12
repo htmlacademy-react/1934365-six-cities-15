@@ -7,6 +7,7 @@ import FavoritesEmpty from '../favorites-empty/favorites-empty';
 export default function FavoritesPage(): JSX.Element {
   const favoritePlaces = useAppSelector(favoriteSelectors.favorites);
   const hasFavorites = favoritePlaces.length > 0;
+
   return (
     <div className="page">
       <Helmet>

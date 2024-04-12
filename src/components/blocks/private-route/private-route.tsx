@@ -22,7 +22,7 @@ export default function PrivateRoute({ onlyForNoAuth, children }: PrivateRoutePr
     return <Navigate to={from} />;
   }
 
-  // если пользователь неавторизован и не страница логина
+  // // если пользователь неавторизован и не страница логина
   if (!onlyForNoAuth && !user) {
     return <Navigate state={{from: location}} to={AppRoute.Login} />;
   }
