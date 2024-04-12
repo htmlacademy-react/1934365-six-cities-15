@@ -19,7 +19,6 @@ export default function MainPage({ cities }: { cities: Array<CityPropsType> }): 
   const activeId = useAppSelector(offersSelectors.activeId);
   const { changeCity, setActiveId } = useActionCreators(offersActions);
   const hasOffers = offers.length > 0;
-
   const filteredPlaces = offers.filter((place) => currentCity.name === place.city.name);
 
   const onCardHover = (placeId: PlaceCardType['id'] | null): void => {
