@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import LocationList from '../../components/blocks/location-list/locations-list';
-import Map from '../../components/blocks/map/map';
+import Map from '../../components/blocks/map/map.tsx';
 import PlaceCardList from '../../components/blocks/place-card-list/place-card-list';
-import Select from '../../components/blocks/select/select';
+import Select from '../../components/blocks/select/select.tsx';
 import { CitiesList, CityPropsType, PlaceCardType } from '../../components/blocks/place-card/types';
 import { useActionCreators, useAppSelector } from '../../store/hooks';
 import { RequestStatus, OffersFilters } from '../../components/utils/types';

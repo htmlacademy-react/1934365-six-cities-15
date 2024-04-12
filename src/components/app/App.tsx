@@ -4,7 +4,7 @@ import { AppPropsType } from './types';
 import NotFound from '../../pages/not-found-page/not-found';
 import PrivateRoute from '../blocks/private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
-import Layout from '../layout/layout/layout';
+import Layout from '../layout/layout/layout.tsx';
 import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import MainPage from '../../pages/main-page/main-page';
