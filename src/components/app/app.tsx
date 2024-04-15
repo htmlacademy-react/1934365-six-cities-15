@@ -26,7 +26,7 @@ export default function App({ cities }: AppPropsType): JSX.Element {
   useEffect(() => {
     fetchAllOffers()
       .unwrap()
-      .then(() => {})
+      .then(() => { })
       .catch(() => {
         toast.error('Server error');
       }
@@ -48,6 +48,7 @@ export default function App({ cities }: AppPropsType): JSX.Element {
 
   return (
     <HelmetProvider>
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root} element={<Layout />} >
@@ -69,7 +70,6 @@ export default function App({ cities }: AppPropsType): JSX.Element {
           </Route>
         </Routes>
       </BrowserRouter>
-      <ToastContainer/>
     </HelmetProvider>
   );
 }

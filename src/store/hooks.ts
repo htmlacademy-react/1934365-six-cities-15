@@ -6,6 +6,8 @@ import { AppDispatch } from './store';
 import { userSliceSelectors } from './slices/user';
 import { AuthorizationStatus, RequestStatus } from '../components/utils/types';
 import { favoriteActions, favoriteSelectors } from './slices/favorites';
+import { useLocation } from 'react-router-dom';
+import { Endpoint } from '../components/utils/constants';
 
 /* eslint-disable */
 type BoundActions<Actions extends ActionCreatorsMapObject> = {
@@ -32,9 +34,10 @@ export const useFavoriteCount = () => {
   const status = useAppSelector(favoriteSelectors.favoriteStatus);
   const count = useAppSelector(favoriteSelectors.favorites).length;
   const { fetchFavorites } = useActionCreators(favoriteActions);
+  const location = useLocation();
 
   useEffect(() => {
-    if (status === RequestStatus.Idle) {
+    if (status === RequestStatus.Idle && location.pathname !== Endpoint.Login) {
       fetchFavorites();
     }
   }, [status, fetchFavorites]);
