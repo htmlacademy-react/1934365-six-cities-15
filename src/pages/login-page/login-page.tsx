@@ -2,14 +2,9 @@ import { FormEvent, ReactEventHandler, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useActionCreators } from '../../store/hooks';
 import { userActions } from '../../store/slices/user';
-import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../components/utils/types';
-
-type HtmlLoginForm = HTMLFormElement & {
-  email: HTMLInputElement;
-  login: HTMLInputElement;
-}
+import { toast } from 'react-toastify';
 
 type ChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>
 
@@ -24,14 +19,14 @@ export default function LoginPage(): JSX.Element {
       [name]: value
     });
   };
-  function handleSubmit(evt: FormEvent<HtmlLoginForm>) {
+
+  function handleButtonClick(evt: FormEvent<HTMLButtonElement>) {
     evt.preventDefault();
-    login(formData);
-  }
-  function handleButtonClick() {
     if (!formData.password.match(/^(?=.*\d)(?=.*[a-zA-Z]).{2,}$/)) {
       toast.error('Password must contain 1 letter and 1 digit');
+      return;
     }
+    login(formData);
   }
   return (
     <>
@@ -45,7 +40,6 @@ export default function LoginPage(): JSX.Element {
             <h1 className="login__title">Sign in</h1>
             <form
               className="login__form form"
-              onSubmit={handleSubmit}
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
@@ -72,7 +66,7 @@ export default function LoginPage(): JSX.Element {
                 />
               </div>
               <button
-                className="login__submit form__submit button" type="submit"
+                className="login__submit form__submit button" type="button"
                 onClick={handleButtonClick}
               >Sign in
               </button>
